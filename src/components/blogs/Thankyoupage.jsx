@@ -5,7 +5,7 @@ function ThankYouPage() {
   const navigate = useNavigate ();
   
   return (
-    <div className='pl-[5rem]' >
+    <div className='pl-[5rem] pt-[5rem]' >
       <h1 className="pl-15 w-72 text-5xl">Thank you!</h1>
       <p className="text-2xl text-black text-opacity-50 p-[4rem]" style={{width: 1144,}} >Your email has been added to the mailing list successfully!</p>
       <Link to="/thank-you">
