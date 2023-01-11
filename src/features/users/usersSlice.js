@@ -1,11 +1,20 @@
-import { createAsyncThunk, createSlice , } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup ,  updatePassword , updateEmail ,} from 'firebase/auth';
-import { doc, setDoc , getDoc , updateDoc   } from 'firebase/firestore';
-import {ref , uploadBytesResumable , getDownloadURL} from "firebase/storage";
-import { db, auth, googleAuth, facebookAuth , storage } from '../../firebase-config';
+  signInWithPopup,
+  // updatePassword,
+  // updateEmail,
+} from 'firebase/auth';
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+// import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+  db,
+  auth,
+  googleAuth,
+  facebookAuth,
+  // storage,
+} from '../../firebase-config';
 
 export const signupUser = createAsyncThunk(
   'user/signupUser',
@@ -13,8 +22,8 @@ export const signupUser = createAsyncThunk(
     const {
       email,
       password,
-      /* firstName,
-      lastName, */
+      firstName,
+      lastName,
       birthdayDay,
       birthdayMonth,
       birthdayYear,
@@ -25,22 +34,15 @@ export const signupUser = createAsyncThunk(
         email,
         password
       );
+      console.log(user);
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
         email,
-        name: `${payload.firstName} ${payload.lastName}` ,
-        photoURL : null , 
+        FullName: `${firstName} ${lastName}`,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
-        EducationLevel : null ,
-        Hobbies : null ,
-        FamilySize : null ,
-        Gender : null ,
-        PhoneNumber : null ,
-        Idimage : null   
-
       });
       return { id: user.uid, email: user.email };
     } catch (error) {
@@ -55,11 +57,19 @@ export const loginUser = createAsyncThunk(
     const { email, password } = payload;
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      
+
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
-    
-      return  docSnap.data()  ;
+      console.log(docSnap.data());
+
+      return {
+        id: user.uid,
+        email: user.email,
+        name: docSnap.data().name,
+        birthdayDay: docSnap.data().birthdayDay,
+        birthdayMonth: docSnap.data().birthdayMonth,
+        birthdayYear: docSnap.data().birthdayYear,
+      };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -75,19 +85,8 @@ export const loginUserWithGoogle = createAsyncThunk(
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
-        email: user.email ,
-        name : user.displayName ,
-        photoURL : user.photoURL , 
-        birthdayDay: null,
-        birthdayMonth : null,
-        birthdayYear : null,
-        EducationLevel : null ,
-        Hobbies : null ,
-        FamilySize : null ,
-        Gender : null ,
-        PhoneNumber : null ,
-        Idimage : null
-        
+        email: user.email,
+        name: user.displayName,
       });
       return { id: user.uid, email: user.email };
     } catch (error) {
@@ -105,7 +104,7 @@ export const loginUserWithFacebook = createAsyncThunk(
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
-        email: user.email
+        email: user.email,
       });
       return { id: user.uid, email: user.email };
     } catch (error) {
@@ -114,71 +113,78 @@ export const loginUserWithFacebook = createAsyncThunk(
   }
 );
 
+// this funciton to update the user profile information
+export const updateChange = createAsyncThunk(
+  'user/updateChange',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const {
+        id,
+        email,
+        name,
+        photoURL,
+        birthdayDay,
+        birthdayMonth,
+        birthdayYear,
+        EducationLevel,
+        Hobbies,
+        FamilySize,
+        Gender,
+        PhoneNumber,
+      } = payload;
 
+      // updatePassword(auth.currentUser, Password)
+      //   .then((passowrdd) => {
+      //     console.log(`${passowrdd}password`);
+      //   })
+      //   .catch((error) => {
+      //     rejectWithValue(error.message);
+      //   });
 
+      // updateEmail(auth.currentUser, email)
+      //   .then((eemail) => {
+      //     console.log(`${eemail}email`);
+      //   })
+      //   .catch((error) => {
+      //     rejectWithValue(error.message);
+      //   });
 
+      // let downloadURL;
+      // if (Idimage !== undefined) {
+      //   const imagesRef = ref(storage, id);
+      //   const uploadTask = uploadBytesResumable(imagesRef, Idimage);
+      //   downloadURL = await getDownloadURL(uploadTask.snapshot.ref).then(
+      //     (download) => {
+      //       return download;
+      //     }
+      //   );
+      // }
+      // sending photo to firestorage
 
+      // sending data to firestore
+      const docRef = doc(db, 'users', id);
+      await updateDoc(docRef, {
+        id,
+        email,
+        name,
+        photoURL,
+        birthdayDay,
+        birthdayMonth,
+        birthdayYear,
+        EducationLevel,
+        Hobbies,
+        FamilySize,
+        Gender,
+        PhoneNumber,
+      });
+      const docSnap = await getDoc(docRef);
 
-// this funciton to update the user profile information 
-export const updatechange = createAsyncThunk("user/updatechange",
-async (payload , { rejectWithValue } ) => {
-  try {
-const {id ,email, name ,photoURL, birthdayDay,birthdayMonth,birthdayYear ,EducationLevel , Hobbies,FamilySize 
-  ,Gender , PhoneNumber ,Idimage , Password  } = payload;
- 
-
- 
-  updatePassword(auth.currentUser, Password).then((passowrdd) => {console.log( `${passowrdd}password` )}).catch((error) => {
-    rejectWithValue(error.message);
-  });
-
-  updateEmail(auth.currentUser, email).then((eemail) => {
-    console.log(`${eemail}email`)}).catch((error) => {
-    rejectWithValue(error.message);
-  });
-
-  let downloadURL ;
-  if(Idimage !== undefined){
-    const imagesRef = ref(storage, id);
-const uploadTask = uploadBytesResumable(imagesRef, Idimage);
-  downloadURL = await  getDownloadURL(uploadTask.snapshot.ref).then((download) => {
-return download ;
-});
+      return docSnap.data();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
-  // sending photo to firestorage 
-
-
-  // sending data to firestore 
-const docRef = doc(db, 'users', id);
-  await updateDoc(docRef, {
-  id ,
-  email,
-   name ,
-   photoURL ,
-    birthdayDay,
-    birthdayMonth,
-    birthdayYear ,
-    EducationLevel ,
-      Hobbies,
-      FamilySize ,
-      Gender ,
-       PhoneNumber ,
-       Idimag :downloadURL 
-
-}
-)
-const docSnap = await getDoc(docRef);
-  
-return  docSnap.data() ;
-}
-
-catch(error){
-  return rejectWithValue(error);
-}}) ;
-
-
-
-
+);
 
 const usersSlice = createSlice({
   name: 'users',
@@ -242,16 +248,16 @@ const usersSlice = createSlice({
       state.user = {};
       state.error = action.payload;
     });
-    builder.addCase(updatechange.pending, (state) => {
+    builder.addCase(updateChange.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(updatechange.fulfilled, (state, action) => {
+    builder.addCase(updateChange.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload;
       state.error = null;
       console.log(action.payload);
     });
-    builder.addCase(updatechange.rejected, (state, action) => {
+    builder.addCase(updateChange.rejected, (state, action) => {
       state.loading = false;
       state.user = {};
       state.error = action.payload;

@@ -1,66 +1,49 @@
-import React, {useState} from 'react';
-import { useSelector ,useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {updatechange} from "../../features/users/usersSlice"
+import { updateChange } from '../../features/users/usersSlice';
 
 import profile from './Images/ProfilePhoto.svg';
 
-
 const UpdateUserInfo = () => {
-  const { register, handleSubmit , } = useForm();
-  const userInfo = useSelector((state)=>state.users.user)
-  const [fullName , setfullName] = useState(userInfo.name);
-  const [Education , setEducation] = useState(userInfo.EducationLevel)
-  const [Hobbies , setHobbies] = useState(userInfo.Hobbies)
-  const [FamilySize , setFamilySize] = useState(userInfo.FamilySize)
-  const [Gender , setGender] = useState(userInfo.Gender);
-  const [Email , setEmail] = useState(userInfo.email)
-  const [day , setDay] = useState(userInfo.birthdayDay)
-  const [month, setMonth] = useState(userInfo.birthdayMonth)
-  const [year, setYear] = useState(userInfo.birthdayYear);
-  const [filedata , setFiledata] = useState();
- 
+  const { register, handleSubmit } = useForm();
+  const userInfo = useSelector((state) => state.users.user);
+  console.log(userInfo);
+  const [filedata, setFiledata] = useState();
+
   const dispatch = useDispatch();
-  
-  
-  const onSubmit =(user) => {
-    let newPassword = null;
-    console.log(user.Password)
-    console.log(user.confiremPassowrd)
-    if(user.Password === user.confiremPassowrd) { 
-        newPassword = user.Password ;
-    }
-    else {
-      alert(" password and confirm password not match ")
-    }
-     
- dispatch(updatechange( {
 
-      id: userInfo.id,
-      email: user.email ,
-      name : user.name ,
-      photoURL : null ,  
-      birthdayDay: user.birthdayDay,
-      birthdayMonth : user.birthdayMonth,
-      birthdayYear : user.birthdayYear,
-      EducationLevel : user.EducationLevel ,
-      Hobbies : user.Hobbies ,
-      FamilySize : user.FamilySize ,
-      Gender : user.Gender ,
-      PhoneNumber : user.PhoneNumber ,
-      Idimage : filedata ,
-      Password : newPassword,
-      
+  // const onSubmit = (user) => {
+  //   let newPassword = null;
+  //   console.log(user.Password);
+  //   console.log(user.confiremPassowrd);
+  //   if (user.Password === user.confiremPassowrd) {
+  //     newPassword = user.Password;
+  //   } else {
+  //     alert(' password and confirm password not match ');
+  //   }
 
-     
-    }))}
-
-  
-  
-
+  //   dispatch(
+  //     updateChange({
+  //       id: userInfo.id,
+  //       email: user.email,
+  //       name: user.name,
+  //       photoURL: null,
+  //       birthdayDay: user.birthdayDay,
+  //       birthdayMonth: user.birthdayMonth,
+  //       birthdayYear: user.birthdayYear,
+  //       EducationLevel: user.EducationLevel,
+  //       Hobbies: user.Hobbies,
+  //       FamilySize: user.FamilySize,
+  //       Gender: user.Gender,
+  //       PhoneNumber: user.PhoneNumber,
+  //       Idimage: filedata,
+  //       Password: newPassword,
+  //     })
+  //   );
+  // };
 
   return (
-  
     <div className="flex flex-col font-poppins lg:items-center">
       <div className="self-center mt-8 lg:text-xl text-sm text-[#FF0000] lg:ml-0 ml-16 lg:mr-0 mr-[-1em]">
         Please fill all the fields with correct and valid details to complete
@@ -90,24 +73,26 @@ const UpdateUserInfo = () => {
               <div className="flex flex-col gap-7 lg:mt-1 mt-3 ml-6 ">
                 <div>
                   <input
-                  {...register("name")  }
+                    {...register('FullName')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="name"
                     name="name"
-                    type="text" 
-                    value={fullName}
-                    onChange={(e)=> setfullName(e.target.value)  }
-                   
+                    type="text"
+                    value={userInfo.name}
                   />
                 </div>
                 <div>
                   <div className="relative w-full lg:max-w-sm">
-                    <select 
-                    {...register("EducationLevel")}
-                    value ={Education}
-                    onChange={(e)=>setEducation(e.target.value)}
-                    className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
-                      <option value={userInfo.EducationLevel} selected="selected" disabled="disabled">
+                    <select
+                      {...register('EducationLevel')}
+                      value={userInfo.EducationLevel}
+                      className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
+                    >
+                      <option
+                        value={userInfo.EducationLevel}
+                        selected="selected"
+                        disabled="disabled"
+                      >
                         -- Select Education --
                       </option>
                       <option value="No formal education">
@@ -135,35 +120,30 @@ const UpdateUserInfo = () => {
                 </div>
                 <div>
                   <input
-                  {...register("Hobbies")}
+                    {...register('Hobbies')}
                     className=" bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="Hobbies"
-                    name="Hobbies"
                     type="text"
-                    value={Hobbies}
-                    onChange={(e)=>setHobbies(e.target.value)}
+                    value={userInfo.Hobbies}
                   />
                 </div>
                 <div className="flex flex-row">
                   <input
-                  {...register("FamilySize")}
+                    {...register('FamilySize')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block w-[4em] p-0.5"
                     id="FamilySize"
-                    name="FamilySize"
                     type="text"
-                    value = {FamilySize}
-                    onChange={(e)=>setFamilySize(e.target.value)}
+                    value={userInfo.FamilySize}
                   />
                   <div className="self-center ml-4">Member(s)</div>
                 </div>
                 <div>
-                  <select 
-                   {...register("Gender")}
-                   value ={Gender}
-                   onChange={(e)=>setGender(e.target.value)}
-
-                  className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-lg shadow-sm outline-none appearance-none focus:border-SubTexts">
-                    <option value={userInfo.Gender} selected="selected" disabled="disabled">
+                  <select
+                    {...register('Gender')}
+                    value={userInfo.Gender}
+                    className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-lg shadow-sm outline-none appearance-none focus:border-SubTexts"
+                  >
+                    <option selected="selected" disabled="disabled">
                       -- Select Gender --
                     </option>
                     <option value="female">Female</option>
@@ -172,65 +152,60 @@ const UpdateUserInfo = () => {
                 </div>
                 <div className="flex flex-row">
                   <input
-                  {...register("birthdayDay")}
+                    {...register('birthdayDay')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[5em] w-[3em]"
                     id="birthdayDay"
                     name="birthdayDay"
                     type="text"
                     placeholder="DD"
-                    value = {day}
-                    onChange={(e)=> setDay(e.target.value)  }
+                    value={userInfo.birthdayDay}
                   />
                   <input
-                   {...register("birthdayMonth")}
+                    {...register('birthdayMonth')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-2 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[5em] w-[3em]"
                     id="birthdbirthdayMonthay"
                     name="birthdayMonth"
                     type="text"
                     placeholder="MM"
-                    value = {month}
-                    onChange = {(e)=> setMonth(e.target.value)}
+                    value={userInfo.birthdayMonth}
                   />
                   <input
+                    {...register('birthdayYear')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-4 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[17em] w-[8.5em]"
                     id="birthyear"
                     name="birthyear"
                     type="text"
                     placeholder="YYYY"
-                    {...register("birthdayYear")}
-                    value = {year}
-                    onChange = {(e)=> setYear(e.target.value)}
+                    value={userInfo.birthdayYear}
                   />
                 </div>
                 <div>
                   <input
-                  {...register("email")}
+                    {...register('Email')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="email"
                     name="email"
                     type="email"
-                    value = {Email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    value={userInfo.email}
                   />
                 </div>
                 <div>
                   <input
-                   {...register("PhoneNumber")}
+                    {...register('PhoneNumber')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="PhoneNumber"
                     name="PhoneNumber"
                     type="tel"
-                    value = {userInfo.PhoneNumber}
+                    value={userInfo.PhoneNumber}
                   />
                 </div>
                 <div className="flex flex-row bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]">
                   <input
-                  
                     className=""
                     id="uploadID"
                     name="uploadID"
                     type="file"
-                    onChange={(e)=>setFiledata(e.target.files[0])}
+                    onChange={(e) => setFiledata(e.target.files[0])}
                   />
                   {/* <img
                       src={plusIcon}
@@ -238,7 +213,6 @@ const UpdateUserInfo = () => {
                       className="w-6 ml-[-2em]"
                     /> */}
                 </div>
-                
               </div>
             </div>
           </div>
@@ -254,7 +228,7 @@ const UpdateUserInfo = () => {
               <div className="flex flex-col gap-7 mt-1 lg:ml-0 ml-4">
                 <div className="flex flex-row">
                   <input
-                  {...register("Password")}
+                    {...register('Password')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28em] w-[17.5em]"
                     id="Password"
                     name="Password"
@@ -263,7 +237,7 @@ const UpdateUserInfo = () => {
                 </div>
                 <div className="flex flex-row">
                   <input
-                  {...register("confiremPassowrd")}
+                    {...register('confiremPassowrd')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block  lg:p-2 p-1 lg:w-[28em] w-[17.5em]"
                     id="confiremPassowrd"
                     name="confiremPassowrd"
@@ -280,7 +254,35 @@ const UpdateUserInfo = () => {
           </div>
           <div className="flex flex-rows lg:gap-8 gap-3 mt-10 lg:ml-20 ml-[-12em] lg:text-base text-sm">
             <button
-            onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit((user) => {
+                console.log(user);
+                // let newPassword = null;
+                // console.log(user.Password);
+                // console.log(user.confiremPassowrd);
+                // if (user.Password === user.confiremPassowrd) {
+                //   newPassword = user.Password;
+                // } else {
+                //   alert(' password and confirm password not match ');
+                // }
+                dispatch(
+                  updateChange({
+                    id: userInfo.id,
+                    email: user.Email,
+                    name: user.FullName,
+                    // photoURL: null,
+                    birthdayDay: user.birthdayDay,
+                    birthdayMonth: user.birthdayMonth,
+                    birthdayYear: user.birthdayYear,
+                    EducationLevel: user.EducationLevel,
+                    Hobbies: user.Hobbies,
+                    FamilySize: user.FamilySize,
+                    Gender: user.Gender,
+                    PhoneNumber: user.PhoneNumber,
+                    Idimage: filedata,
+                    // Password: newPassword,
+                  })
+                );
+              })}
               type="button"
               className="bg-[#2DD3E3] font-medium text-2xl px-10 py-3 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
             >
