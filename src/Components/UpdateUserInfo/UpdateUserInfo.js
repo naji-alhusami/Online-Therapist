@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { updateChange } from '../../features/users/usersSlice';
@@ -9,7 +9,7 @@ const UpdateUserInfo = () => {
   const { register, handleSubmit } = useForm();
   const userInfo = useSelector((state) => state.users.user);
   console.log(userInfo);
-  const [filedata, setFiledata] = useState();
+  // const [filedata, setFiledata] = useState();
 
   const dispatch = useDispatch();
 
@@ -73,10 +73,9 @@ const UpdateUserInfo = () => {
               <div className="flex flex-col gap-7 lg:mt-1 mt-3 ml-6 ">
                 <div>
                   <input
-                    {...register('FullName')}
+                    {...register('name')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="name"
-                    name="name"
                     type="text"
                     value={userInfo.name}
                   />
@@ -84,12 +83,12 @@ const UpdateUserInfo = () => {
                 <div>
                   <div className="relative w-full lg:max-w-sm">
                     <select
-                      {...register('EducationLevel')}
-                      value={userInfo.EducationLevel}
+                      {...register('educationLevel')}
+                      value={userInfo.educationLevel}
                       className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600"
                     >
                       <option
-                        value={userInfo.EducationLevel}
+                        value={userInfo.educationLevel}
                         selected="selected"
                         disabled="disabled"
                       >
@@ -120,27 +119,27 @@ const UpdateUserInfo = () => {
                 </div>
                 <div>
                   <input
-                    {...register('Hobbies')}
+                    {...register('hobbies')}
                     className=" bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="Hobbies"
                     type="text"
-                    value={userInfo.Hobbies}
+                    value={userInfo.hobbies}
                   />
                 </div>
                 <div className="flex flex-row">
                   <input
-                    {...register('FamilySize')}
+                    {...register('familySize')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block w-[4em] p-0.5"
                     id="FamilySize"
                     type="text"
-                    value={userInfo.FamilySize}
+                    value={userInfo.familySize}
                   />
                   <div className="self-center ml-4">Member(s)</div>
                 </div>
                 <div>
                   <select
-                    {...register('Gender')}
-                    value={userInfo.Gender}
+                    {...register('gender')}
+                    value={userInfo.gender}
                     className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-lg shadow-sm outline-none appearance-none focus:border-SubTexts"
                   >
                     <option selected="selected" disabled="disabled">
@@ -181,22 +180,20 @@ const UpdateUserInfo = () => {
                 </div>
                 <div>
                   <input
-                    {...register('Email')}
+                    {...register('email')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="email"
-                    name="email"
                     type="email"
-                    value={userInfo.email}
+                    // value={userInfo.email}
                   />
                 </div>
                 <div>
                   <input
-                    {...register('PhoneNumber')}
+                    {...register('phoneNumber')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     id="PhoneNumber"
-                    name="PhoneNumber"
                     type="tel"
-                    value={userInfo.PhoneNumber}
+                    value={userInfo.phoneNumber}
                   />
                 </div>
                 <div className="flex flex-row bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]">
@@ -205,7 +202,7 @@ const UpdateUserInfo = () => {
                     id="uploadID"
                     name="uploadID"
                     type="file"
-                    onChange={(e) => setFiledata(e.target.files[0])}
+                    // onChange={(e) => setFiledata(e.target.files[0])}
                   />
                   {/* <img
                       src={plusIcon}
@@ -228,19 +225,17 @@ const UpdateUserInfo = () => {
               <div className="flex flex-col gap-7 mt-1 lg:ml-0 ml-4">
                 <div className="flex flex-row">
                   <input
-                    {...register('Password')}
+                    {...register('password')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28em] w-[17.5em]"
                     id="Password"
-                    name="Password"
                     type="text"
                   />
                 </div>
                 <div className="flex flex-row">
                   <input
-                    {...register('confiremPassowrd')}
+                    {...register('confirmPassowrd')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block  lg:p-2 p-1 lg:w-[28em] w-[17.5em]"
                     id="confiremPassowrd"
-                    name="confiremPassowrd"
                     type="text"
                   />
                   {/* <img
@@ -267,19 +262,19 @@ const UpdateUserInfo = () => {
                 dispatch(
                   updateChange({
                     id: userInfo.id,
-                    email: user.Email,
-                    name: user.FullName,
+                    email: user.email,
+                    name: user.name,
                     // photoURL: null,
                     birthdayDay: user.birthdayDay,
                     birthdayMonth: user.birthdayMonth,
                     birthdayYear: user.birthdayYear,
-                    EducationLevel: user.EducationLevel,
-                    Hobbies: user.Hobbies,
-                    FamilySize: user.FamilySize,
-                    Gender: user.Gender,
-                    PhoneNumber: user.PhoneNumber,
-                    Idimage: filedata,
-                    // Password: newPassword,
+                    educationLevel: user.educationLevel,
+                    hobbies: user.hobbies,
+                    familySize: user.familySize,
+                    gender: user.gender,
+                    phoneNumber: user.phoneNumber,
+                    // Idimage: filedata,
+                    password: user.password,
                   })
                 );
               })}

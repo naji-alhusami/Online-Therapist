@@ -3,8 +3,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  // updatePassword,
-  // updateEmail,
+  updatePassword,
+  updateEmail,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 // import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -39,7 +39,7 @@ export const signupUser = createAsyncThunk(
       await setDoc(docRef, {
         id: user.uid,
         email,
-        FullName: `${firstName} ${lastName}`,
+        name: `${firstName} ${lastName}`,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
@@ -122,32 +122,18 @@ export const updateChange = createAsyncThunk(
         id,
         email,
         name,
-        photoURL,
+        // photoURL,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
-        EducationLevel,
-        Hobbies,
-        FamilySize,
-        Gender,
-        PhoneNumber,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        phoneNumber,
+        password,
       } = payload;
-
-      // updatePassword(auth.currentUser, Password)
-      //   .then((passowrdd) => {
-      //     console.log(`${passowrdd}password`);
-      //   })
-      //   .catch((error) => {
-      //     rejectWithValue(error.message);
-      //   });
-
-      // updateEmail(auth.currentUser, email)
-      //   .then((eemail) => {
-      //     console.log(`${eemail}email`);
-      //   })
-      //   .catch((error) => {
-      //     rejectWithValue(error.message);
-      //   });
+      console.log(payload, password);
 
       // let downloadURL;
       // if (Idimage !== undefined) {
@@ -167,16 +153,21 @@ export const updateChange = createAsyncThunk(
         id,
         email,
         name,
-        photoURL,
+        // photoURL,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
-        EducationLevel,
-        Hobbies,
-        FamilySize,
-        Gender,
-        PhoneNumber,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        phoneNumber,
       });
+      await updatePassword(auth.currentUser, password);
+      console.log(email);
+
+      await updateEmail(auth.currentUser, email);
+
       const docSnap = await getDoc(docRef);
 
       return docSnap.data();
