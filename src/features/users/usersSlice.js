@@ -7,7 +7,7 @@ import {
   updateEmail,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import {
   db,
   auth,
@@ -133,6 +133,7 @@ export const updateChange = createAsyncThunk(
 
       const imagesRef = ref(storage, photoURL);
       uploadBytesResumable(imagesRef, imageId);
+      const publicImageUrl = await getDownloadURL(imagesRef);
       // let downloadURL;
       // if (Idimage !== undefined) {
       //   const imagesRef = ref(storage, id);
@@ -151,7 +152,7 @@ export const updateChange = createAsyncThunk(
         id,
         email,
         name,
-        photoURL,
+        publicImageUrl,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
@@ -161,7 +162,7 @@ export const updateChange = createAsyncThunk(
         gender,
         phoneNumber,
       });
-      
+
       await updatePassword(auth.currentUser, password);
 
       await updateEmail(auth.currentUser, email);

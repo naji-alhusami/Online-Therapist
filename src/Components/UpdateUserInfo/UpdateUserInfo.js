@@ -9,12 +9,6 @@ const UpdateUserInfo = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo);
-  // const [filedata, setFiledata] = useState();
-
-  // const formData = new FormData();
-        // formData.append("file", data.file[0]);
-
 
   // const onSubmit = (user) => {
   //   let newPassword = null;
@@ -54,7 +48,15 @@ const UpdateUserInfo = () => {
       </div>
       <div className="flex lg:flex-row flex-col">
         <div className="flex flex-col lg:ml-[-10em] md:ml-[10%] ml-[25%] lg:mr-[0%] md:mr-[30%] mr-[25%]">
-          <img src={profile} alt="profile" className="self-center ml-28" />
+          {userInfo.publicImageUrl ? (
+            <img
+              src={userInfo.publicImageUrl}
+              alt="profile"
+              className="self-center ml-28 w-42 h-42 rounded-full"
+            />
+          ) : (
+            <img src={profile} alt="profile" className="self-center ml-28" />
+          )}
         </div>
         <div className="flex flex-col lg:ml-16 ml-44">
           <div className=" lg:ml-20 ml-[-15em] lg:self-start lg:mr-44 mt-6 mb-15 ">
@@ -200,7 +202,7 @@ const UpdateUserInfo = () => {
                 </div>
                 <div className="flex flex-row bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]">
                   <input
-                    {...register("file")}
+                    {...register('file')}
                     className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     type="file"
                     id="uploadID"
