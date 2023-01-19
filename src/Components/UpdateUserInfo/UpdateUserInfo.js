@@ -7,11 +7,14 @@ import profile from './Images/ProfilePhoto.svg';
 
 const UpdateUserInfo = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.user);
   console.log(userInfo);
   // const [filedata, setFiledata] = useState();
 
-  const dispatch = useDispatch();
+  // const formData = new FormData();
+        // formData.append("file", data.file[0]);
+
 
   // const onSubmit = (user) => {
   //   let newPassword = null;
@@ -89,7 +92,6 @@ const UpdateUserInfo = () => {
                     >
                       <option
                         value={userInfo.educationLevel}
-                        selected="selected"
                         disabled="disabled"
                       >
                         -- Select Education --
@@ -142,7 +144,7 @@ const UpdateUserInfo = () => {
                     value={userInfo.gender}
                     className="lg:w-[25em] w-[16em] p-2 ml-6 text-gray-500 bg-white border border-SubTexts rounded-lg shadow-sm outline-none appearance-none focus:border-SubTexts"
                   >
-                    <option selected="selected" disabled="disabled">
+                    <option value="selected" disabled="disabled">
                       -- Select Gender --
                     </option>
                     <option value="female">Female</option>
@@ -198,11 +200,10 @@ const UpdateUserInfo = () => {
                 </div>
                 <div className="flex flex-row bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]">
                   <input
-                    className=""
-                    id="uploadID"
-                    name="uploadID"
+                    {...register("file")}
+                    className="bg-gray-50 border border-SubTexts text-gray-900 sm:text-sm rounded-lg ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[28.5em] w-[16em]"
                     type="file"
-                    // onChange={(e) => setFiledata(e.target.files[0])}
+                    id="uploadID"
                   />
                   {/* <img
                       src={plusIcon}
@@ -264,7 +265,8 @@ const UpdateUserInfo = () => {
                     id: userInfo.id,
                     email: user.email,
                     name: user.name,
-                    // photoURL: null,
+                    photoURL: user.file[0].name,
+                    imageId: user.file[0],
                     birthdayDay: user.birthdayDay,
                     birthdayMonth: user.birthdayMonth,
                     birthdayYear: user.birthdayYear,
@@ -273,7 +275,6 @@ const UpdateUserInfo = () => {
                     familySize: user.familySize,
                     gender: user.gender,
                     phoneNumber: user.phoneNumber,
-                    // Idimage: filedata,
                     password: user.password,
                   })
                 );

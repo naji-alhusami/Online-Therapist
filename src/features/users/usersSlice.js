@@ -7,13 +7,13 @@ import {
   updateEmail,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
-// import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable } from 'firebase/storage';
 import {
   db,
   auth,
   googleAuth,
   facebookAuth,
-  // storage,
+  storage,
 } from '../../firebase-config';
 
 export const signupUser = createAsyncThunk(
@@ -34,7 +34,6 @@ export const signupUser = createAsyncThunk(
         email,
         password
       );
-      console.log(user);
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
@@ -60,7 +59,6 @@ export const loginUser = createAsyncThunk(
 
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
 
       return {
         id: user.uid,
@@ -81,7 +79,6 @@ export const loginUserWithGoogle = createAsyncThunk(
   async ({ rejectWithValue }) => {
     try {
       const { user } = await signInWithPopup(auth, googleAuth);
-      console.log(user);
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
@@ -100,7 +97,6 @@ export const loginUserWithFacebook = createAsyncThunk(
   async ({ rejectWithValue }) => {
     try {
       const { user } = await signInWithPopup(auth, facebookAuth);
-      console.log(user);
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
@@ -122,7 +118,8 @@ export const updateChange = createAsyncThunk(
         id,
         email,
         name,
-        // photoURL,
+        photoURL,
+        imageId,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
@@ -133,8 +130,9 @@ export const updateChange = createAsyncThunk(
         phoneNumber,
         password,
       } = payload;
-      console.log(payload, password);
 
+      const imagesRef = ref(storage, photoURL);
+      uploadBytesResumable(imagesRef, imageId);
       // let downloadURL;
       // if (Idimage !== undefined) {
       //   const imagesRef = ref(storage, id);
@@ -153,7 +151,7 @@ export const updateChange = createAsyncThunk(
         id,
         email,
         name,
-        // photoURL,
+        photoURL,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
@@ -163,8 +161,8 @@ export const updateChange = createAsyncThunk(
         gender,
         phoneNumber,
       });
+      
       await updatePassword(auth.currentUser, password);
-      console.log(email);
 
       await updateEmail(auth.currentUser, email);
 
@@ -246,7 +244,6 @@ const usersSlice = createSlice({
       state.loading = false;
       state.user = action.payload;
       state.error = null;
-      console.log(action.payload);
     });
     builder.addCase(updateChange.rejected, (state, action) => {
       state.loading = false;

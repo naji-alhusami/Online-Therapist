@@ -23,12 +23,6 @@ const FormCard = () => {
   };
   
 
-
-
-  
-  
-  
-
   return (
     <div className="max-w-sm rounded-lg shadow-lg p-8 ">
       <form onSubmit={handleSubmit}>
