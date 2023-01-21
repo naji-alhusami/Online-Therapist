@@ -84,7 +84,7 @@ export const Booking = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     console.log(payload)
     const {
-      selectedValue
+      answer
     } = payload;
     try {
       // Get the current user
@@ -93,7 +93,7 @@ export const Booking = createAsyncThunk(
       const docRef = db.collection('questionnaire').doc(user.uid);
       await docRef.set(docRef, {
         id: user.uid,
-        selectedValue
+        answer
       });;
 
       return payload;
