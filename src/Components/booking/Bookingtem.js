@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Booking } from '../../features/users/usersSlice';
 import HeaderBooking from './HeaderBooking';
 import { MutipleChoose } from './bookingData';
-
-// import { useDispatch } from 'react-redux';
 // import Booking from './Booking';
 
 const Bookingtem = () => {
@@ -11,18 +11,12 @@ const Bookingtem = () => {
   const [selectedValue, setSelectedValue] = useState('');
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch();
-  // const handleSubmit = () =>  {
-  //   dispatch(
-  //     Booking({
-  //       id: user.uid,
-  //       question,
-  //       choice,
 
-  //     })
-  //   );
-  // }
+
+
+
   const handlegettingvalue = (e) => {
     setSelectedValue(e.target.value);
     setIsClicked(!isClicked);
@@ -30,13 +24,20 @@ const Bookingtem = () => {
   };
   useEffect(() => {
   }, [selectedValue]);
-  console.log(selectedValue);
+  // console.log(selectedValue);
 
-  const handleClick = () => {
+  const handleClick = (user) => {
     const nextId = parseInt(id, 10) + 1;
     if (nextId <= 3) {
       navigate(`/booking1/${nextId}`);
     } else navigate('/booking2/1');
+
+    dispatch(Booking({
+      id:user.uid,
+     selectedValue
+    })).catch(error => {
+      console.log(error);
+    });
   };
 
   const QustionPages = MutipleChoose.filter((obj) => obj.id === id);

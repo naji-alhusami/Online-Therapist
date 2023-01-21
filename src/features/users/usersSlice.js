@@ -7,6 +7,8 @@ import {
 import { doc, setDoc } from 'firebase/firestore';
 import { db, auth, googleAuth, facebookAuth } from '../../firebase-config';
 
+
+
 export const signupUser = createAsyncThunk(
   'user/signupUser',
   async (payload, { rejectWithValue }) => {
@@ -77,22 +79,29 @@ export const loginUserWithGoogle = createAsyncThunk(
 );
 
 
-// export const Booking = createAsyncThunk(
-//   'user/Booking',
-//   async ({ rejectWithValue }) => {
-//     try {
-//       const docRef = doc(db, 'questionnaire', user.uid);
-//       await setDoc(docRef, {
-//         id: user.uid,
-//         question,
-//         choice,
-//       });
-//       return { id: user.uid};
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
+export const Booking = createAsyncThunk(
+  'user/Booking',
+  async (payload, { rejectWithValue }) => {
+    console.log(payload)
+    const {
+      selectedValue
+    } = payload;
+    try {
+      // Get the current user
+      const user = await auth().currentUser;
+      // sending data to firestore
+      const docRef = db.collection('questionnaire').doc(user.uid);
+      await docRef.set(docRef, {
+        id: user.uid,
+        selectedValue
+      });;
+
+      return payload;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 
 
@@ -175,6 +184,22 @@ const usersSlice = createSlice({
       state.user = {};
       state.error = action.payload;
     });
+
+
+    builder.addCase(Booking.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(Booking.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.error = null;
+    });
+    builder.addCase(Booking.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
   },
 });
 
