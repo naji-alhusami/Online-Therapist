@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   updatePassword,
   updateEmail,
+  sendEmailVerification,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -28,12 +29,19 @@ export const signupUser = createAsyncThunk(
       birthdayMonth,
       birthdayYear,
     } = payload;
+    
     try {
+      // create user to Authentication in Firebase
       const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+
+      // Send Email for verification in Firebase:
+      await sendEmailVerification(auth.currentUser);
+      
+      // Send User Data to firestore:
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
         id: user.uid,
@@ -132,7 +140,7 @@ export const updateChange = createAsyncThunk(
       } = payload;
 
       const imagesRef = ref(storage, photoURL);
-      uploadBytesResumable(imagesRef, imageId);
+      await uploadBytesResumable(imagesRef, imageId);
       const publicImageUrl = await getDownloadURL(imagesRef);
       // let downloadURL;
       // if (Idimage !== undefined) {
@@ -175,6 +183,21 @@ export const updateChange = createAsyncThunk(
     }
   }
 );
+
+// export const deleteAccount = createAsyncThunk(
+//   'user/deleteAccount',
+//   async (userid, { rejectWithValue }) => {
+//     try {
+//       const user = auth.currentUser;
+//       await deleteUser(user);
+//       await deleteDoc(doc(db, 'users', userid.id));
+
+//       return user;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
 
 const usersSlice = createSlice({
   name: 'users',
@@ -251,6 +274,19 @@ const usersSlice = createSlice({
       state.user = {};
       state.error = action.payload;
     });
+    // builder.addCase(deleteAccount.pending, (state) => {
+    //   state.loading = true;
+    // });
+    // builder.addCase(deleteAccount.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.user = action.payload;
+    //   state.error = null;
+    // });
+    // builder.addCase(deleteAccount.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.user = {};
+    //   state.error = action.payload;
+    // });
   },
 });
 

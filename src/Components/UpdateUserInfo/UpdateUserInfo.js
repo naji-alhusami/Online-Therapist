@@ -1,43 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { updateChange } from '../../features/users/usersSlice';
-
+// import ProfilePic from './ProfilePic';
 import profile from './Images/ProfilePhoto.svg';
+import { updateChange } from '../../features/users/usersSlice';
 
 const UpdateUserInfo = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.user);
 
-  // const onSubmit = (user) => {
-  //   let newPassword = null;
-  //   console.log(user.Password);
-  //   console.log(user.confiremPassowrd);
-  //   if (user.Password === user.confiremPassowrd) {
-  //     newPassword = user.Password;
-  //   } else {
-  //     alert(' password and confirm password not match ');
-  //   }
-
-  //   dispatch(
-  //     updateChange({
-  //       id: userInfo.id,
-  //       email: user.email,
-  //       name: user.name,
-  //       photoURL: null,
-  //       birthdayDay: user.birthdayDay,
-  //       birthdayMonth: user.birthdayMonth,
-  //       birthdayYear: user.birthdayYear,
-  //       EducationLevel: user.EducationLevel,
-  //       Hobbies: user.Hobbies,
-  //       FamilySize: user.FamilySize,
-  //       Gender: user.Gender,
-  //       PhoneNumber: user.PhoneNumber,
-  //       Idimage: filedata,
-  //       Password: newPassword,
-  //     })
-  //   );
+  // const handleDelete = () => {
+  //   dispatch(deleteAccount({ id: userInfo.id }));
   // };
 
   return (
@@ -48,6 +22,7 @@ const UpdateUserInfo = () => {
       </div>
       <div className="flex lg:flex-row flex-col">
         <div className="flex flex-col lg:ml-[-10em] md:ml-[10%] ml-[25%] lg:mr-[0%] md:mr-[30%] mr-[25%]">
+          {/* <ProfilePic userInfo={userInfo} /> */}
           {userInfo.publicImageUrl ? (
             <img
               src={userInfo.publicImageUrl}
@@ -289,6 +264,7 @@ const UpdateUserInfo = () => {
             <button
               type="button"
               className="bg-[#2DD3E3] font-medium text-2xl px-10 py-3 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+              // onClick={()=>handleDelete()}
             >
               DELETE ACCOUNT
             </button>

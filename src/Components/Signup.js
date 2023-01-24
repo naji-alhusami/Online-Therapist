@@ -25,6 +25,7 @@ const SignupForm = () => {
           className="grid grid-rows-3 gap-4 shadow-2xl px-10 py-10 w-[555px] h-[493]"
           onSubmit={handleSubmit((userData) => {
             console.log(userData);
+
             dispatch(
               signupUser({
                 email: userData.email,
@@ -109,13 +110,12 @@ const SignupForm = () => {
               </button>
             </Link>
 
-              <button
-                type="submit"
-                className="broder-solid border-2 border-[#2DD3E3] font-medium text-2xl px-14 py-3 rounded-md"
-              >
-                Signup
-              </button>
-
+            <button
+              type="submit"
+              className="broder-solid border-2 border-[#2DD3E3] font-medium text-2xl px-14 py-3 rounded-md"
+            >
+              Signup
+            </button>
           </div>
         </form>
         <div className="flex justify-around my-6">
