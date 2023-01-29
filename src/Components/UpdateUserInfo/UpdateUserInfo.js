@@ -33,7 +33,7 @@ const UpdateUserInfo = () => {
         newPassword = user.Password ;
     }
     else {
-      alert(" password and confirm password not match ")
+      // alert(" password and confirm password not match ")
     }
      
  dispatch(updatechange( {

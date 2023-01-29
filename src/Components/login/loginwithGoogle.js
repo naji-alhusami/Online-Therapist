@@ -9,7 +9,6 @@ import googleicon from './Images/google.svg';
 function LoginwithGoogle() {
   const dispatch = useDispatch();
 
-
   return (
     <>
       <div className="absolute flex items-center pl-20">
@@ -23,10 +22,10 @@ function LoginwithGoogle() {
         <button
           type="button"
           style={{ height: 32, width: 32 }}
-          onClick={(userDat) => {
-            console.log(userDat);
+          onClick={(userData) => {
+            console.log(userData);
             dispatch(
-              loginUserWithGoogle({ id: userDat.id, email: userDat.email })
+              loginUserWithGoogle({ id: userData.id, email: userData.email })
             );
           }}
         >
@@ -36,10 +35,10 @@ function LoginwithGoogle() {
         <button
           type="button"
           style={{ height: 32, width: 32 }}
-          onClick={(userDat) => {
-            console.log(userDat);
+          onClick={(userData) => {
+            console.log(userData);
             dispatch(
-              loginUserWithFacebook({ id: userDat.id, email: userDat.email })
+              loginUserWithFacebook({ id: userData.id, email: userData.email })
             );
           }}
         >
@@ -50,4 +49,5 @@ function LoginwithGoogle() {
     </>
   );
 }
+
 export default LoginwithGoogle;
