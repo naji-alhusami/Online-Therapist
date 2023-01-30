@@ -387,7 +387,7 @@ const usersSlice = createSlice({
     });
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.loading = false;
-      state.user = null;
+      state.user = {};
       state.error = null;
       state.userlogin = false;
     });

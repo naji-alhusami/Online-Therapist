@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navebar from './Components/Home/NavBar/Navbar';
 import Login from './Components/login/Login';
@@ -19,8 +19,18 @@ import Team from './Components/about/Team';
 import About from './Components/about/About';
 
 function App() {
+  // const navigate = useNavigate();
+
+  // const navigateThankYouPage = useEffect(() => {
+  //   <ThankYouPage
+  //             path="/Thank-you"
+  //             header="Thank you!"
+  //             text=" Your email has been added to the mailing list successfully!"
+  //           />
+  // }, []);
+
   return (
-    <BrowserRouter>
+    <>
       <Navebar />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -37,11 +47,11 @@ function App() {
         <Route
           path="/Thank-you"
           element={
-            <ThankYouPage
+            (<ThankYouPage
               path="/Thank-you"
               header="Thank you!"
               text=" Your email has been added to the mailing list successfully!"
-            />
+            />)
           }
         />
         <Route path="/team" element={<Team />} />
@@ -49,7 +59,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 

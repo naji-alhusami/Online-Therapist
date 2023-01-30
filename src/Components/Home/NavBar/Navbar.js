@@ -30,9 +30,9 @@ function Navebar() {
 
   const logOut = (e) => {
     e.preventDefault();
+    Navigate('/');
     dispatch(logoutUser());
     console.log('Text');
-    // return Navigate('/');
   };
 
   const onclicklogo = () => {

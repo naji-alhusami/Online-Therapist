@@ -7,6 +7,7 @@ import {
   loginUserWithFacebook,
   loginUserWithGoogle,
 } from '../features/users/usersSlice';
+// import ThankYouPage from './blogs/Thankyoupage';
 import facebookicon from './login/Images/facebook.svg';
 import googleicon from './login/Images/google.svg';
 
@@ -15,6 +16,10 @@ const SignupForm = () => {
   const [enteredInput, setEnteredInput] = useState(false);
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+
+  // const handleSubmitForm = () => {
+
+  // };
 
   return (
     <div className="h-screen flex justify-center content-center md:flex-wrap max-[767px]:flex-wrap gap-x-20 mb-32">
@@ -124,12 +129,15 @@ const SignupForm = () => {
               </button>
             </Link>
 
+            {/* <Link to="/Thank-you"> */}
             <button
               type="submit"
               className="broder-solid border-2 border-[#2DD3E3] font-medium text-2xl px-14 py-3 rounded-md"
+              
             >
               Signup
             </button>
+            {/* </Link> */}
           </div>
         </form>
         <div className="flex justify-around my-6">
