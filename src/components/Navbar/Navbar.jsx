@@ -58,6 +58,67 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+        <div
+          className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+            showNavbar ? 'block' : 'hidden'
+          }`}
+        >
+          <div className="mt-3 space-y-2 lg:hidden md:hidden ">
+            <div className="flex flex-col  items-center  text-xl ">
+              <ul className="items-center justify-center  md:flex md:space-x-6 md:space-y-0">
+                  <li className="w-fit p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                    <a href="Home">{t('Home')}</a>
+                  </li>
+                  <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                    <a href="Blog">{t('Blog')}</a>
+                  </li>
+                <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
+                  <div className=" relative  absolute">
+                    <button
+                      type="button"
+                      className="flex peer text-black hover:text-indigo-100 p-2"
+                    >
+                      About
+                      <AiFillCaretDown className=" mt-1 ml-2" />
+                    </button>
+                    <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                      <a
+                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                        href="About"
+                      >
+                        About Us
+                      </a>
+                      <a
+                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                        href="Team"
+                      >
+                        Our Team
+                      </a>
+                      <a
+                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                        href="Careers"
+                      >
+                        Careers
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                  <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
+                    <a href="Contact">{t('Contact Us')}</a>
+                  </li>
+                <Link to="login">
+                  <button
+                    type="button"
+                    className="my-2 flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 text-m"
+                  >
+                    {t('Login')}
+                  </button>
+                </Link>
+                <LanguageButton />
+              </ul>
+            </div>
+          </div>
+        </div>
         <div className="hidden space-x-2 md:inline-block">
           <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <Link to="/">
@@ -77,16 +138,25 @@ const Navbar = () => {
                   className="flex peer text-black hover:text-indigo-100 p-2"
                 >
                   About
-                <AiFillCaretDown className=" mt-1 ml-2" />
+                  <AiFillCaretDown className=" mt-1 ml-2" />
                 </button>
                 <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
-                  <a className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100" href="About">
+                  <a
+                    className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                    href="About"
+                  >
                     About Us
                   </a>
-                  <a className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100" href="Team">
+                  <a
+                    className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                    href="Team"
+                  >
                     Our Team
                   </a>
-                  <a className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100" href="Careers">
+                  <a
+                    className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                    href="Careers"
+                  >
                     Careers
                   </a>
                 </div>
