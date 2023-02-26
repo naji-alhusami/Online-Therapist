@@ -7,8 +7,8 @@ import Logo from '../Images/Logo.svg';
 
 const Navbar = () => {
   const { t } = useTranslation();
-  const [showNavbar, setShowNavbar] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
+  const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
+  const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
 
   return (
     <nav className="w-full sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
@@ -18,9 +18,9 @@ const Navbar = () => {
             <button
               type="button"
               className="p-2 text-gray-700 rounded-md outline-none  focus:border-gray-400 focus:border"
-              onClick={() => setShowNavbar(!showNavbar)}
+              onClick={() => setShowNavbarInResponsive(!showNavbarInResponsive)}
             >
-              {showNavbar ? (
+              {showNavbarInResponsive ? (
                 <svg
                   className="w-6 h-6 "
                   viewBox="0 0 20 20"
@@ -60,7 +60,7 @@ const Navbar = () => {
         </div>
         <div
           className={`flex-1 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
-            showNavbar ? 'translate-x-full ' : 'translate-x-[-250px]'
+            showNavbarInResponsive ? 'translate-x-full ' : 'translate-x-[-250px]'
           }`}
         >
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
@@ -77,13 +77,13 @@ const Navbar = () => {
                     <button
                       type="button"
                       className="flex peer text-black hover:text-indigo-100 p-2"
-                      onClick={() => setShowAbout(!showAbout)}
+                      onClick={() => setShowAboutInResponsive(!showAboutInResponsive)}
                     >
                       About
                       <AiFillCaretDown className=" mt-1 ml-2" />
                     </button>
-                    {showAbout && (
-                      <div className="hidden relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                    {showAboutInResponsive ? (
+                      <div className="flex relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
                         <a
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           href="About"
@@ -103,7 +103,7 @@ const Navbar = () => {
                           Careers
                         </a>
                       </div>
-                    )}
+                    ): '' }
                   </div>
                 </li>
                 <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
