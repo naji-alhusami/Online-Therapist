@@ -8,6 +8,7 @@ import Logo from '../Images/Logo.svg';
 const Navbar = () => {
   const { t } = useTranslation();
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   return (
     <nav className="w-full sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
@@ -76,30 +77,33 @@ const Navbar = () => {
                     <button
                       type="button"
                       className="flex peer text-black hover:text-indigo-100 p-2"
+                      onClick={() => setShowAbout(!showAbout)}
                     >
                       About
                       <AiFillCaretDown className=" mt-1 ml-2" />
                     </button>
-                    <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
-                      <a
-                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                        href="About"
-                      >
-                        About Us
-                      </a>
-                      <a
-                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                        href="Team"
-                      >
-                        Our Team
-                      </a>
-                      <a
-                        className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                        href="Careers"
-                      >
-                        Careers
-                      </a>
-                    </div>
+                    {showAbout && (
+                      <div className="hidden relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                        <a
+                          className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                          href="About"
+                        >
+                          About Us
+                        </a>
+                        <a
+                          className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                          href="Team"
+                        >
+                          Our Team
+                        </a>
+                        <a
+                          className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                          href="Careers"
+                        >
+                          Careers
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </li>
                 <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
@@ -131,14 +135,15 @@ const Navbar = () => {
               </li>
             </Link>
             <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
-              <div className=" relative  absolute">
+              <div className="relative absolute">
                 <button
                   type="button"
                   className="flex peer text-black hover:text-indigo-100 p-2"
                 >
-                  About
-                  <AiFillCaretDown className=" mt-1 ml-2" />
+                  Abouts
+                  <AiFillCaretDown className="mt-1 ml-2" />
                 </button>
+
                 <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
                   <a
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
