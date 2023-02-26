@@ -13,16 +13,7 @@ const Navbar = () => {
     <nav className="w-full sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
       <div className="justify-between px-4 mx-auto  md:items-center md:flex md:px-8">
         <div className="flex items-center md:block">
-          <Link to="/">
-            <div className="flex flex-row items-center">
-              <img src={Logo} alt="logo" className=" h-9 w-9 mt-2 ml-6" />
-              <h2 className="text-3xl text-bold m-4 ml-3 font-medium">
-                Healing
-              </h2>
-            </div>
-          </Link>
-
-          <div className="ml-auto md:hidden">
+          <div className=" md:hidden">
             <button
               type="button"
               className="p-2 text-gray-700 rounded-md outline-none  focus:border-gray-400 focus:border"
@@ -57,21 +48,29 @@ const Navbar = () => {
               )}
             </button>
           </div>
+          <Link to="/">
+            <div className="flex flex-row items-center">
+              <img src={Logo} alt="logo" className=" h-9 w-9 mt-2 ml-6" />
+              <h2 className="text-3xl text-bold m-4 ml-3 font-medium">
+                Healing
+              </h2>
+            </div>
+          </Link>
         </div>
         <div
-          className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-            showNavbar ? 'block' : 'hidden'
+          className={`flex-1 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px] transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
+            showNavbar ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
-            <div className="flex flex-col  items-center  text-xl ">
+            <div className="flex flex-col items-start  text-xl ">
               <ul className="items-center justify-center  md:flex md:space-x-6 md:space-y-0">
-                  <li className="w-fit p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
-                    <a href="Home">{t('Home')}</a>
-                  </li>
-                  <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
-                    <a href="Blog">{t('Blog')}</a>
-                  </li>
+                <li className="w-fit p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                  <a href="Home">{t('Home')}</a>
+                </li>
+                <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                  <a href="Blog">{t('Blog')}</a>
+                </li>
                 <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
                   <div className=" relative  absolute">
                     <button
@@ -103,9 +102,9 @@ const Navbar = () => {
                     </div>
                   </div>
                 </li>
-                  <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                    <a href="Contact">{t('Contact Us')}</a>
-                  </li>
+                <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
+                  <a href="Contact">{t('Contact Us')}</a>
+                </li>
                 <Link to="login">
                   <button
                     type="button"
