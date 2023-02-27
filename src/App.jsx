@@ -1,9 +1,9 @@
 import React from 'react';
-import { Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import Home from "./components/Home/Home";
 // import Login from "./components/login/Login";
-// import Home from "./Components/Home/Home";
 // import Signup from './Components/Signup';
 // import Thankyoupage from './Components/blogs/Thankyoupage';
 // import Blogarticle from './Components/blogs/Blogarticle';
@@ -24,9 +24,8 @@ function App() {
   return (
     <>
       <Navbar />
-
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         {/* <Route path="/login" element ={<Login/>}/> */}
         {/* <Route path="/signup" element ={<Signup/>}/>
         <Route path="/blog/:id" element={<Blogarticle/>}/>
