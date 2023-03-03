@@ -21,6 +21,7 @@
     "firebase": "^9.15.0",
     "i18next": "^22.4.10",
     "i18next-browser-languagedetector": "^7.0.1",
+    "jquery": "^3.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.3",
@@ -36,6 +37,7 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.2.0",
     "renderer": "^0.1.5",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "test": "^3.2.1",
     "web-vitals": "^2.1.0"
