@@ -11,7 +11,7 @@ const Navbar = () => {
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
 
   return (
-    <nav className="w-full sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
+    <nav className="w-screen sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
       <div className="justify-between px-4 mx-auto  md:items-center md:flex md:px-8">
         <div className="flex items-center md:block">
           <div className=" md:hidden">
@@ -113,7 +113,7 @@ const Navbar = () => {
                   </div>
                 </li>
                 <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                  <a href="Contact">{t('Contact Us')}</a>
+                  <a href="Contact">{t('Contact')}</a>
                 </li>
                 <Link to="login">
                   <button
@@ -174,7 +174,7 @@ const Navbar = () => {
             </li>
             <Link to="contactus">
               <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                <a href="Contact">{t('Contact Us')}</a>
+                <a href="Contact">{t('Contact')}</a>
               </li>
             </Link>
             <Link to="login">

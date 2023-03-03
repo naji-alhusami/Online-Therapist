@@ -37,7 +37,7 @@ const SliderContent = () => {
   };
 
   return (
-    <div className="bg-cyan-50 py-16 w-full h-full relative overflow-hidden sm:py-8 md:py-12">
+    <div className="w-screen bg-cyan-50 py-16 h-full relative overflow-hidden sm:py-8 md:py-12">
       <h1 className="lg:text-start pb-20 pl-32 font-poppins text-3xl md:text-4xl">{t('RECENT BLOGS')}</h1>
       <SliderSettings settings={settings} />
     </div>

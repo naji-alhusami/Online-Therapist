@@ -17,7 +17,7 @@ import Careers from './components/Careers/Careers';
 // import Note from "./Components/booking/Note"
 // import Submit from './Components/booking/Submit';
 // import Requestsubmit from './Components/booking/RequestSubmit';
-// import Fotter from "./Components/fotter/Fotter"
+import Footer from './components/Footer/Footer';
 // import ContactUs from './Components/contactus/Contact';
 
 function App() {
@@ -42,6 +42,7 @@ function App() {
          <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/>
          <Route path='/contactus' element={<ContactUs />}/> */}
       </Routes>
+      <Footer />
     </>
   );
 }

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const Counselor = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col shadow-lg   shadow-zinc-300 p-10 mt-20 text-center rounded-lg  lg:mx-16 md:ml-20 mb-20  ">
+    <div className=" flex flex-col shadow-lg shadow-zinc-300 p-10 mt-20 text-center rounded-lg  lg:mx-16 md:ml-20 mb-20  ">
       <h1 className=" lg:text-5xl  md:text-2xl	sm:text-sm  lg:pt-8 md:pt:6 sm:pt:4 ">
         {t('Are you a counselor?')}
       </h1>

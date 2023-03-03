@@ -7,7 +7,7 @@ const TherapistPart = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-amber-200 pb-3 pt-3 font-poppins">
+    <div className="w-screen bg-amber-200 pb-3 pt-3 font-poppins">
       <div
         className=" lg:m-20 lg:mt-0  md:ml-10  flex flex-col gap-6 m-20 "
         style={{ fontFamily: 'Poppins, sans-serif' }}
