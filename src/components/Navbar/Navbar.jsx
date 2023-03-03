@@ -88,24 +88,24 @@ const Navbar = () => {
                     </button>
                     {showAboutInResponsive ? (
                       <div className="flex relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
-                        <a
+                        <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                          href="About"
+                          to="/about"
                         >
-                          <Link to="/about">About</Link>
-                        </a>
-                        <a
+                          About
+                        </Link>
+                        <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                          href="Team"
+                          to="/team"
                         >
-                          <Link to="/team">Our Team</Link>
-                        </a>
-                        <a
+                          Our Team
+                        </Link>
+                        <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                          href="Careers"
+                          to="/careers"
                         >
-                          <Link to="/careers">Careers</Link>
-                        </a>
+                          Careers
+                        </Link>
                       </div>
                     ) : (
                       ''
@@ -151,29 +151,24 @@ const Navbar = () => {
                 </button>
 
                 <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
-                  <a
+                  <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                    href="About"
+                    to="/about"
                   >
-                    <Link to="/about">About</Link>
-                  </a>
-                  <a
+                    About
+                  </Link>
+                  <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                    href="Team"
+                    to="/team"
                   >
-                    <Link to="/team">Our Team</Link>
-                  </a>
-                  {/* <a
+                    Our Team
+                  </Link>
+                  <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                    href="Careers"
-                  > */}
-                    <Link
-                      className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                      to="/careers"
-                    >
-                      Careers
-                    </Link>
-                  {/* </a> */}
+                    to="/careers"
+                  >
+                    Careers
+                  </Link>
                 </div>
               </div>
             </li>
