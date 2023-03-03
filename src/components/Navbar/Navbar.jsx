@@ -60,7 +60,9 @@ const Navbar = () => {
         </div>
         <div
           className={`flex-1 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
-            showNavbarInResponsive ? 'translate-x-full ' : 'translate-x-[-250px]'
+            showNavbarInResponsive
+              ? 'translate-x-full '
+              : 'translate-x-[-250px]'
           }`}
         >
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
@@ -77,7 +79,9 @@ const Navbar = () => {
                     <button
                       type="button"
                       className="flex peer text-black hover:text-indigo-100 p-2"
-                      onClick={() => setShowAboutInResponsive(!showAboutInResponsive)}
+                      onClick={() =>
+                        setShowAboutInResponsive(!showAboutInResponsive)
+                      }
                     >
                       About
                       <AiFillCaretDown className=" mt-1 ml-2" />
@@ -88,22 +92,24 @@ const Navbar = () => {
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           href="About"
                         >
-                          About Us
+                          <Link to="/about">About</Link>
                         </a>
                         <a
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           href="Team"
                         >
-                          Our Team
+                          <Link to="/team">Our Team</Link>
                         </a>
                         <a
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           href="Careers"
                         >
-                          Careers
+                          <Link to="/careers">Careers</Link>
                         </a>
                       </div>
-                    ): '' }
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </li>
                 <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
@@ -140,7 +146,7 @@ const Navbar = () => {
                   type="button"
                   className="flex peer text-black hover:text-indigo-100 p-2"
                 >
-                  Abouts
+                  About
                   <AiFillCaretDown className="mt-1 ml-2" />
                 </button>
 
@@ -149,20 +155,25 @@ const Navbar = () => {
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     href="About"
                   >
-                    About Us
+                    <Link to="/about">About</Link>
                   </a>
                   <a
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     href="Team"
                   >
-                    Our Team
+                    <Link to="/team">Our Team</Link>
                   </a>
-                  <a
+                  {/* <a
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     href="Careers"
-                  >
-                    Careers
-                  </a>
+                  > */}
+                    <Link
+                      className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                      to="/careers"
+                    >
+                      Careers
+                    </Link>
+                  {/* </a> */}
                 </div>
               </div>
             </li>

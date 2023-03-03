@@ -2,7 +2,10 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Home from "./components/Home/Home";
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import Team from './components/Team/Team';
+import Careers from './components/Careers/Careers';
 // import Login from "./components/login/Login";
 // import Signup from './Components/Signup';
 // import Thankyoupage from './Components/blogs/Thankyoupage';
@@ -15,10 +18,7 @@ import Home from "./components/Home/Home";
 // import Submit from './Components/booking/Submit';
 // import Requestsubmit from './Components/booking/RequestSubmit';
 // import Fotter from "./Components/fotter/Fotter"
-// import Team from './Components/about/Team';
-// import About from './Components/about/About';
 // import ContactUs from './Components/contactus/Contact';
-// import Careers from './Components/about/Careers';
 
 function App() {
   return (
@@ -26,6 +26,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/careers" element={<Careers />} />
         {/* <Route path="/login" element ={<Login/>}/> */}
         {/* <Route path="/signup" element ={<Signup/>}/>
         <Route path="/blog/:id" element={<Blogarticle/>}/>
@@ -37,10 +40,7 @@ function App() {
         <Route path="/bookingsubmit" element={<Submit />} />
         <Route path="/Requestsubmit" element={<Requestsubmit />} />
          <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/>
-         <Route path='/team' element={<Team />}/>
-         <Route path='/about' element={<About />}/>
-         <Route path='/contactus' element={<ContactUs />}/>
-         <Route path='/careers' element={<Careers />}/> */}
+         <Route path='/contactus' element={<ContactUs />}/> */}
       </Routes>
     </>
   );
