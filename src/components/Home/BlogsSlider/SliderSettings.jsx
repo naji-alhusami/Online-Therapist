@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import $ from 'jquery';
-import Blogs from './BlogData';
+import Blogs from '../../Blogs/BlogsData';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick';

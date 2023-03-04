@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Subscribe from '../Images/Subscribe.svg';
 import FacebookLogo from '../Images/FacebookLogo.svg';
 import TwitterLogo from '../Images/TwitterLogo.svg';
 import GoogleLogo from '../Images/GoogleLogo.svg';
+import SubscribeForm from '../Subscribe/SubscribeForm';
 
 const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="relative bg-amber-200 bottom-0 w-full p-4 md:flex md:items-center md:justify-between md:p-6 ">
+    <footer className="relative bg-amber-200 bottom-0 w-full pt-4 md:flex md:items-center md:justify-between md:p-2 ">
       <span className="text-sm ">
         <div className="flex items-center flex-col  lg:items-start lg:ml-16">
           <h1 className=" text-BlackTexts text-4xl font-medium h-[44px]">
@@ -24,7 +24,8 @@ const Footer = () => {
             {t('We will never spam to you or share your email')}
           </p>
 
-          <div className=" md:flex ">
+          <SubscribeForm />
+          {/* <div className=" md:flex ">
             <div className="flex flex-row mb-4 w-[300px] h-[50px] box-border rounded-lg border-2 border-[#718096]">
               <form
                 // ref={form}
@@ -55,7 +56,7 @@ const Footer = () => {
                 />
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </span>
       <div

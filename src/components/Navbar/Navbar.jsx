@@ -71,9 +71,13 @@ const Navbar = () => {
                 <li className="w-fit p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
                   <a href="Home">{t('Home')}</a>
                 </li>
-                <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
-                  <a href="Blog">{t('Blog')}</a>
-                </li>
+
+                <Link to="/blog/1">
+                  <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                    {t('Blogs')}
+                  </li>
+                </Link>
+
                 <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
                   <div className=" relative  absolute">
                     <button
@@ -112,8 +116,13 @@ const Navbar = () => {
                     )}
                   </div>
                 </li>
-                <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                  <a href="Contact">{t('Contact')}</a>
+                <li>
+                  <Link
+                    className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md"
+                    to="/contact"
+                  >
+                    {t('Contact')}
+                  </Link>
                 </li>
                 <Link to="login">
                   <button
@@ -135,9 +144,9 @@ const Navbar = () => {
                 <a href="Home">{t('Home')}</a>
               </li>
             </Link>
-            <Link to="blog">
+            <Link to="/blog/1">
               <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                <a href="Blog">{t('Blog')}</a>
+                {t('Blogs')}
               </li>
             </Link>
             <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
@@ -172,10 +181,11 @@ const Navbar = () => {
                 </div>
               </div>
             </li>
-            <Link to="contactus">
-              <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                <a href="Contact">{t('Contact')}</a>
-              </li>
+            <Link
+              to="/contact"
+              className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md"
+            >
+              <li>{t('Contact')}</li>
             </Link>
             <Link to="login">
               <button
