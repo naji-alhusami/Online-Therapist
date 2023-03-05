@@ -17,7 +17,7 @@ const Footer = () => {
             {t('Subscribe')}
           </h1>
           <p
-            className=" text-SubTexts mb-12 
+            className=" text-SubTexts 
               w-auto h-[22px] top-[56px] mt-2
               font-normal md:text-xl sm:text-sm leading-5"
           >

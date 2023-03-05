@@ -124,7 +124,7 @@ const Navbar = () => {
                     {t('Contact')}
                   </Link>
                 </li>
-                <Link to="login">
+                <Link to="/login">
                   <button
                     type="button"
                     className="my-2 flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 text-m"
@@ -187,7 +187,7 @@ const Navbar = () => {
             >
               <li>{t('Contact')}</li>
             </Link>
-            <Link to="login">
+            <Link to="/login">
               <button
                 type="button"
                 className="flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 text-m"

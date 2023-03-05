@@ -8,7 +8,7 @@ import Team from './components/Team/Team';
 import Careers from './components/Careers/Careers';
 import Contact from './components/Contact/Contact';
 import BlogsArticle from './components/Blogs/BlogsArticle';
-// import Login from "./components/login/Login";
+import Login from './components/Login/Login';
 // import Signup from './Components/Signup';
 // import Thankyoupage from './Components/blogs/Thankyoupage';
 // import UpdateUserInfo from './Components/UpdateUserInfo/UpdateUserInfo'
@@ -31,7 +31,7 @@ function App() {
         <Route path="/careers" element={<Careers />} />
         <Route path='/contact' element={<Contact />}/> 
         <Route path="/blog/:id" element={<BlogsArticle/>}/>
-        {/* <Route path="/login" element ={<Login/>}/> */}
+        <Route path="/login" element ={<Login/>}/>
         {/* <Route path="/signup" element ={<Signup/>}/>
         <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
         <Route path="/Profilepic" element={<Profilepic />}/>
