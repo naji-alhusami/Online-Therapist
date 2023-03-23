@@ -10,7 +10,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="relative bg-amber-200 bottom-0 w-full pt-4 md:flex md:items-center md:justify-between md:p-2 ">
+    <footer className="relative bg-amber-200 bottom-0 w-screen pt-4 md:flex md:items-center md:justify-between md:p-2 ">
       <span className="text-sm ">
         <div className="flex items-center flex-col  lg:items-start lg:ml-16">
           <h1 className=" text-BlackTexts text-4xl font-medium h-[44px]">

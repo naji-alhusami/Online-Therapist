@@ -9,7 +9,7 @@ import Careers from './components/Careers/Careers';
 import Contact from './components/Contact/Contact';
 import BlogsArticle from './components/Blogs/BlogsArticle';
 import Login from './components/Login/Login';
-// import Signup from './Components/Signup';
+import Signup from './components/Signup/Signup';
 // import Thankyoupage from './Components/blogs/Thankyoupage';
 // import UpdateUserInfo from './Components/UpdateUserInfo/UpdateUserInfo'
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
@@ -29,11 +29,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
         <Route path="/careers" element={<Careers />} />
-        <Route path='/contact' element={<Contact />}/> 
-        <Route path="/blog/:id" element={<BlogsArticle/>}/>
-        <Route path="/login" element ={<Login/>}/>
-        {/* <Route path="/signup" element ={<Signup/>}/>
-        <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blog/:id" element={<BlogsArticle />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
         <Route path="/Profilepic" element={<Profilepic />}/>
        <Route path="/booking1/:id" element={<Bookingtem />}/>
         <Route path="/booking2/:id" element={<Bookingradio />}/>

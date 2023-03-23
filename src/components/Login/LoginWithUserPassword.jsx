@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import LoginWithGoogleFacebook from './LoginWithGoogleFacebook';
 
 const LoginWithUserPassword = () => {
@@ -12,7 +13,7 @@ const LoginWithUserPassword = () => {
       </h2>
       <form
         // onSubmit={login}
-        className="grid grid-rows-3 gap-6 shadow-2xl px-4 py-6 md:px-10 md:py-10 max-w-lg"
+        className="grid grid-rows-3 gap-6 shadow-2xl px-2 py-6 md:px-10 md:py-10 sm:px-10 sm:py-10 xs:px-10 xs:py-10 max-w-lg"
       >
         <input
           type="text"
@@ -37,13 +38,12 @@ const LoginWithUserPassword = () => {
           >
             {t('Login')}
           </button>
-          <button
-            type="button"
+          <Link
+            to="/signup"
             className="w-1/2 broder-solid border-2 border-[#2DD3E3] hover:bg-[#2DD3E3] font-medium text-2xl px-7 py-1 rounded-md"
-            // onClick={() => navigate('/signup')}
           >
-            {t('Signup')}
-          </button>
+            <button type="button">{t('Signup')}</button>
+          </Link>
         </div>
       </form>
       <LoginWithGoogleFacebook />
