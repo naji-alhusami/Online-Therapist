@@ -37,15 +37,6 @@ const Singup = () => {
   const onSubmitform = async (userData) => {
     console.log(userData);
 
-    // if (userData.email !== userData.emailConfirmation) {
-    //   showalertitm(true);
-    //   setEnteredInput(false);
-    //   setError('Your Email should  match');
-    // } else if (userData.password !== userData.passwordConfirmation) {
-    //   showalertitm(true);
-    //   setError('Your Password should  match');
-    // }
-
     dispatch(
       signupUser({
         email: userData.email,
@@ -77,20 +68,20 @@ const Singup = () => {
           {userInfo.error}
         </Alert>
       )} */}
-
-      <div className=" flex flex-col  justify-center lg:flex lg:flex-row lg:justify-around ">
-        <div>
-          <img src={signupImage} alt="singupemage" className="lg:mt-40 mt-10" />
+{/* flex flex-col  justify-center */}
+      <div className="  lg:flex lg:flex-row xl:justify-around ">
+        <div className="flex justify-center">
+          <img src={signupImage} alt="singupemage"  />
         </div>
 
         <div>
-          <h2 className='text-3xl lg:text-5xl font-["Poppins"] font-normal lg:mb-6 mb-10 lg:mt-10 lg:ml-0 ml-4 mt-10 '>
+          <h2 className='flex justify-center text-3xl lg:text-5xl font-["Poppins"] font-normal lg:mb-6 mb-10 lg:mt-10 lg:ml-0 ml-4 mt-10 '>
             {t('SIGNUP NOW')}
           </h2>
 
           <div className="flex justify-center">
             <form
-              className="shadow-2xl lg:px-10 lg:py-10 lg:w-[500px] px-4 py-4 flex flex-col gap-4  "
+              className="shadow-2xl lg:px-10 lg:py-10 lg:w-[500px]  px-4 py-4 flex flex-col gap-4  "
               onSubmit={handleSubmit(onSubmitform)}
             >
               <div className="lg:flex lg:flex-row lg:justify-between flex flex-col gap-4">
@@ -147,7 +138,7 @@ const Singup = () => {
                   type="email"
                   placeholder={t('Your Email')}
                   className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12 "
-                  aria-invalid={errors.lastName ? 'true' : 'false'}
+                  aria-invalid={errors.email ? 'true' : 'false'}
                   required
                 />
                 {errors.email && (
