@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  // useState
+  useEffect,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Alert } from '@mui/material';
+// import { Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import {
   signupUser,
@@ -12,19 +15,21 @@ import {
 import facebookicon from '../Images/FacebookLogo.svg';
 import googleicon from '../Images/GoogleLogo.svg';
 import signupImage from '../Images/Singup.svg';
+import Line from '../Images/Line.svg';
 
 const Singup = () => {
   const { t } = useTranslation();
-  const userInfo = useSelector((state) => state.users);
+  // const userInfo = useSelector((state) => state.users);
   const { signedup } = useSelector((state) => state.users);
 
-  const [enteredInput, setEnteredInput] = useState(false);
-  const [alertitem, showalertitm] = useState(false);
-  const [error, setError] = useState('');
+  // const [enteredInput, setEnteredInput] = useState(true);
+  // const [alertitem, showalertitm] = useState(false);
+  // const [error, setError] = useState('');
   const {
     register,
-    formState: { errors },
     handleSubmit,
+    watch,
+    formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,28 +37,26 @@ const Singup = () => {
   const onSubmitform = async (userData) => {
     console.log(userData);
 
-    if (userData.email !== userData.emailConfirmation) {
-      showalertitm(true);
-      setError('Your Email should  match');
-    } else if (userData.password !== userData.passwordConfirmation) {
-      showalertitm(true);
-      setError('Your Password should  match');
-    } else {
-      showalertitm(false);
-      setEnteredInput(true);
+    // if (userData.email !== userData.emailConfirmation) {
+    //   showalertitm(true);
+    //   setEnteredInput(false);
+    //   setError('Your Email should  match');
+    // } else if (userData.password !== userData.passwordConfirmation) {
+    //   showalertitm(true);
+    //   setError('Your Password should  match');
+    // }
 
-      dispatch(
-        signupUser({
-          email: userData.email,
-          password: userData.password,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          birthdayDay: userData.birthdayDay,
-          birthdayMonth: userData.birthdayMonth,
-          birthdayYear: userData.birthdayYear,
-        })
-      );
-    }
+    dispatch(
+      signupUser({
+        email: userData.email,
+        password: userData.password,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        birthdayDay: userData.birthdayDay,
+        birthdayMonth: userData.birthdayMonth,
+        birthdayYear: userData.birthdayYear,
+      })
+    );
   };
 
   useEffect(() => {
@@ -64,16 +67,16 @@ const Singup = () => {
 
   return (
     <div>
-      {alertitem && (
+      {/* {alertitem && (
         <Alert severity="error" className="fixed w-full">
           {error}
         </Alert>
       )}
-      {enteredInput && (
+      {!enteredInput && (
         <Alert severity="error" className="fixed w-full">
           {userInfo.error}
         </Alert>
-      )}
+      )} */}
 
       <div className=" flex flex-col  justify-center lg:flex lg:flex-row lg:justify-around ">
         <div>
@@ -91,163 +94,194 @@ const Singup = () => {
               onSubmit={handleSubmit(onSubmitform)}
             >
               <div className="lg:flex lg:flex-row lg:justify-between flex flex-col gap-4">
+                {/* First Name */}
                 <div>
                   <input
-                    className="broder-solid border-2  placeholder-gray-300 lg:w-48  h-12 "
-                    {...register('firstName', { pattern: /^[A-Za-z]+$/i })}
+                    {...register('firstName', {
+                      maxLength: {
+                        value: 15,
+                        message: 'First Name should not exceed 15 characters',
+                      },
+                    })}
                     type="text"
                     placeholder={t('First Name')}
+                    className="px-3 broder-solid border-2 rounded-md  placeholder-gray-300 lg:w-48  h-12 "
                     aria-invalid={errors.firstName ? 'true' : 'false'}
                     required
                   />
-                  {errors.firstName?.type === 'pattern' && (
-                    <span className="text-red-600" role="alert">
-                      The first Name must not contain numbers
-                    </span>
+                  {errors.firstName && (
+                    <p className="text-red-600">{errors.firstName.message}</p>
                   )}
                 </div>
+
+                {/* Last Name */}
                 <div>
                   <input
-                    {...register('lastName', { pattern: /^[A-Za-z]+$/i })}
+                    {...register('lastName', {
+                      maxLength: {
+                        value: 15,
+                        message: 'Last Name should not exceed 15 characters',
+                      },
+                    })}
                     type="text"
                     placeholder={t('Last Name')}
-                    className=" broder-solid border-2 placeholder-gray-300 lg:w-48  h-12"
+                    className="px-3 broder-solid border-2 rounded-md placeholder-gray-300 lg:w-48  h-12"
                     aria-invalid={errors.lastName ? 'true' : 'false'}
                     required
                   />
-                  {errors.lastName?.type === 'pattern' && (
-                    <span className="text-red-600" role="alert">
-                      The Last Name must not contain numbers
-                    </span>
+                  {errors.lastName && (
+                    <p className="text-red-600">{errors.lastName.message}</p>
                   )}
                 </div>
               </div>
 
+              {/* Email */}
               <div>
                 <input
                   {...register('email', {
-                    pattern:
-                      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message: 'Invalid email address',
+                    },
                   })}
-                  type="text"
+                  type="email"
                   placeholder={t('Your Email')}
-                  className=" broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12 "
+                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12 "
                   aria-invalid={errors.lastName ? 'true' : 'false'}
                   required
                 />
-                {errors.email?.type === 'pattern' && (
-                  <span className="text-red-600" role="alert">
-                    please enter a valid email address{' '}
-                  </span>
+                {errors.email && (
+                  <p className="text-red-600">{errors.email.message}</p>
                 )}
               </div>
 
+              {/* Email Confirmation */}
               <div>
                 <input
-                  {...register('emailConfirmation')}
-                  type="text"
-                  placeholder={t('Confirm email')}
-                  className=" broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12"
+                  {...register('emailConfirmaion', {
+                    validate: (value) =>
+                      value === watch('email') || 'Emails do not match',
+                  })}
+                  type="email"
+                  placeholder={t('Confirm Email')}
+                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12"
                   required
                 />
+                {errors.emailConfirmaion && (
+                  <p className="text-red-600">
+                    {errors.emailConfirmaion.message}
+                  </p>
+                )}
               </div>
 
+              {/* Password */}
               <div className="lg:flex lg:flex-row lg:justify-between flex flex-col gap-4">
                 <div>
                   <input
                     {...register('password', {
-                      pattern:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/,
+                      pattern: {
+                        value:
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/,
+                        message:
+                          'Password should contain at least one uppercase letter, one lowercase letter, and one number',
+                      },
                     })}
                     type="password"
                     placeholder={t('Password')}
-                    className="broder-solid border-2  placeholder-gray-300 h-12 lg:w-48"
-                    aria-invalid={errors.lastName ? 'true' : 'false'}
+                    className="rounded-md px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48"
+                    aria-invalid={errors.password ? 'true' : 'false'}
                     required
                   />
-                  {errors.password?.type === 'pattern' && (
-                    <span className="text-red-600" role="alert">
-                      password must be eight characters including one uppercase
-                      letter, one lower case letter, and number{' '}
-                    </span>
+                  {errors.password && (
+                    <p className="text-red-600">{errors.password.message}</p>
                   )}
                 </div>
 
+                {/* Password Confirmation */}
                 <div>
                   <input
-                    {...register('passwordConfirmation')}
+                    {...register('passswordConfirmation', {
+                      validate: (value) =>
+                        value === watch('password') || 'Passwords do not match',
+                    })}
                     type="password"
                     placeholder={t('Confirm Password')}
-                    className="broder-solid border-2  placeholder-gray-300 h-12 lg:w-48"
+                    className="px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48 rounded-md"
                     required
                   />
+                  {errors.passswordConfirmation && (
+                    <p className="text-red-600">
+                      {errors.passswordConfirmation.message}
+                    </p>
+                  )}
                 </div>
               </div>
+
+              {/* Day of Birthday */}
               <div className="lg:flex lg:items-center lg:justify-between ">
                 <p className="mr-7 ml-7 font-light text-[#9DAFBD]">
                   {t('Birth Date')}
                 </p>
                 <input
                   {...register('birthdayDay', {
-                    pattern: /^(0?[1-9]|[12][0-9]|3[01])$/,
+                    pattern: {
+                      value: /^\d{2}$/,
+                      message: 'Please enter valid day',
+                    },
                   })}
                   type="text"
                   placeholder="DD"
-                  className="h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
-                  aria-invalid={errors.lastName ? 'true' : 'false'}
+                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
+                  aria-invalid={errors.birthdayDay ? 'true' : 'false'}
                   required
                 />
+                {errors.birthdayDay && <p className="text-red-600">{errors.birthdayDay.message}</p>}
+
+                {/* Month of Birthday */}
                 <input
                   {...register('birthdayMonth', {
-                    pattern: /^(0?[1-9]|1[0-2])$/,
+                    pattern: {
+                      value: /^\d{2}$/,
+                      message: 'Please enter valid month',
+                    },
                   })}
                   type="text"
                   placeholder="MM"
-                  className="h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
-                  aria-invalid={errors.lastName ? 'true' : 'false'}
+                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
+                  aria-invalid={errors.birthdayMonth ? 'true' : 'false'}
                   required
                 />
+                {errors.birthdayMonth && <p className="text-red-600">{errors.birthdayMonth.message}</p>}
+
+                {/* Year of Birthday */}
                 <input
                   {...register('birthdayYear', {
-                    pattern: /^(1[0-9][0-9][0-9]|20[0-1][0-9]|200[0-2])$/,
+                    pattern: {
+                      value: /^\d{4}$/,
+                      message: 'Please enter valid year',
+                    },
                   })}
                   type="text"
                   placeholder="YYYY"
-                  className="h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md w-36 placeholder-gray-300"
-                  aria-invalid={errors.lastName ? 'true' : 'false'}
+                  className="px-3 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md w-36 placeholder-gray-300"
+                  aria-invalid={errors.birthdayYear ? 'true' : 'false'}
                   required
                 />
+                {errors.birthdayYear && <p className="text-red-600">{errors.birthdayYear.message}</p>}
               </div>
-              <div>
-                {errors.birthdayDay?.type === 'pattern' && (
-                  <span className="text-red-600" role="alert">
-                    invalid Day{' '}
-                  </span>
-                )}
 
-                {errors.birthdayMonth?.type === 'pattern' && (
-                  <span className="text-red-600" role="alert">
-                    invalid Month{' '}
-                  </span>
-                )}
-                {errors.birthdayYear?.type === 'pattern' && (
-                  <span className="text-red-600" role="alert">
-                    invalid Year{' '}
-                  </span>
-                )}
-              </div>
               <div className="flex justify-around py-3 gap-8">
                 <Link to="/login">
                   <button
                     type="button"
-                    className="bg-[#2DD3E3] font-medium lg:text-2xl lg:px-14 py-3 px-4 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+                    className="bg-[#2DD3E3] hover:bg-cyan-500 font-medium lg:text-2xl lg:px-14 py-3 px-4 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
                   >
                     {t('Login')}
                   </button>
                 </Link>
                 <button
                   type="submit"
-                  className="broder-solid border-2 border-[#2DD3E3] font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md"
+                  className="broder-solid border-2 border-[#2DD3E3] hover:bg-[#2DD3E3] font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md"
                 >
                   {t('Sign Up')}
                 </button>
@@ -256,7 +290,9 @@ const Singup = () => {
           </div>
           <div>
             <div className="flex justify-around my-6">
-              <p>{t('Or')}</p>
+              <img src={Line} alt="A line" />
+              <p>{t('OR')}</p>
+              <img src={Line} alt="A line" />
             </div>
             <div className="flex justify-center my-6 gap-x-12">
               <button
