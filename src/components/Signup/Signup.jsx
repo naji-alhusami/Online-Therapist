@@ -96,7 +96,7 @@ const Singup = () => {
                     })}
                     type="text"
                     placeholder={t('First Name')}
-                    className="px-3 broder-solid border-2 rounded-md  placeholder-gray-300 lg:w-48  h-12 "
+                    className="px-3 broder-solid border-2 rounded-md  placeholder-gray-300 lg:w-48 md:w-96 h-12 "
                     aria-invalid={errors.firstName ? 'true' : 'false'}
                     required
                   />
@@ -116,7 +116,7 @@ const Singup = () => {
                     })}
                     type="text"
                     placeholder={t('Last Name')}
-                    className="px-3 broder-solid border-2 rounded-md placeholder-gray-300 lg:w-48  h-12"
+                    className="px-3 broder-solid border-2 rounded-md placeholder-gray-300 lg:w-48 md:w-96 h-12"
                     aria-invalid={errors.lastName ? 'true' : 'false'}
                     required
                   />
@@ -137,7 +137,7 @@ const Singup = () => {
                   })}
                   type="email"
                   placeholder={t('Your Email')}
-                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12 "
+                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full md:w-96 h-12 "
                   aria-invalid={errors.email ? 'true' : 'false'}
                   required
                 />
@@ -155,7 +155,7 @@ const Singup = () => {
                   })}
                   type="email"
                   placeholder={t('Confirm Email')}
-                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full h-12"
+                  className="px-3 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 lg:w-full md:w-96 h-12"
                   required
                 />
                 {errors.emailConfirmaion && (
@@ -179,7 +179,7 @@ const Singup = () => {
                     })}
                     type="password"
                     placeholder={t('Password')}
-                    className="rounded-md px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48"
+                    className="rounded-md px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48 md:w-96"
                     aria-invalid={errors.password ? 'true' : 'false'}
                     required
                   />
@@ -197,7 +197,7 @@ const Singup = () => {
                     })}
                     type="password"
                     placeholder={t('Confirm Password')}
-                    className="px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48 rounded-md"
+                    className="px-3 broder-solid border-2  placeholder-gray-300 h-12 lg:w-48 rounded-md md:w-96"
                     required
                   />
                   {errors.passswordConfirmation && (
@@ -209,7 +209,7 @@ const Singup = () => {
               </div>
 
               {/* Day of Birthday */}
-              <div className="lg:flex lg:items-center lg:justify-between ">
+              <div className="lg:flex lg:items-center lg:justify-between">
                 <p className="mr-7 ml-7 font-light text-[#9DAFBD]">
                   {t('Birth Date')}
                 </p>
@@ -222,7 +222,7 @@ const Singup = () => {
                   })}
                   type="text"
                   placeholder="DD"
-                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
+                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
                   aria-invalid={errors.birthdayDay ? 'true' : 'false'}
                   required
                 />
@@ -238,7 +238,7 @@ const Singup = () => {
                   })}
                   type="text"
                   placeholder="MM"
-                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
+                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
                   aria-invalid={errors.birthdayMonth ? 'true' : 'false'}
                   required
                 />
@@ -254,7 +254,7 @@ const Singup = () => {
                   })}
                   type="text"
                   placeholder="YYYY"
-                  className="px-3 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md w-36 placeholder-gray-300"
+                  className="px-3 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md w-36 placeholder-gray-300 md:mr-6"
                   aria-invalid={errors.birthdayYear ? 'true' : 'false'}
                   required
                 />
@@ -265,16 +265,16 @@ const Singup = () => {
                 <Link to="/login">
                   <button
                     type="button"
-                    className="bg-[#2DD3E3] hover:bg-cyan-500 font-medium lg:text-2xl lg:px-14 py-3 px-4 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+                    className="bg-[#2DD3E3] hover:bg-cyan-500 font-medium lg:text-2xl lg:px-14 py-3 px-4 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)] lg:w-44"
                   >
                     {t('Login')}
                   </button>
                 </Link>
                 <button
                   type="submit"
-                  className="broder-solid border-2 border-[#2DD3E3] hover:bg-[#2DD3E3] font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md"
+                  className="broder-solid border-2 border-[#2DD3E3] hover:bg-[#2DD3E3] font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md lg:w-36 "
                 >
-                  {t('Sign Up')}
+                  {t('Signup')}
                 </button>
               </div>
             </form>

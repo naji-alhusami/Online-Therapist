@@ -2,7 +2,7 @@ import React from 'react';
 import AppointmentPart from './AppointmentPart';
 import TherapistPart from './TherapistPart';
 import Communications from './Communications';
-import SliderContent from './BlogsSlider/SliderContent';
+import Slider from './BlogsSlider/Slider';
 import PurchaseTickets from './PurchaseTickets';
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
       <AppointmentPart />
       <TherapistPart />
       <Communications />
-      <SliderContent />
+      <Slider />
       <PurchaseTickets />
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
 import LanguageButton from './LanguageButton';
@@ -7,6 +8,8 @@ import Logo from '../Images/Logo.svg';
 
 const Navbar = () => {
   const { t } = useTranslation();
+  // const { userlogin } = useSelector((state) => state.users);
+  // const dispatch = useDispatch();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
 
