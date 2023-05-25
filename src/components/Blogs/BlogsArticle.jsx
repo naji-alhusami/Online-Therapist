@@ -11,7 +11,7 @@ import Blog3 from '../Images/Blog3.jpg';
 function BlogsArticle() {
   const { t } = useTranslation();
 
-  console.log(BlogData);
+  window.scrollTo(0, 0);
 
   const { id } = useParams();
   const filterbyid = BlogData.filter((blog) => blog.id === id);
@@ -24,7 +24,7 @@ function BlogsArticle() {
   } else {
     imageurl = Blog3;
   }
-  
+
   return (
     <div
       data-testid="blogarticle"

@@ -11,7 +11,7 @@ function Communications() {
   const { t } = useTranslation();
 
   return (
-    <div className="font-poppins p-12 mb-16 mt-4  flex flex-col justify-evenly ">
+    <div className=" w-screen font-poppins p-12 mb-16  flex flex-col justify-evenly ">
       <h1 className=" text-2xl md:text-4xl xl:text-4xl p-16 mb-2 lg:ml-0">
         {t('WE CAN COMMUNICATE THROUGH:')}
       </h1>

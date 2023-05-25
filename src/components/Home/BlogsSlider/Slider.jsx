@@ -11,10 +11,6 @@ import './Slider.css';
 function Slider() {
   const { t } = useTranslation();
 
-  function scrolltotop() {
-    window.scrollTo(0, 0);
-  }
-
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -36,21 +32,19 @@ function Slider() {
 
   const BlogsSilder = Blogs.map((blog) => (
     <Link className="bl-10" to={`blog/${blog.id}`} key={blog.id}>
-      <button type="submit" onClick={scrolltotop}>
         <img key={blog.id} src={blog.logo} alt={blog.name} />
-      </button>
     </Link>
   ));
 
   return (
-    <div className="bg-cyan-50">
-      <div className="lg:ml-40 ml-20 pb-20">
+    <div className="bg-cyan-50 w-screen">
+      <div className="lg:ml-32 mx-20 pb-20 ">
         <p className=" py-10 lg:text-5xl text-4xl md:text-2xl">
           {t('RECENT BLOGS')}
         </p>
         <Carousel
           infinite="true"
-          containerClass="w-9/12"
+          containerClass="w-full"
           responsive={responsive}
         >
           {BlogsSilder}
