@@ -6,6 +6,7 @@ import Slider from './BlogsSlider/Slider';
 import PurchaseTickets from './PurchaseTickets';
 
 const Home = () => {
+  window.scrollTo(0, 0);
   return (
     <>
       <AppointmentPart />
