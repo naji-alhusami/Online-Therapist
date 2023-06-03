@@ -10,7 +10,7 @@ import Contact from './components/Contact/Contact';
 import BlogsArticle from './components/Blogs/BlogsArticle';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import Thankyoupage from './components/ThankYou';
+import Thanks from './components/Thanks/Thanks';
 // import UpdateUserInfo from './Components/UpdateUserInfo/UpdateUserInfo'
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
@@ -33,7 +33,9 @@ function App() {
         <Route path="/blog/:id" element={<BlogsArticle />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/>
+        <Route path="/thanks" element={<Thanks />} />
+
+        {/* <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/> */}
         {/* <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
         <Route path="/Profilepic" element={<Profilepic />}/>
        <Route path="/booking1/:id" element={<Bookingtem />}/>

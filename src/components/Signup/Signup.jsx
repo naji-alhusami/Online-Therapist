@@ -1,17 +1,16 @@
-import React, {
-  // useState
-  useEffect,
-} from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 // import { Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+
 import {
   signupUser,
   //   loginUserWithFacebook,
   //   loginUserWithGoogle,
 } from '../../features/users/usersSlice';
+
 import facebookicon from '../Images/FacebookLogo.svg';
 import googleicon from '../Images/GoogleLogo.svg';
 import signupImage from '../Images/Singup.svg';
@@ -20,7 +19,7 @@ import Line from '../Images/Line.svg';
 const Singup = () => {
   const { t } = useTranslation();
   // const userInfo = useSelector((state) => state.users);
-  const { signedup } = useSelector((state) => state.users);
+  // const { signedup } = useSelector((state) => state.users);
 
   // const [enteredInput, setEnteredInput] = useState(true);
   // const [alertitem, showalertitm] = useState(false);
@@ -48,13 +47,9 @@ const Singup = () => {
         birthdayYear: userData.birthdayYear,
       })
     );
-  };
 
-  useEffect(() => {
-    if (signedup === true) {
-      navigate('/signup-thanks');
-    }
-  }, [signedup]);
+    navigate("/thanks");
+  };
 
   return (
     <>
@@ -210,8 +205,10 @@ const Singup = () => {
 
               {/* Day of Birthday */}
               <div className="flex flex-col md:flex md:flex-row lg:flex lg:items-center lg:justify-between">
-                <p className="md:flex md:items-center md:mr-8 text-[#9DAFBD]">{t('Birth Date:')}</p>
-                <div className='flex flex-row'>
+                <p className="md:flex md:items-center md:mr-8 text-[#9DAFBD]">
+                  {t('Birth Date:')}
+                </p>
+                <div className="flex flex-row">
                   <input
                     {...register('birthdayDay', {
                       pattern: {
