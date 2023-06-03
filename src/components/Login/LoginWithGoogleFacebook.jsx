@@ -10,9 +10,9 @@ const LoginWithGoogleFacebook = () => {
   return (
     <>
       <div className="flex justify-around my-6">
-        <img src={Line} alt="A line" />
-        <p>{t('OR')}</p>
-        <img src={Line} alt="A line" />
+        <img src={Line} alt="A line" className='w-32'/>
+        <p className="mx-5">{t('OR')}</p>
+        <img src={Line} alt="A line" className='w-32' />
       </div>
       <div className="flex justify-center my-6 gap-x-20">
         <button

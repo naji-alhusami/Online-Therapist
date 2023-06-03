@@ -7,13 +7,13 @@ const LoginWithUserPassword = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <h2 className='text-5xl font-["Poppins"] font-normal mb-44 max-[767px]:mt-10 md:mt-10 max-[767px]:mb-10 md:mb-10'>
+    <div className='max-w-[22rem]'>
+      <h2 className='m-4 mb-16 text-5xl font-["Poppins"] font-normal'>
         {t('Login')}
       </h2>
       <form
         // onSubmit={login}
-        className="grid grid-rows-3 gap-6 shadow-2xl px-2 py-6 md:px-10 md:py-10 sm:px-10 sm:py-10 xs:px-10 xs:py-10 max-w-lg"
+        className="grid grid-rows-3 gap-6 shadow-2xl px-2 py-6 m-4"
       >
         <input
           type="text"

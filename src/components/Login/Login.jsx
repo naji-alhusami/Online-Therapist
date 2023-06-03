@@ -7,11 +7,10 @@ function Login() {
   window.scrollTo(0, 0);
 
   return (
-    <div className="h-full flex justify-center content-center md:flex-wrap max-[767px]:flex-wrap gap-x-20">
-    <LoginWithUserPassword />
-    <img src={LoginSofa} alt="Login" className="max-[767px]:my-10 md:my-10 w-5/12" />
-  </div>
-
+    <div className="mx-5 mt-10 flex flex-col items-center md:flex md:flex-row lg:flex lg:flex-row lg:justify-center">
+      <img src={LoginSofa} alt="Login" className="my-20 mr-5 md:w-[30rem] md:h-[30rem] md:order-last md:ml-5 lg:mx-20" />
+      <LoginWithUserPassword />
+    </div>
   );
 }
 export default Login;

@@ -57,7 +57,7 @@ const Singup = () => {
   }, [signedup]);
 
   return (
-    <div>
+    <>
       {/* {alertitem && (
         <Alert severity="error" className="fixed w-full">
           {error}
@@ -68,13 +68,13 @@ const Singup = () => {
           {userInfo.error}
         </Alert>
       )} */}
-{/* flex flex-col  justify-center */}
-      <div className="  lg:flex lg:flex-row xl:justify-around ">
+      {/* flex flex-col  justify-center */}
+      <div className="flex flex-col m-5 lg:flex lg:flex-row lg:justify-center">
         <div className="flex justify-center">
-          <img src={signupImage} alt="singupemage"  />
+          <img src={signupImage} alt="singupemage" />
         </div>
 
-        <div>
+        <div className="lg:mx-10">
           <h2 className='flex justify-center text-3xl lg:text-5xl font-["Poppins"] font-normal lg:mb-6 mb-10 lg:mt-10 lg:ml-0 ml-4 mt-10 '>
             {t('SIGNUP NOW')}
           </h2>
@@ -209,56 +209,66 @@ const Singup = () => {
               </div>
 
               {/* Day of Birthday */}
-              <div className="lg:flex lg:items-center lg:justify-between">
-                <p className="mr-7 ml-7 font-light text-[#9DAFBD]">
-                  {t('Birth Date')}
-                </p>
-                <input
-                  {...register('birthdayDay', {
-                    pattern: {
-                      value: /^\d{2}$/,
-                      message: 'Please enter valid day',
-                    },
-                  })}
-                  type="text"
-                  placeholder="DD"
-                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
-                  aria-invalid={errors.birthdayDay ? 'true' : 'false'}
-                  required
-                />
-                {errors.birthdayDay && <p className="text-red-600">{errors.birthdayDay.message}</p>}
+              <div className="flex flex-col md:flex md:flex-row lg:flex lg:items-center lg:justify-between">
+                <p className="md:flex md:items-center md:mr-8 text-[#9DAFBD]">{t('Birth Date:')}</p>
+                <div className='flex flex-row'>
+                  <input
+                    {...register('birthdayDay', {
+                      pattern: {
+                        value: /^\d{2}$/,
+                        message: 'Please enter valid day',
+                      },
+                    })}
+                    type="text"
+                    placeholder="DD"
+                    className="mr-2 px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
+                    aria-invalid={errors.birthdayDay ? 'true' : 'false'}
+                    required
+                  />
+                  {errors.birthdayDay && (
+                    <p className="text-red-600">{errors.birthdayDay.message}</p>
+                  )}
 
-                {/* Month of Birthday */}
-                <input
-                  {...register('birthdayMonth', {
-                    pattern: {
-                      value: /^\d{2}$/,
-                      message: 'Please enter valid month',
-                    },
-                  })}
-                  type="text"
-                  placeholder="MM"
-                  className="px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
-                  aria-invalid={errors.birthdayMonth ? 'true' : 'false'}
-                  required
-                />
-                {errors.birthdayMonth && <p className="text-red-600">{errors.birthdayMonth.message}</p>}
+                  {/* Month of Birthday */}
+                  <input
+                    {...register('birthdayMonth', {
+                      pattern: {
+                        value: /^\d{2}$/,
+                        message: 'Please enter valid month',
+                      },
+                    })}
+                    type="text"
+                    placeholder="MM"
+                    className="mr-2 px-2 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300 md:mr-6"
+                    aria-invalid={errors.birthdayMonth ? 'true' : 'false'}
+                    required
+                  />
+                  {errors.birthdayMonth && (
+                    <p className="text-red-600">
+                      {errors.birthdayMonth.message}
+                    </p>
+                  )}
 
-                {/* Year of Birthday */}
-                <input
-                  {...register('birthdayYear', {
-                    pattern: {
-                      value: /^\d{4}$/,
-                      message: 'Please enter valid year',
-                    },
-                  })}
-                  type="text"
-                  placeholder="YYYY"
-                  className="px-3 h-12 w-12 broder-solid border-2 border-[#D1DBE3] rounded-md w-36 placeholder-gray-300 md:mr-6"
-                  aria-invalid={errors.birthdayYear ? 'true' : 'false'}
-                  required
-                />
-                {errors.birthdayYear && <p className="text-red-600">{errors.birthdayYear.message}</p>}
+                  {/* Year of Birthday */}
+                  <input
+                    {...register('birthdayYear', {
+                      pattern: {
+                        value: /^\d{4}$/,
+                        message: 'Please enter valid year',
+                      },
+                    })}
+                    type="text"
+                    placeholder="YYYY"
+                    className="md:w-[8.5rem] px-3 h-12 w-24 broder-solid border-2 border-[#D1DBE3] rounded-md placeholder-gray-300"
+                    aria-invalid={errors.birthdayYear ? 'true' : 'false'}
+                    required
+                  />
+                  {errors.birthdayYear && (
+                    <p className="text-red-600">
+                      {errors.birthdayYear.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="flex justify-around py-3 gap-8">
@@ -272,7 +282,7 @@ const Singup = () => {
                 </Link>
                 <button
                   type="submit"
-                  className="broder-solid border-2 border-[#2DD3E3] hover:bg-[#2DD3E3] font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md lg:w-36 "
+                  className="border-[#2DD3E3] hover:bg-[#2DD3E3] broder-solid border-2   font-medium lg:text-2xl lg:px-14 px-4 py-3 rounded-md "
                 >
                   {t('Signup')}
                 </button>
@@ -280,9 +290,9 @@ const Singup = () => {
             </form>
           </div>
           <div>
-            <div className="flex justify-around my-6">
+            <div className="flex justify-center my-6">
               <img src={Line} alt="A line" />
-              <p>{t('OR')}</p>
+              <p className="mx-5">{t('OR')}</p>
               <img src={Line} alt="A line" />
             </div>
             <div className="flex justify-center my-6 gap-x-12">
@@ -314,7 +324,7 @@ const Singup = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Singup;
