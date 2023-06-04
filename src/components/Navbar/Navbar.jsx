@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
+
+// import { logoutUser } from '../../features/users/usersSlice';
+
 import LanguageButton from './LanguageButton';
 import Logo from '../Images/Logo.svg';
 
 const Navbar = () => {
   const { t } = useTranslation();
-  // const { userlogin } = useSelector((state) => state.users);
-  // const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
+  const [showProfileInResponsive, setShowProfileInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
+
+  // dispatch logout user:
+  // const logOut = (e) => {
+  //   e.preventDefault();
+  //   navigate('/');
+  //   dispatch(logoutUser());
+  //   if (showNavbarInResponsive) {
+  //     setShowNavbarInResponsive(!showNavbarInResponsive);
+  //   }
+  // };
 
   return (
     <nav className="w-screen sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
@@ -61,8 +76,10 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
+
+        {/* mobile screens */}
         <div
-          className={`flex-1 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
+          className={`flex-1 z-10 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
             showNavbarInResponsive
               ? 'translate-x-full '
               : 'translate-x-[-250px]'
@@ -71,15 +88,28 @@ const Navbar = () => {
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
             <div className="flex flex-col items-start  text-xl ">
               <ul className="items-center justify-center  md:flex md:space-x-6 md:space-y-0">
-                <li className="w-fit p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
-                  <a href="Home">{t('Home')}</a>
+                <li className="my-2">
+                  <Link
+                    to="/"
+                    className="w-fit p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md "
+                    onClick={() => {
+                      setShowNavbarInResponsive(!showNavbarInResponsive);
+                    }}
+                  >
+                    Home
+                  </Link>
                 </li>
-
-                <Link to="/blog/1">
-                  <li className="w-fit p-2 m-0 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md ">
+                <li className="my-3">
+                  <Link
+                    to="/blog/1"
+                    className="w-fit p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
+                    onClick={() => {
+                      setShowNavbarInResponsive(!showNavbarInResponsive);
+                    }}
+                  >
                     {t('Blogs')}
-                  </li>
-                </Link>
+                  </Link>
+                </li>
 
                 <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
                   <div className=" relative  absolute">
@@ -119,27 +149,77 @@ const Navbar = () => {
                     )}
                   </div>
                 </li>
-                <li>
+                <li className="my-3">
                   <Link
-                    className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md"
                     to="/contact"
+                    className="w-fit p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
+                    onClick={() => {
+                      setShowNavbarInResponsive(!showNavbarInResponsive);
+                    }}
                   >
                     {t('Contact')}
                   </Link>
                 </li>
-                <Link to="/login">
-                  <button
-                    type="button"
-                    className="my-2 flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 text-m"
-                  >
-                    {t('Login')}
-                  </button>
-                </Link>
+                <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
+                  <div className=" relative  absolute">
+                    {!userLogin.userlogin && (
+                      <Link
+                        to="/login"
+                        className="flex peer my-2 flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white text-m"
+                        onClick={() => {
+                          setShowNavbarInResponsive(!showNavbarInResponsive);
+                        }}
+                      >
+                        Login
+                      </Link>
+                    )}
+                    {userLogin.userlogin && (
+                      <div className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer relative  absolute">
+                        <button
+                          type="button"
+                          className="flex peer text-white bg-cyan-400 hover:bg-cyan-500 rounded-md p-2"
+                          onClick={() =>
+                            setShowProfileInResponsive(!showProfileInResponsive)
+                          }
+                        >
+                          Admin
+                          <AiFillCaretDown className=" mt-1 ml-2" />
+                        </button>
+                        {showProfileInResponsive ? (
+                          <div className="flex relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                            <Link
+                              className="p-2 pl-5 text-black hover:bg-cyan-400 hover:text-white"
+                              to="/addcenter"
+                              onClick={() => {
+                                setShowNavbarInResponsive(
+                                  !showNavbarInResponsive
+                                );
+                              }}
+                            >
+                              Update
+                            </Link>
+                            <button
+                              type="button"
+                              className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
+                              // onClick={logOut}
+                            >
+                              Log Out
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </li>
                 <LanguageButton />
               </ul>
             </div>
           </div>
         </div>
+
+        {/* Large screens */}
         <div className="hidden space-x-2 md:inline-block">
           <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <Link to="/">
