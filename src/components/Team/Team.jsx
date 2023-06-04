@@ -1,54 +1,12 @@
-// import React from 'react';
-// import { useTranslation } from 'react-i18next';
-// import TeamCard from './TeamCard';
-// import naji from '../Images/naji.jpg'
-// import nour from '../Images/nour.jpg';
-// import mohammed from '../Images/mohammed.jpg';
-
-// function Team() {
-//   const { t } = useTranslation();
-//   return (
-//     <div>
-//       <h1 className="text-4xl md:text-3xl sm:text-3xl p-[4rem] md:p-[4rem] pl-[7rem] lg:pb-[8rem] ">
-//         {t('WE ARE HEALING, NICE TO MEET YOU!')}
-//       </h1>
-//       <div className=" ">
-//         <h4 className="pl-[7rem] pb-[3rem]   text-3xl leading-10 text-gray-700">
-//           {t('Meet the Team!')}
-//         </h4>
-//         <div className=" pl-[7rem] pb-[5rem] pr-[6rem] grid lg:grid-cols-5 md:grid-cols-3 .grid-cols-5 gap-3">
-//           <TeamCard
-//             image={mohammed}
-//             name="Muhammed Mustafa"
-//             position={t('Front-end Developer')}
-//           />
-//           <TeamCard
-//             image={naji}
-//             name="Naji AlHusami"
-//             position={t("Front-end Developer")}
-//           />
-//           <TeamCard
-//             image={nour}
-//             name="Nour Al Maleh"
-//             position={t("Front-end Developer")}
-//           />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-// export default Team;
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import TeamCard from './TeamCard';
-import naji from '../Images/naji.jpg';
-import nour from '../Images/nour.jpg';
-import mohammed from '../Images/mohammed.jpg';
+import TeamData from './TeamData';
 
-const names = ['Muhammed Mustafa', 'Naji Al Husami', 'Nour Al Maleh'];
-const job = 'Front-End Developer';
-const photos = [mohammed, naji, nour];
+
+// const names = ['Muhammed Mustafa', 'Naji Alhusami', 'Nour Al Maleh'];
+// const job = 'Front-End Developer';
+// const photos = [mohammed, naji, nour];
 
 function Team() {
   window.scrollTo(0, 0);
@@ -66,8 +24,8 @@ function Team() {
       </div>
       <div className=" ml-36 mt-[4em] mr-36">
         <div className="font-poppins flex flex-rows justify-items-center justify-evenly flex-wrap -m-6">
-          {names.map((name, index) => {
-            return <TeamCard name={name} job={job} photo={photos[index]} />;
+          {TeamData.map((member) => {
+            return <TeamCard  key={member.id} name={member.name} job={member.job} photo={member.image} />;
           })}
         </div>
       </div>
