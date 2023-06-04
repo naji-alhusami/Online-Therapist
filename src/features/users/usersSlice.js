@@ -6,7 +6,7 @@ import {
   //   signInWithPopup,
   //   updatePassword,
   //   deleteUser,
-  //   signOut,
+  signOut,
 } from 'firebase/auth';
 import {
   doc,
@@ -81,20 +81,44 @@ export const loginUser = createAsyncThunk(
       const docSnap = await getDoc(docRef);
 
       return docSnap.data();
-      // return {
-      //   id: user.uid,
-      //   email: user.email,
-      //   name: docSnap.data().name,
-      //   birthdayDay: docSnap.data().birthdayDay,
-      //   birthdayMonth: docSnap.data().birthdayMonth,
-      //   birthdayYear: docSnap.data().birthdayYear,
-      // };
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
 // End of Login.
+
+// Start of Logout User:
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      await signOut(auth);
+      return {};
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+// End of Logout User.
+
+// Start of Load User:
+export const loadUser = createAsyncThunk(
+  "user/loadUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      if (payload.emailVerified === false) {
+        return rejectWithValue("Email is not verified");
+      }
+      const docRef = doc(db, "users", payload.uid);
+      const docSnap = await getDoc(docRef);
+      return docSnap.data();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// End of of Load User.
 
 const usersSlice = createSlice({
   name: 'users',
@@ -141,6 +165,45 @@ const usersSlice = createSlice({
       }
     });
     builder.addCase(loginUser.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
+    // Logout Cases:
+    builder.addCase(logoutUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.loading = false;
+      state.user = {};
+      state.error = null;
+      state.userlogin = false;
+      state.signedup = false;
+    });
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
+    // Load user Cases:
+    builder.addCase(loadUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(loadUser.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload && action.payload.error) {
+        state.user = null;
+        state.userlogin = false;
+        state.error = action.payload.error;
+      } else {
+        state.user = action.payload;
+        state.userlogin = true;
+        state.error = null;
+      }
+    });
+    builder.addCase(loadUser.rejected, (state, action) => {
       state.loading = false;
       state.user = {};
       state.error = action.payload;

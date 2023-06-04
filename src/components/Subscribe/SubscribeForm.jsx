@@ -35,7 +35,7 @@ const SubscribeForm = () => {
         <label htmlFor="email">
           <input
             className=" w-[15rem] h-[2.5rem] text-xl leading-loose text-gray-500 bg-white border-2 text-left border-gray-500 "
-            type="email"
+            type="emailSubscribe"
             id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}

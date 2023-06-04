@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import {
-  Link,
-  // useNavigate
-} from 'react-router-dom';
-import {
-  useSelector,
-  // useDispatch
-} from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
 
-// import { logoutUser } from '../../features/users/usersSlice';
+import { logoutUser } from '../../features/users/usersSlice';
 
 import LanguageButton from './LanguageButton';
 import Logo from '../Images/Logo.svg';
@@ -18,21 +12,21 @@ import Logo from '../Images/Logo.svg';
 const Navbar = () => {
   const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
   const [showProfileInResponsive, setShowProfileInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
 
   // dispatch logout user:
-  // const logOut = (e) => {
-  //   e.preventDefault();
-  //   navigate('/');
-  //   dispatch(logoutUser());
-  //   if (showNavbarInResponsive) {
-  //     setShowNavbarInResponsive(!showNavbarInResponsive);
-  //   }
-  // };
+  const logOut = (e) => {
+    e.preventDefault();
+    navigate('/');
+    dispatch(logoutUser());
+    if (showNavbarInResponsive) {
+      setShowNavbarInResponsive(!showNavbarInResponsive);
+    }
+  };
 
   return (
     <nav className="w-screen sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
@@ -216,7 +210,7 @@ const Navbar = () => {
                             <button
                               type="button"
                               className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
-                              // onClick={logOut}
+                              onClick={logOut}
                             >
                               Log Out
                             </button>
@@ -288,7 +282,7 @@ const Navbar = () => {
 
             <li>
               <Link
-                to="/healthcenters"
+                to="/contact"
                 className=" p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
               >
                 {t('Contact')}
@@ -323,7 +317,7 @@ const Navbar = () => {
                     <button
                       type="button"
                       className="py-2 text-black hover:bg-cyan-500 hover:text-white"
-                      // onClick={logOut}
+                      onClick={logOut}
                     >
                       Log Out
                     </button>

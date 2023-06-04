@@ -40,7 +40,7 @@ const LoginWithUserPassword = () => {
       >
         <input
           className="w-full px-3 broder-solid border-2 border-[#D1DBE3] rounded-md focus:outline-none focus:placeholder-white"
-          id="email"
+          id="emailLogin"
           type="email"
           placeholder={t('Enter Your Email')}
           value={email}

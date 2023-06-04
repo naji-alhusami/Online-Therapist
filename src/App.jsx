@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
@@ -18,9 +20,35 @@ import Thanks from './components/Thanks/Thanks';
 // import Note from "./Components/booking/Note"
 // import Submit from './Components/booking/Submit';
 // import Requestsubmit from './Components/booking/RequestSubmit';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
+import { loadUser } from './features/users/usersSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    const load = () => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(
+            loadUser({ uid: user.uid, emailVerified: user.emailVerified })
+          );
+        } else {
+          dispatch(loadUser(null));
+        }
+      });
+    };
+
+    load();
+  }, [dispatch]);
+
+  if (loading) {
+    return "Loading...";
+  }
+
   return (
     <>
       <Navbar />
@@ -34,6 +62,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/thanks" element={<Thanks />} />
+        <Route element={<RequireAuth />} />
+
+        {/* </Route> */}
 
         {/* <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/> */}
         {/* <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
