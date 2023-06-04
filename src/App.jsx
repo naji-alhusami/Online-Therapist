@@ -18,7 +18,7 @@ import Thanks from './components/Thanks/Thanks';
 // import Note from "./Components/booking/Note"
 // import Submit from './Components/booking/Submit';
 // import Requestsubmit from './Components/booking/RequestSubmit';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
         <Route path="/Requestsubmit" element={<Requestsubmit />} />
           */}
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

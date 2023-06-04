@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {
+  Link,
+  // useNavigate
+} from 'react-router-dom';
+import {
+  useSelector,
+  // useDispatch
+} from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
 
@@ -12,8 +18,8 @@ import Logo from '../Images/Logo.svg';
 const Navbar = () => {
   const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
   const [showProfileInResponsive, setShowProfileInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
@@ -96,7 +102,7 @@ const Navbar = () => {
                       setShowNavbarInResponsive(!showNavbarInResponsive);
                     }}
                   >
-                    Home
+                    {t('Home')}
                   </Link>
                 </li>
                 <li className="my-3">
@@ -112,7 +118,7 @@ const Navbar = () => {
                 </li>
 
                 <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
-                  <div className=" relative  absolute">
+                  <div className="relative absolute">
                     <button
                       type="button"
                       className="flex peer text-black hover:text-indigo-100 p-2"
@@ -120,7 +126,7 @@ const Navbar = () => {
                         setShowAboutInResponsive(!showAboutInResponsive)
                       }
                     >
-                      About
+                      {t('About')}
                       <AiFillCaretDown className=" mt-1 ml-2" />
                     </button>
                     {showAboutInResponsive ? (
@@ -128,20 +134,29 @@ const Navbar = () => {
                         <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           to="/about"
+                          onClick={() => {
+                            setShowNavbarInResponsive(!showNavbarInResponsive);
+                          }}
                         >
-                          About
+                          {t('About')}
                         </Link>
                         <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           to="/team"
+                          onClick={() => {
+                            setShowNavbarInResponsive(!showNavbarInResponsive);
+                          }}
                         >
-                          Our Team
+                          {t('Our Team')}
                         </Link>
                         <Link
                           className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                           to="/careers"
+                          onClick={() => {
+                            setShowNavbarInResponsive(!showNavbarInResponsive);
+                          }}
                         >
-                          Careers
+                          {t('Careers')}
                         </Link>
                       </div>
                     ) : (
@@ -207,7 +222,7 @@ const Navbar = () => {
                             </button>
                           </div>
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                     )}
@@ -222,62 +237,100 @@ const Navbar = () => {
         {/* Large screens */}
         <div className="hidden space-x-2 md:inline-block">
           <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-            <Link to="/">
-              <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
-                <a href="Home">{t('Home')}</a>
-              </li>
-            </Link>
-            <Link to="/blog/1">
-              <li className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md">
+            <li>
+              <Link
+                to="/"
+                className=" p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
+              >
+                {t('Home')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog/1"
+                className=" p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
+              >
                 {t('Blogs')}
-              </li>
-            </Link>
+              </Link>
+            </li>
+
             <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
               <div className="relative absolute">
-                <button
-                  type="button"
+                <div
+                  // type="button"
                   className="flex peer text-black hover:text-indigo-100 p-2"
                 >
-                  About
+                  {t('About')}
                   <AiFillCaretDown className="mt-1 ml-2" />
-                </button>
-
+                </div>
                 <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
                   <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     to="/about"
                   >
-                    About
+                    {t('About')}
                   </Link>
                   <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     to="/team"
                   >
-                    Our Team
+                    {t('Our Team')}
                   </Link>
                   <Link
                     className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                     to="/careers"
                   >
-                    Careers
+                    {t('Careers')}
                   </Link>
                 </div>
               </div>
             </li>
-            <Link
-              to="/contact"
-              className=" p-2 hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md"
-            >
-              <li>{t('Contact')}</li>
-            </Link>
-            <Link to="/login">
-              <button
-                type="button"
-                className="flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400 hover:bg-cyan-500 text-m"
+
+            <li>
+              <Link
+                to="/healthcenters"
+                className=" p-2 hover:text-white hover:bg-cyan-400 hover:rounded-md"
               >
-                {t('Login')}
-              </button>
-            </Link>
+                {t('Contact')}
+              </Link>
+            </li>
+
+            {!userLogin.userlogin && (
+              <li>
+                <Link
+                  to="/login"
+                  className="flex justify-center px-4 py-2 text-center rounded-md shadowtransition-all duration-250 bg-cyan-400  bg-cyan-400 hover:bg-cyan-500 hover:text-white text-m"
+                >
+                  {t('Login')}
+                </Link>
+              </li>
+            )}
+            {userLogin.userlogin && (
+              <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
+                <div className="relative absolute">
+                  <div className="flex peer text-white p-2 bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
+                    Admin
+                    <AiFillCaretDown className="mt-1 ml-2" />
+                  </div>
+
+                  <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                    <Link
+                      className="p-2 pl-6 text-black hover:bg-cyan-500 hover:text-white"
+                      to="/addcenter"
+                    >
+                      Update
+                    </Link>
+                    <button
+                      type="button"
+                      className="py-2 text-black hover:bg-cyan-500 hover:text-white"
+                      // onClick={logOut}
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                </div>
+              </li>
+            )}
             <LanguageButton />
           </ul>
         </div>
