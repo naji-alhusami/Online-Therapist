@@ -65,30 +65,26 @@ const Footer = () => {
                text-SubTexts font-normal text-xl leading-5 tracking-[0.075px]"
       >
         <ul className="flex p-4 items-center sm:text-center mt-3 sm:mt-0 md:space-x-6">
-          <Link to="/">
-            <li>
-              <a href="Home" className="mr-4 hover:underline md:mr-6 ">
-                {t('Home')}
-              </a>
-            </li>
-          </Link>
-          <Link to="blog">
-            <li>
-              <a href="Blogs" className="mr-4 hover:underline md:mr-6">
-                {t('Blogs')}
-              </a>
-            </li>
-          </Link>
-          <Link className="mr-4 hover:underline md:mr-6" to="/about">
-            <li>{t('About')}</li>
-          </Link>
-          <Link to="contactus">
-            <li>
-              <a href="Contact" className="mr-4 hover:underline md:mr-6">
-                {t('Contact')}
-              </a>
-            </li>
-          </Link>
+          <li>
+            <Link to="/" className="mr-4 hover:underline md:mr-6 ">
+              {t('Home')}
+            </Link>
+          </li>
+          <li>
+            <Link to="/blog/1" className="mr-4 hover:underline md:mr-6">
+              {t('Blogs')}
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="mr-4 hover:underline md:mr-6">
+              {t('About')}
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="mr-4 hover:underline md:mr-6">
+              {t('Contact')}
+            </Link>
+          </li>
         </ul>
         <div
           className="flex flex-row w-[200px] h-[78px] 
