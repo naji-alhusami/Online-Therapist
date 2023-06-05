@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
@@ -13,7 +13,7 @@ import BlogsArticle from './components/Blogs/BlogsArticle';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Thanks from './components/Thanks/Thanks';
-// import UpdateUserInfo from './Components/UpdateUserInfo/UpdateUserInfo'
+import UpdateUserProfile from './components/UpdateUserProfile/UpdateUserProfile';
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
 // import Bookingradio from './Components/booking/Bookingradio';
@@ -46,7 +46,7 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return "Loading...";
+    return 'Loading...';
   }
 
   return (
@@ -59,16 +59,16 @@ function App() {
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog/:id" element={<BlogsArticle />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/updateUserProfile" element={<UpdateUserProfile />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route element={<RequireAuth />} />
 
         {/* </Route> */}
 
         {/* <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/> */}
-        {/* <Route path="/UpdateUserInfo" element={<UpdateUserInfo />}/>
-        <Route path="/Profilepic" element={<Profilepic />}/>
+        {/* <Route path="/Profilepic" element={<Profilepic />}/>
        <Route path="/booking1/:id" element={<Bookingtem />}/>
         <Route path="/booking2/:id" element={<Bookingradio />}/>
         <Route path="/bookingnote" element={<Note />} />
