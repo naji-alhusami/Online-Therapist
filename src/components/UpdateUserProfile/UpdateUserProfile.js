@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import UpdatePicture from './UpdatePicture';
+
 const UpdateUserProfile = () => {
   const { t } = useTranslation();
 
@@ -13,6 +15,13 @@ const UpdateUserProfile = () => {
             'Please fill all the fields with correct and valid details to complete your profile.'
           )}
         </p>
+      </div>
+      <div>
+        <UpdatePicture
+        //   setprofilepic={setprofilepic}
+        //   profilepic={userInfo.photoURL}
+          className="self-center ml-28"
+        />
       </div>
       <div>
         <h1 className="text-4xl ml-5">

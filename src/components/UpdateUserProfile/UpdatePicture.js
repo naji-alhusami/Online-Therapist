@@ -1,10 +1,10 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import upload from './Images/ProfilePhoto.png';
+import profilePicture from "../Images/ProfilePhoto.png";
 
-function Profilepic({ profilepic, setprofilepic }) {
+function UpdatePicture({ profilepic }) {
   const { t } = useTranslation();
-//   const [showbox, setshowbox] = useState(false);
+  const [showbox, setshowbox] = useState(false);
 
 //   const handlesendfile = (e) => {
 //     setprofilepic(e.target.files[0]);
@@ -20,11 +20,11 @@ function Profilepic({ profilepic, setprofilepic }) {
       />
       <button
         type="button"
-        // onClick={() => setshowbox(true)}
+        onClick={() => setshowbox(true)}
         className="w-12 h-12 ml-14 absolute translate-y-28"
       >
         {' '}
-        <img src={upload} alt="upload icon" />{' '}
+        <img src={profilePicture} alt="upload icon" />{' '}
       </button>
       {showbox && (
         <div
@@ -41,11 +41,11 @@ function Profilepic({ profilepic, setprofilepic }) {
               type="file"
               className="mt-4"
               accept="image/*"
-              onChange={handlesendfile}
+            //   onChange={handlesendfile}
             />
             <button
               type="button"
-            //   onClick={() => setshowbox(false)}
+              onClick={() => setshowbox(false)}
               className="lg:text-2xl md:text-1xl sm:text-sm rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white  self-end"
             >
               {' '}
@@ -58,4 +58,4 @@ function Profilepic({ profilepic, setprofilepic }) {
   );
 }
 
-export default Profilepic;
+export default UpdatePicture;
