@@ -16,11 +16,10 @@ const UpdateUserProfile = () => {
           )}
         </p>
       </div>
-      <div>
+      <div className="m-5 ">
         <UpdatePicture
         //   setprofilepic={setprofilepic}
         //   profilepic={userInfo.photoURL}
-          className="self-center ml-28"
         />
       </div>
       <div>
@@ -45,7 +44,7 @@ const UpdateUserProfile = () => {
           <p>{t('Education Level')}</p>
           <div className="flex ml-auto">
             <select className=" w-auto py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg">
-              <option selected="selected" disabled value="">
+              <option defaultValue="selected" disabled value="">
                 {t('')}
               </option>
               <option value="No formal education">
@@ -98,7 +97,7 @@ const UpdateUserProfile = () => {
           <p>{t('Gender')}</p>
           <div className="flex ml-auto">
             <select className=" w-[12rem] py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg">
-              <option selected="selected" disabled>
+              <option defaultValue="selected" disabled>
                 {t('')}
               </option>
               <option value="Male">{t('Male')}</option>
