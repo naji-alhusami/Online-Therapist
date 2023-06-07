@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const UpdateUSerSecurity = () => {
+
   const { t } = useTranslation();
 
   return (
@@ -13,7 +14,7 @@ const UpdateUSerSecurity = () => {
 
       {/* Password */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
-        <p className='mr-[7rem]'>{t('Password')}</p>
+        <p className="mr-[7rem]">{t('Password')}</p>
         <input
           type="password"
           className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
@@ -23,12 +24,12 @@ const UpdateUSerSecurity = () => {
 
       {/* Confirm Password */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
-        <p className='mr-[3.2rem]'>{t('Confirm Password')}</p>
-          <input
-            type="password"
-            className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
-            required
-          />
+        <p className="mr-[3.2rem]">{t('Confirm Password')}</p>
+        <input
+          type="password"
+          className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
+          required
+        />
       </div>
 
       {/* Action Buttons */}
