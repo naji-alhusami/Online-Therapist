@@ -3,7 +3,7 @@
 import profilePicture from '../Images/ProfilePhoto.png';
 import ProfilePhoto from '../Images/profilePhoto.svg';
 
-function UpdatePicture() {
+function UpdateUserPicture() {
   //   const { t } = useTranslation();
   //   const [showbox, setshowbox] = useState(false);
 
@@ -13,7 +13,7 @@ function UpdatePicture() {
   //   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center m-5 ">
       <div className="relative">
         <img src={ProfilePhoto} alt="ProfilePicture" />
         <button
@@ -34,4 +34,4 @@ function UpdatePicture() {
   );
 }
 
-export default UpdatePicture;
+export default UpdateUserPicture;
