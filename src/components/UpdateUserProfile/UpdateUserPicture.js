@@ -13,8 +13,8 @@ function UpdateUserPicture() {
   //   };
 
   return (
-    <div className="flex justify-center m-5 ">
-      <div className="relative">
+    <div className="m-5 md:mr-20 lg:mx-40">
+      <div className="relative ">
         <img src={ProfilePhoto} alt="ProfilePicture" />
         <button
           type="button"

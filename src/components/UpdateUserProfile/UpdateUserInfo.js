@@ -13,21 +13,18 @@ const UpdateUserInfo = () => {
 
       {/* Full Name */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
-        {/* <div className="flex items-center"> */}
         <p className="mr-[6.8rem]">{t('Full Name')}</p>
         <input
           type="text"
-          className="bg-white border text-gray-800 shadow-lg rounded-md p-1"
+          className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
           required
         />
-        {/* </div> */}
       </div>
 
       {/* Education Level */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className='mr-[4.3rem]'>{t('Education Level')}</p>
-        {/* <div className="flex ml-auto"> */}
-        <select className=" w-auto py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg">
+        <select className=" w-auto py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]">
           <option defaultValue="selected" disabled value="">
             {t('')}
           </option>
@@ -55,7 +52,7 @@ const UpdateUserInfo = () => {
           <p className="mr-[7.5rem]">{t('Hobbies')}</p>
           <input
             type="text"
-            className="bg-white border text-gray-800 shadow-lg rounded-md p-1"
+            className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
             required
           />
         </div>
@@ -64,77 +61,65 @@ const UpdateUserInfo = () => {
       {/* Family Size */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className="mr-[6.3rem]">{t('Family Size')}</p>
-        {/* <div className="flex justify-end mr-9"> */}
         <input
           type="text"
           className="bg-white border text-gray-800 shadow-lg rounded-md p-1 w-[20%] mr-5"
           required
         />
         <p>Member(s)</p>
-        {/* </div> */}
       </div>
 
       {/* Gender */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className="mr-[7.9rem]">{t('Gender')}</p>
-        {/* <div className="flex ml-auto"> */}
-        <select className=" w-[12rem] py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg">
+        <select className=" w-[12rem] py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]">
           <option defaultValue="selected" disabled>
             {t('')}
           </option>
           <option value="Male">{t('Male')}</option>
           <option value="Female">{t('Female')}</option>
         </select>
-        {/* </div> */}
       </div>
 
       {/* Birth Date */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className="mr-[6.7rem]">{t('Birth Date')}</p>
-        {/* <div className="flex ml-auto"> */}
         <input
           type="date"
-          className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 block p-1 w-[12rem]"
+          className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 block p-1 w-[12rem] lg:w-[16rem]"
           required
         />
-        {/* </div> */}
       </div>
 
       {/* Email */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
-        {/* <div className="flex items-center"> */}
         <p className="mr-[8.7rem]">{t('Email')}</p>
         <input
           type="text"
-          className="bg-white border text-gray-800 shadow-lg rounded-md p-1"
+          className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
           required
         />
-        {/* </div> */}
       </div>
 
       {/* Phone Number */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
-        {/* <div className="flex items-center"> */}
         <p className="mr-[4.3rem]">{t('Phone Number')}</p>
         <input
           type="text"
-          className="bg-white border text-gray-800 shadow-lg rounded-md p-1"
+          className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
           required
         />
-        {/* </div> */}
       </div>
 
       {/* Upload ID */}
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className='mr-[6.5rem]'>{t('Upload ID')}</p>
-        {/* <div className="relative ml-auto"> */}
           <input
-            className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5"
+            className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
             type="file"
             id="file-upload"
           />
         </div>
-      {/* </div> */}
     </div>
   );
 };

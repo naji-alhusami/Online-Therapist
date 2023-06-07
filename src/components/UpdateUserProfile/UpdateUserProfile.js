@@ -11,7 +11,7 @@ const UpdateUserProfile = () => {
 
   return (
     <div className="flex flex-col font-poppins">
-      <div className="text-center flex items-center">
+      <div className="text-center flex flex-col items-center">
         <p className=" text-sm text-[#FF0000] m-10">
           {t(
             'Please fill all the fields with correct and valid details to complete your profile.'
@@ -20,7 +20,7 @@ const UpdateUserProfile = () => {
       </div>
 
       {/* div for picture and the fields */}
-      <div className="flex flex-col md:flex md:flex-row">
+      <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
         <UpdateUserPicture
         //   setprofilepic={setprofilepic}
         //   profilepic={userInfo.photoURL}
