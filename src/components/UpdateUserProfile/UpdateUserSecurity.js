@@ -12,27 +12,27 @@ const UpdateUSerSecurity = () => {
       </h1>
 
       {/* Password */}
-      <div className="flex flex-row items-center ml-6 mt-8">
-        <p>{t('Password')}</p>
-        <div className="flex ml-auto">
-          <input
-            type="password"
-            className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto"
-            required
-          />
-        </div>
+      <div className="flex flex-row justify-start items-center ml-6 mt-8">
+        <p className='mr-[7rem]'>{t('Password')}</p>
+        {/* <div className="flex ml-auto"> */}
+        <input
+          type="password"
+          className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto"
+          required
+        />
+        {/* </div> */}
       </div>
 
       {/* Confirm Password */}
-      <div className="flex flex-row items-center ml-6 mt-8">
-        <p>{t('Confirm Password')}</p>
-        <div className="flex ml-auto">
+      <div className="flex flex-row justify-start items-center ml-6 mt-8">
+        <p className='mr-[3.2rem]'>{t('Confirm Password')}</p>
+        {/* <div className="flex ml-auto"> */}
           <input
             type="password"
             className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto"
             required
           />
-        </div>
+        {/* </div> */}
       </div>
 
       {/* Action Buttons */}
