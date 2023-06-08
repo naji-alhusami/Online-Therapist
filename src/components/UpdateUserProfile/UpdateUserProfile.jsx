@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 import UpdateUserPicture from './UpdateUserPicture';
 import UpdateUserInfo from './UpdateUserInfo';
-import UpdateUserSecurity from './UpdateUserSecurity';
 
 const UpdateUserProfile = () => {
   const userLoading = useSelector((state) => state.users);
@@ -36,7 +35,6 @@ const UpdateUserProfile = () => {
           {/* div for all the fields */}
           <div>
             <UpdateUserInfo userInfo={userInfo} />
-            <UpdateUserSecurity />
 
             {/* Payment Methods & Tickets */}
             <div className="flex flex-col ml-6 mt-16">

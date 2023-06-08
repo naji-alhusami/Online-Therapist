@@ -7,7 +7,7 @@ const UpdateUserInfo = ({ userInfo }) => {
   const {
     register,
     // handleSubmit,
-    // watch,
+    watch,
     formState: { errors },
   } = useForm();
   const { t } = useTranslation();
@@ -17,6 +17,14 @@ const UpdateUserInfo = ({ userInfo }) => {
     const parsedValue = parseInt(value, 10);
     if (Number.isNaN(parsedValue) || parsedValue > 10) {
       return 'Please enter a number less than or equal to 10.';
+    }
+    return true;
+  };
+
+  const validatePhoneNumber = (value) => {
+    const regex = /^\d{10}$/;
+    if (!regex.test(value)) {
+      return 'Please enter a valid phone number.';
     }
     return true;
   };
@@ -108,6 +116,7 @@ const UpdateUserInfo = ({ userInfo }) => {
         <p className="mr-[6.3rem]">{t('Family Size')}</p>
         <input
           {...register('FamilySize', { validate: validateFamilySize })}
+          aria-invalid={errors.FamilySize ? 'true' : 'false'}
           type="text"
           className="bg-white border text-gray-800 shadow-lg rounded-md p-1 w-[20%] mr-5"
           required
@@ -175,11 +184,13 @@ const UpdateUserInfo = ({ userInfo }) => {
       <div className="flex flex-row justify-start items-center ml-6 mt-8">
         <p className="mr-[4.3rem]">{t('Phone Number')}</p>
         <input
-          {...register('PhoneNumber')}
+          {...register('PhoneNumber', { validate: validatePhoneNumber })}
+          aria-invalid={errors.PhoneNumber ? 'true' : 'false'}
           type="tel"
           className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
           required
         />
+        {errors.PhoneNumber && <p>{errors.PhoneNumber.message}</p>}
       </div>
 
       {/* Upload ID */}
@@ -190,6 +201,76 @@ const UpdateUserInfo = ({ userInfo }) => {
           type="file"
           id="file-upload"
         />
+      </div>
+      <div>
+        <h1 className="text-4xl ml-5 my-10">
+          <b>{t('Security')}</b>
+        </h1>
+
+        {/* Password */}
+        <div className="flex flex-row justify-start items-center ml-6 mt-8">
+          <p className="mr-[7rem]">{t('Password')}</p>
+          <input
+            {...register('Password', {
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/,
+                message:
+                  'Password should contain at least one uppercase letter, one lowercase letter, and one number',
+              },
+            })}
+            aria-invalid={errors.password ? 'true' : 'false'}
+            type="password"
+            className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
+            required
+          />
+          {errors.password && (
+            <p className="text-red-600">{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div className="flex flex-row justify-start items-center ml-6 mt-8">
+          <p className="mr-[3.2rem]">{t('Confirm Password')}</p>
+          <input
+            {...register('ConfirmPassword', {
+              validate: (value) =>
+                value === watch('password') || 'Passwords do not match',
+            })}
+            type="password"
+            className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
+            required
+          />
+          {errors.passswordConfirmation && (
+            <p className="text-red-600">
+              {errors.passswordConfirmation.message}
+            </p>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-row lg:gap-2 gap-3 ml-6 mt-8 md:mr-5">
+          <button
+            //   onClick={handleSubmit(onSubmit)}
+            type="button"
+            className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 text-bold bg-cyan-400 hover:bg-cyan-500 hover:text-white"
+          >
+            {t('SAVE CHANGES')}
+          </button>
+          <button
+            type="button"
+            className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
+            //   onClick={() => HandelDelete()}
+          >
+            {t('DELETE ACCOUNT')}
+          </button>
+          <button
+            type="button"
+            className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
+            //   onClick={() => handleCancel}
+          >
+            {t('CANCEL')}
+          </button>
+        </div>
       </div>
     </div>
   );
