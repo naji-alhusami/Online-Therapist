@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 const UpdateUserInfo = ({ userInfo }) => {
+  const [state, setState] = useState({
+    fullName: userInfo.name,
+    EducationLevel: userInfo.EducationLevel,
+    Hobbies: userInfo.Hobbies,
+    FamilySize: userInfo.FamilySize,
+    Gender: userInfo.Gender,
+    BirthDate: `${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`,
+    Email: userInfo.email,
+    PhoneNumber: userInfo.PhoneNumber,
+    Password: userInfo.Password,
+    ConfirmPassword: userInfo.ConfirmPassword,
+  });
+  // console.log(state.EducationLevel);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +68,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.fullName ? 'true' : 'false'}
                 type="text"
-                value={userInfo.name}
+                value={state.fullName}
+                onChange={(event) =>
+                  setState({ ...state, fullName: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
@@ -77,6 +94,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.EducationLevel ? 'true' : 'false'}
                 defaultValue=""
+                value={state.EducationLevel}
+                onChange={(event) =>
+                  setState({ ...state, EducationLevel: event.target.value })
+                }
                 className=" w-auto py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]"
               >
                 <option value="" disabled>
@@ -125,6 +146,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.Hobbies ? 'true' : 'false'}
                 type="text"
+                value={state.Hobbies}
+                onChange={(event) =>
+                  setState({ ...state, Hobbies: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
@@ -148,8 +173,11 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.FamilySize ? 'true' : 'false'}
                 type="text"
+                value={state.FamilySize}
+                onChange={(event) =>
+                  setState({ ...state, FamilySize: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 w-[20%] mr-5"
-                // required
               />
               <p>Member(s)</p>
             </div>
@@ -172,6 +200,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.Gender ? 'true' : 'false'}
                 defaultValue=""
+                value={state.Gender}
+                onChange={(event) =>
+                  setState({ ...state, Gender: event.target.value })
+                }
                 className=" w-[12rem] py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]"
               >
                 <option value="" disabled>
@@ -195,7 +227,10 @@ const UpdateUserInfo = ({ userInfo }) => {
           <input
             {...register('BirthDate')}
             type="date"
-            value={`${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`}
+            value={state.BirthDate}
+            onChange={(event) =>
+              setState({ ...state, BirthDate: event.target.value })
+            }
             className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 block p-1 w-[12rem] lg:w-[16rem]"
           />
         </div>
@@ -215,7 +250,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.Email ? 'true' : 'false'}
                 type="text"
-                value={userInfo.email}
+                value={state.Email}
+                onChange={(event) =>
+                  setState({ ...state, Email: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
@@ -239,6 +277,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                 })}
                 aria-invalid={errors.PhoneNumber ? 'true' : 'false'}
                 type="tel"
+                value={state.PhoneNumber}
+                onChange={(event) =>
+                  setState({ ...state, PhoneNumber: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
@@ -279,6 +321,10 @@ const UpdateUserInfo = ({ userInfo }) => {
                   },
                 })}
                 aria-invalid={errors.Password ? 'true' : 'false'}
+                value={state.Password}
+                onChange={(event) =>
+                  setState({ ...state, Password: event.target.value })
+                }
                 type="password"
                 className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
               />
@@ -303,14 +349,16 @@ const UpdateUserInfo = ({ userInfo }) => {
                     value === watch('Password') || 'Passwords do not match',
                 })}
                 type="password"
+                value={state.ConfirmPassword}
+                onChange={(event) =>
+                  setState({ ...state, ConfirmPassword: event.target.value })
+                }
                 className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
               />
             </div>
             <div className="mt-2">
               {errors.ConfirmPassword && (
-                <p className="text-red-600">
-                  {errors.ConfirmPassword.message}
-                </p>
+                <p className="text-red-600">{errors.ConfirmPassword.message}</p>
               )}
             </div>
           </div>
