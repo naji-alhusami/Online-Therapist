@@ -53,7 +53,7 @@ export const signupUser = createAsyncThunk(
       await setDoc(docRef, {
         id: user.uid,
         email,
-        name: `${firstName} ${lastName}`,
+        fullName: `${firstName} ${lastName}`,
         birthdayDay,
         birthdayMonth,
         birthdayYear,
@@ -77,6 +77,7 @@ export const loginUser = createAsyncThunk(
       if (response.user.emailVerified === false) {
         return rejectWithValue('Email is Not Verified');
       }
+
       const docRef = doc(db, 'users', response.user.uid);
       const docSnap = await getDoc(docRef);
 
@@ -87,6 +88,47 @@ export const loginUser = createAsyncThunk(
   }
 );
 // End of Login.
+
+// Start of Update User Profile:
+export const updateProfile = createAsyncThunk(
+  'user/updateProfile',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const {
+        id,
+        fullName,
+        EducationLevel,
+        Hobbies,
+        FamilySize,
+        Gender,
+        BirthDate,
+        Email,
+        PhoneNumber,
+        // Password,
+      } = payload;
+      console.log(payload);
+
+      const docRef = doc(db, 'users', id);
+      await setDoc(docRef, {
+        fullName,
+        EducationLevel,
+        Hobbies,
+        FamilySize,
+        Gender,
+        BirthDate,
+        Email,
+        PhoneNumber,
+      });
+
+      const docSnap = await getDoc(docRef);
+
+      return docSnap.data();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+// End of Update User Profile.
 
 // Start of Logout User:
 export const logoutUser = createAsyncThunk(
@@ -104,13 +146,13 @@ export const logoutUser = createAsyncThunk(
 
 // Start of Load User:
 export const loadUser = createAsyncThunk(
-  "user/loadUser",
+  'user/loadUser',
   async (payload, { rejectWithValue }) => {
     try {
       if (payload.emailVerified === false) {
-        return rejectWithValue("Email is not verified");
+        return rejectWithValue('Email is not verified');
       }
-      const docRef = doc(db, "users", payload.uid);
+      const docRef = doc(db, 'users', payload.uid);
       const docSnap = await getDoc(docRef);
       return docSnap.data();
     } catch (error) {
@@ -170,6 +212,21 @@ const usersSlice = createSlice({
       state.error = action.payload;
     });
 
+    // Update User Cases:
+    builder.addCase(updateProfile.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.signedup = true;
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
     // Logout Cases:
     builder.addCase(logoutUser.pending, (state) => {
       state.loading = true;
@@ -187,7 +244,7 @@ const usersSlice = createSlice({
       state.error = action.payload;
     });
 
-    // Load user Cases:
+    // Load User Cases:
     builder.addCase(loadUser.pending, (state) => {
       state.loading = true;
     });

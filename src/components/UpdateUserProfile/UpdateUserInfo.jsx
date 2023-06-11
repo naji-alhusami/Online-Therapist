@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-const UpdateUserInfo = ({ userInfo }) => {
+import { updateProfile } from '../../features/users/usersSlice';
+
+const UpdateUserInfo = () => {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.users.user);
+  console.log(userInfo);
+
   const [state, setState] = useState({
-    fullName: userInfo.name,
-    EducationLevel: userInfo.EducationLevel,
-    Hobbies: userInfo.Hobbies,
-    FamilySize: userInfo.FamilySize,
-    Gender: userInfo.Gender,
-    BirthDate: `${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`,
-    Email: userInfo.email,
-    PhoneNumber: userInfo.PhoneNumber,
-    Password: userInfo.Password,
-    ConfirmPassword: userInfo.ConfirmPassword,
+    fullName: userInfo.fullName || '',
+    EducationLevel: userInfo.EducationLevel || '',
+    Hobbies: userInfo.Hobbies || '',
+    FamilySize: userInfo.FamilySize || '',
+    Gender: userInfo.Gender || '',
+    BirthDate: `${userInfo.birthdayYear || ''}-${
+      userInfo.birthdayMonth || ''
+    }-${userInfo.birthdayDay || ''}`,
+    Email: userInfo.email || '',
+    PhoneNumber: userInfo.PhoneNumber || '',
+    Password: userInfo.Password || '',
+    ConfirmPassword: userInfo.ConfirmPassword || '',
   });
   // console.log(state.EducationLevel);
 
@@ -43,7 +52,21 @@ const UpdateUserInfo = ({ userInfo }) => {
   };
 
   const onSubmitform = (userData) => {
-    console.log(userData);
+    // console.log(userData);
+
+    dispatch(
+      updateProfile({
+        fullName: userData.fullName,
+        EducationLevel: userData.EducationLevel,
+        Hobbies: userData.Hobbies,
+        FamilySize: userData.FamilySize,
+        Gender: userData.Gender,
+        BirthDate: userData.BirthDate,
+        Email: userData.Email,
+        PhoneNumber: userData.PhoneNumber,
+        Password: userData.Password,
+      })
+    );
   };
 
   return (
@@ -76,8 +99,8 @@ const UpdateUserInfo = ({ userInfo }) => {
               />
             </div>
             <div className="mt-2">
-              {errors.firstName && (
-                <p className="text-red-600">{errors.firstName.message}</p>
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
               )}
             </div>
           </div>
@@ -93,7 +116,7 @@ const UpdateUserInfo = ({ userInfo }) => {
                   required: 'Please Select an Education Level',
                 })}
                 aria-invalid={errors.EducationLevel ? 'true' : 'false'}
-                defaultValue=""
+                // defaultValue=""
                 value={state.EducationLevel}
                 onChange={(event) =>
                   setState({ ...state, EducationLevel: event.target.value })
@@ -199,7 +222,7 @@ const UpdateUserInfo = ({ userInfo }) => {
                   required: 'Please Select Gender',
                 })}
                 aria-invalid={errors.Gender ? 'true' : 'false'}
-                defaultValue=""
+                // defaultValue=""
                 value={state.Gender}
                 onChange={(event) =>
                   setState({ ...state, Gender: event.target.value })
@@ -228,9 +251,9 @@ const UpdateUserInfo = ({ userInfo }) => {
             {...register('BirthDate')}
             type="date"
             value={state.BirthDate}
-            onChange={(event) =>
-              setState({ ...state, BirthDate: event.target.value })
-            }
+            // onChange={(event) =>
+            //   setState({ ...state, BirthDate: event.target.value })
+            // }
             className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 block p-1 w-[12rem] lg:w-[16rem]"
           />
         </div>
@@ -251,9 +274,9 @@ const UpdateUserInfo = ({ userInfo }) => {
                 aria-invalid={errors.Email ? 'true' : 'false'}
                 type="text"
                 value={state.Email}
-                onChange={(event) =>
-                  setState({ ...state, Email: event.target.value })
-                }
+                // onChange={(event) =>
+                //   setState({ ...state, Email: event.target.value })
+                // }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>

@@ -8,7 +8,6 @@ import UpdateUserInfo from './UpdateUserInfo';
 
 const UpdateUserProfile = () => {
   const userLoading = useSelector((state) => state.users);
-  const userInfo = useSelector((state) => state.users.user);
   const { t } = useTranslation();
 
   if (userLoading.loading) {
@@ -34,7 +33,7 @@ const UpdateUserProfile = () => {
 
           {/* div for all the fields */}
           <div>
-            <UpdateUserInfo userInfo={userInfo} />
+            <UpdateUserInfo />
 
             {/* Payment Methods & Tickets */}
             <div className="flex flex-col ml-6 mt-16">
