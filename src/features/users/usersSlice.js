@@ -106,7 +106,7 @@ export const updateProfile = createAsyncThunk(
         PhoneNumber,
         // Password,
       } = payload;
-      console.log(payload);
+      console.log(payload.id);
 
       const docRef = doc(db, 'users', id);
       await setDoc(docRef, {

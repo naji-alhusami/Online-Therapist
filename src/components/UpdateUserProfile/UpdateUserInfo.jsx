@@ -17,15 +17,16 @@ const UpdateUserInfo = () => {
     Hobbies: userInfo.Hobbies || '',
     FamilySize: userInfo.FamilySize || '',
     Gender: userInfo.Gender || '',
-    BirthDate: `${userInfo.birthdayYear || ''}-${
-      userInfo.birthdayMonth || ''
-    }-${userInfo.birthdayDay || ''}`,
-    Email: userInfo.email || '',
+    BirthDate:
+      userInfo.birthdayYear && userInfo.birthdayMonth && userInfo.birthdayDay
+        ? `${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`
+        : userInfo.BirthDate || '',
+    Email: userInfo.Email || userInfo.email,
     PhoneNumber: userInfo.PhoneNumber || '',
     Password: userInfo.Password || '',
     ConfirmPassword: userInfo.ConfirmPassword || '',
   });
-  // console.log(state.EducationLevel);
+  console.log(state.BirthDate);
 
   const {
     register,
@@ -56,6 +57,7 @@ const UpdateUserInfo = () => {
 
     dispatch(
       updateProfile({
+        id: userInfo.id,
         fullName: userData.fullName,
         EducationLevel: userData.EducationLevel,
         Hobbies: userData.Hobbies,
