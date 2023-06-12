@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 import {
   signupUser,
+  loginUserWithGoogle,
   //   loginUserWithFacebook,
-  //   loginUserWithGoogle,
 } from '../../features/users/usersSlice';
 
 import facebookicon from '../Images/FacebookLogo.svg';
@@ -285,7 +285,8 @@ const Singup = () => {
                 navigate('/');
               }}
             >
-              <img src={googleicon} alt="Google Icon" />{' '}
+              {' '}
+              <img src={facebookicon} alt="facebookicon" />{' '}
             </button>
             <button
               type="button"
@@ -295,8 +296,7 @@ const Singup = () => {
                 navigate('/');
               }}
             >
-              {' '}
-              <img src={facebookicon} alt="facebookicon" />{' '}
+              <img src={googleicon} alt="Google Icon" />{' '}
             </button>
           </div>
         </div>
