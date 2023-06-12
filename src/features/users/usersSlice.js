@@ -97,28 +97,28 @@ export const updateProfile = createAsyncThunk(
       const {
         id,
         fullName,
-        EducationLevel,
-        Hobbies,
-        FamilySize,
-        Gender,
-        BirthDate,
-        Email,
-        PhoneNumber,
-        Password,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        birthDate,
+        email,
+        phoneNumber,
+        password,
       } = payload;
       console.log(payload.id);
 
       const docRef = doc(db, 'users', id);
       await setDoc(docRef, {
         fullName,
-        EducationLevel,
-        Hobbies,
-        FamilySize,
-        Gender,
-        BirthDate,
-        Email,
-        PhoneNumber,
-        Password,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        birthDate,
+        email,
+        phoneNumber,
+        password,
       });
 
       // await updatePassword(auth.currentUser, Password)
