@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { loginUser } from '../../features/users/usersSlice';
@@ -19,12 +19,14 @@ const LoginWithUserPassword = () => {
   // dispatch user login with email:
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const response = await dispatch(loginUser({ email, password }));
 
     if (response.meta.rejectedWithValue) {
       setError(response.payload);
       return;
     }
+
     navigate('/');
   };
 
@@ -33,7 +35,6 @@ const LoginWithUserPassword = () => {
       <h2 className='m-4 mb-16 text-5xl font-["Poppins"] font-normal'>
         {t('Login')}
       </h2>
-      {error && <p className="text-red-500 text-lg text-center">{error}</p>}
       <form
         onSubmit={handleSubmit}
         className="grid grid-rows-3 gap-6 shadow-2xl px-2 py-6 m-4"
@@ -55,6 +56,7 @@ const LoginWithUserPassword = () => {
           name="userPassword"
           onChange={(event) => setPassword(event.target.value)}
         />
+        {error && <p className="text-red-500 text-lg text-center">{error}</p>}
         <div className="flex justify-around py-3 gap-8">
           <button
             type="submit"
