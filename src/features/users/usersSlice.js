@@ -4,7 +4,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   //   signInWithPopup,
-  //   updatePassword,
+  // updatePassword,
   //   deleteUser,
   signOut,
 } from 'firebase/auth';
@@ -104,7 +104,7 @@ export const updateProfile = createAsyncThunk(
         BirthDate,
         Email,
         PhoneNumber,
-        // Password,
+        Password,
       } = payload;
       console.log(payload.id);
 
@@ -118,7 +118,14 @@ export const updateProfile = createAsyncThunk(
         BirthDate,
         Email,
         PhoneNumber,
+        Password,
       });
+
+      // await updatePassword(auth.currentUser, Password)
+      //   .then(console.log('password changed'))
+      //   .catch(() => {
+      //     rejectWithValue('ERROR!!!');
+      //   });
 
       const docSnap = await getDoc(docRef);
 
@@ -129,6 +136,42 @@ export const updateProfile = createAsyncThunk(
   }
 );
 // End of Update User Profile.
+
+// // Start of of Update User Password.:
+// export const updatePassword = createAsyncThunk(
+//   'user/updatePassword',
+//   async (payload, { rejectWithValue }) => {
+//     try {
+//       const { id, Password } = payload;
+//       console.log(payload.id);
+
+//       await updatePassword(auth.currentUser, Password)
+//         .then(console.log('password changed'))
+//         .catch((error) => {
+//           rejectWithValue(error.message);
+//         });
+
+//       const docRef = doc(db, 'users', id);
+//       await setDoc(docRef, {
+//         fullName,
+//         EducationLevel,
+//         Hobbies,
+//         FamilySize,
+//         Gender,
+//         BirthDate,
+//         Email,
+//         PhoneNumber,
+//       });
+
+//       const docSnap = await getDoc(docRef);
+
+//       return docSnap.data();
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+// // End of Update User Password.
 
 // Start of Logout User:
 export const logoutUser = createAsyncThunk(

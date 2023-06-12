@@ -9,24 +9,24 @@ import { updateProfile } from '../../features/users/usersSlice';
 const UpdateUserInfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
-    EducationLevel: userInfo.EducationLevel || '',
-    Hobbies: userInfo.Hobbies || '',
-    FamilySize: userInfo.FamilySize || '',
-    Gender: userInfo.Gender || '',
+    educationLevel: userInfo.educationLevel || '',
+    hobbies: userInfo.hobbies || '',
+    familySize: userInfo.familySize || '',
+    gender: userInfo.gender || '',
     BirthDate:
       userInfo.birthdayYear && userInfo.birthdayMonth && userInfo.birthdayDay
         ? `${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`
         : userInfo.BirthDate || '',
-    Email: userInfo.Email || userInfo.email,
-    PhoneNumber: userInfo.PhoneNumber || '',
-    Password: userInfo.Password || '',
-    ConfirmPassword: userInfo.ConfirmPassword || '',
+    email: userInfo.email || '',
+    phoneNumber: userInfo.phoneNumber || '',
+    password: userInfo.password || '',
+    confirmPassword: userInfo.confirmPassword || '',
   });
-  console.log(state.BirthDate);
+  // console.log(state.BirthDate);
 
   const {
     register,
@@ -53,20 +53,25 @@ const UpdateUserInfo = () => {
   };
 
   const onSubmitform = (userData) => {
-    // console.log(userData);
+    console.log(state.password);
+    console.log(userData.password);
+    if (userData.password !== state.password) {
+      console.log('Password is incorrect');
+      return;
+    }
 
     dispatch(
       updateProfile({
         id: userInfo.id,
         fullName: userData.fullName,
-        EducationLevel: userData.EducationLevel,
-        Hobbies: userData.Hobbies,
-        FamilySize: userData.FamilySize,
-        Gender: userData.Gender,
+        educationLevel: userData.educationLevel,
+        hobbies: userData.hobbies,
+        familySize: userData.familySize,
+        gender: userData.gender,
         BirthDate: userData.BirthDate,
-        Email: userData.Email,
-        PhoneNumber: userData.PhoneNumber,
-        Password: userData.Password,
+        email: userData.email,
+        phoneNumber: userData.phoneNumber,
+        // password: userData.password,
       })
     );
   };
@@ -114,14 +119,14 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[4.3rem]">{t('Education Level')}</p>
               <select
-                {...register('EducationLevel', {
+                {...register('educationLevel', {
                   required: 'Please Select an Education Level',
                 })}
-                aria-invalid={errors.EducationLevel ? 'true' : 'false'}
+                aria-invalid={errors.educationLevel ? 'true' : 'false'}
                 // defaultValue=""
-                value={state.EducationLevel}
+                value={state.educationLevel}
                 onChange={(event) =>
-                  setState({ ...state, EducationLevel: event.target.value })
+                  setState({ ...state, educationLevel: event.target.value })
                 }
                 className=" w-auto py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]"
               >
@@ -149,8 +154,8 @@ const UpdateUserInfo = () => {
               </select>
             </div>
             <div className="mt-2">
-              {errors.EducationLevel && (
-                <p className="text-red-600 ">{errors.EducationLevel.message}</p>
+              {errors.educationLevel && (
+                <p className="text-red-600 ">{errors.educationLevel.message}</p>
               )}
             </div>
           </div>
@@ -162,25 +167,25 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[7.5rem]">{t('Hobbies')}</p>
               <input
-                {...register('Hobbies', {
+                {...register('hobbies', {
                   required: 'Hobbies Field is Required',
                   maxLength: {
                     value: 10,
                     message: 'Hobbies should not exceed 10 characters',
                   },
                 })}
-                aria-invalid={errors.Hobbies ? 'true' : 'false'}
+                aria-invalid={errors.hobbies ? 'true' : 'false'}
                 type="text"
-                value={state.Hobbies}
+                value={state.hobbies}
                 onChange={(event) =>
-                  setState({ ...state, Hobbies: event.target.value })
+                  setState({ ...state, hobbies: event.target.value })
                 }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
             <div className="mt-2">
-              {errors.Hobbies && (
-                <p className="text-red-600">{errors.Hobbies.message}</p>
+              {errors.hobbies && (
+                <p className="text-red-600">{errors.hobbies.message}</p>
               )}
             </div>
           </div>
@@ -192,23 +197,23 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[6.3rem]">{t('Family Size')}</p>
               <input
-                {...register('FamilySize', {
+                {...register('familySize', {
                   required: 'Family Size Field is Required',
                   validate: validateFamilySize,
                 })}
-                aria-invalid={errors.FamilySize ? 'true' : 'false'}
+                aria-invalid={errors.familySize ? 'true' : 'false'}
                 type="text"
-                value={state.FamilySize}
+                value={state.familySize}
                 onChange={(event) =>
-                  setState({ ...state, FamilySize: event.target.value })
+                  setState({ ...state, familySize: event.target.value })
                 }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 w-[20%] mr-5"
               />
               <p>Member(s)</p>
             </div>
             <div className="mt-2">
-              {errors.FamilySize && (
-                <p className="text-red-600">{errors.FamilySize.message}</p>
+              {errors.familySize && (
+                <p className="text-red-600">{errors.familySize.message}</p>
               )}
             </div>
           </div>
@@ -220,14 +225,14 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[7.9rem]">{t('Gender')}</p>
               <select
-                {...register('Gender', {
+                {...register('gender', {
                   required: 'Please Select Gender',
                 })}
-                aria-invalid={errors.Gender ? 'true' : 'false'}
+                aria-invalid={errors.gender ? 'true' : 'false'}
                 // defaultValue=""
-                value={state.Gender}
+                value={state.gender}
                 onChange={(event) =>
-                  setState({ ...state, Gender: event.target.value })
+                  setState({ ...state, gender: event.target.value })
                 }
                 className=" w-[12rem] py-1 mr-5 text-gray-800 bg-white border rounded-md shadow-lg lg:w-[16rem]"
               >
@@ -239,8 +244,8 @@ const UpdateUserInfo = () => {
               </select>
             </div>
             <div className="mt-2">
-              {errors.Gender && (
-                <p className="text-red-600">{errors.Gender.message}</p>
+              {errors.gender && (
+                <p className="text-red-600">{errors.gender.message}</p>
               )}
             </div>
           </div>
@@ -266,16 +271,16 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[8.7rem]">{t('Email')}</p>
               <input
-                {...register('Email', {
+                {...register('email', {
                   required: 'Email Address is Required',
                   pattern: {
                     value: /\S+@\S+\.\S+/,
                     message: 'Invalid Email Address',
                   },
                 })}
-                aria-invalid={errors.Email ? 'true' : 'false'}
+                aria-invalid={errors.email ? 'true' : 'false'}
                 type="text"
-                value={state.Email}
+                value={state.email}
                 // onChange={(event) =>
                 //   setState({ ...state, Email: event.target.value })
                 // }
@@ -283,8 +288,8 @@ const UpdateUserInfo = () => {
               />
             </div>
             <div className="mt-2">
-              {errors.Email && (
-                <p className="text-red-600">{errors.Email.message}</p>
+              {errors.email && (
+                <p className="text-red-600">{errors.email.message}</p>
               )}
             </div>
           </div>
@@ -296,22 +301,22 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[4.3rem]">{t('Phone Number')}</p>
               <input
-                {...register('PhoneNumber', {
+                {...register('phoneNumber', {
                   required: 'Phone Number is Required',
                   validate: validatePhoneNumber,
                 })}
-                aria-invalid={errors.PhoneNumber ? 'true' : 'false'}
+                aria-invalid={errors.phoneNumber ? 'true' : 'false'}
                 type="tel"
-                value={state.PhoneNumber}
+                value={state.phoneNumber}
                 onChange={(event) =>
-                  setState({ ...state, PhoneNumber: event.target.value })
+                  setState({ ...state, phoneNumber: event.target.value })
                 }
                 className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
               />
             </div>
             <div className="mt-2">
-              {errors.PhoneNumber && (
-                <p className="text-red-600">{errors.PhoneNumber.message}</p>
+              {errors.phoneNumber && (
+                <p className="text-red-600">{errors.phoneNumber.message}</p>
               )}
             </div>
           </div>
@@ -337,7 +342,7 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[7rem]">{t('Password')}</p>
               <input
-                {...register('Password', {
+                {...register('password', {
                   required: 'Password is Required',
                   pattern: {
                     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/,
@@ -345,18 +350,18 @@ const UpdateUserInfo = () => {
                       'Password should contain at least one uppercase letter, one lowercase letter, and one number',
                   },
                 })}
-                aria-invalid={errors.Password ? 'true' : 'false'}
-                value={state.Password}
+                aria-invalid={errors.password ? 'true' : 'false'}
+                value={state.password}
                 onChange={(event) =>
-                  setState({ ...state, Password: event.target.value })
+                  setState({ ...state, password: event.target.value })
                 }
                 type="password"
                 className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
               />
             </div>
             <div className="mt-2 w-[85%]">
-              {errors.Password && (
-                <p className="text-red-600">{errors.Password.message}</p>
+              {errors.password && (
+                <p className="text-red-600">{errors.password.message}</p>
               )}
             </div>
           </div>
@@ -368,22 +373,22 @@ const UpdateUserInfo = () => {
             <div className="flex flex-row">
               <p className="mr-[3.2rem]">{t('Confirm Password')}</p>
               <input
-                {...register('ConfirmPassword', {
+                {...register('confirmPassword', {
                   required: 'Password Confirmation is Required',
                   validate: (value) =>
-                    value === watch('Password') || 'Passwords do not match',
+                    value === watch('password') || 'Passwords do not match',
                 })}
                 type="password"
-                value={state.ConfirmPassword}
+                value={state.confirmPassword}
                 onChange={(event) =>
-                  setState({ ...state, ConfirmPassword: event.target.value })
+                  setState({ ...state, confirmPassword: event.target.value })
                 }
                 className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
               />
             </div>
             <div className="mt-2">
-              {errors.ConfirmPassword && (
-                <p className="text-red-600">{errors.ConfirmPassword.message}</p>
+              {errors.confirmPassword && (
+                <p className="text-red-600">{errors.confirmPassword.message}</p>
               )}
             </div>
           </div>
