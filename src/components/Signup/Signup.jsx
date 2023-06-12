@@ -33,7 +33,8 @@ const Singup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmitform = async (userData) => { // check if async is required!!
+  const onSubmitform = async (userData) => {
+    // check if async is required!!
     console.log(userData);
 
     dispatch(
@@ -279,23 +280,20 @@ const Singup = () => {
             <button
               type="button"
               style={{ height: 32, width: 32 }}
-              // onClick={(userData) => {
-              //   dispatch(
-              //     loginUserWithGoogle({
-              //       id: userData.id,
-              //       email: userData.email,
-              //     })
-              //   );
-              // }}
+              onClick={() => {
+                dispatch(loginUserWithGoogle());
+                navigate('/');
+              }}
             >
               <img src={googleicon} alt="Google Icon" />{' '}
             </button>
             <button
               type="button"
               style={{ height: 32, width: 32 }}
-              // onClick={(userData) => {
-              //   dispatch(loginUserWithFacebook({ email: userData.email }));
-              // }}
+              onClick={() => {
+                dispatch(loginUserWithGoogle());
+                navigate('/');
+              }}
             >
               {' '}
               <img src={facebookicon} alt="facebookicon" />{' '}

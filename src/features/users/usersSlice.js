@@ -3,8 +3,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
-  //   signInWithPopup,
-  // updatePassword,
+  signInWithPopup,
   //   deleteUser,
   signOut,
 } from 'firebase/auth';
@@ -19,7 +18,7 @@ import {
 import {
   db,
   auth,
-  //   googleAuth,
+  googleAuth,
   //   facebookAuth,
   //   storage,
 } from '../../firebase-config';
@@ -89,6 +88,26 @@ export const loginUser = createAsyncThunk(
   }
 );
 // End of Login.
+
+// Login with Google:
+export const loginUserWithGoogle = createAsyncThunk(
+  'user/loginUserWithGoogle',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { user } = await signInWithPopup(auth, googleAuth);
+      const docRef = doc(db, 'users', user.uid);
+      await setDoc(docRef, {
+        id: user.uid,
+        email: user.email,
+        name: user.displayName,
+      });
+      return { id: user.uid, email: user.email };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// End of Login with Google.
 
 // Start of Update User Profile:
 export const updateProfile = createAsyncThunk(
@@ -196,7 +215,7 @@ const usersSlice = createSlice({
       state.error = action.payload;
     });
 
-    // Login Cases:
+    // Login with user & Password Cases:
     builder.addCase(loginUser.pending, () => {});
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload.error) {
@@ -210,6 +229,20 @@ const usersSlice = createSlice({
       }
     });
     builder.addCase(loginUser.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
+    // Login with Google Cases:
+    builder.addCase(loginUserWithGoogle.pending, () => {});
+    builder.addCase(loginUserWithGoogle.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.userlogin = true;
+      state.error = null;
+    });
+    builder.addCase(loginUserWithGoogle.rejected, (state, action) => {
       state.loading = false;
       state.user = {};
       state.error = action.payload;
