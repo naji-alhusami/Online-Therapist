@@ -19,7 +19,7 @@ import {
   db,
   auth,
   googleAuth,
-  //   facebookAuth,
+  facebookAuth,
   //   storage,
 } from '../../firebase-config';
 
@@ -88,6 +88,26 @@ export const loginUser = createAsyncThunk(
   }
 );
 // End of Login.
+
+// Login with Facebook:
+export const loginUserWithFacebook = createAsyncThunk(
+  'user/loginUserWithFacebook',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { user } = await signInWithPopup(auth, facebookAuth);
+      const docRef = doc(db, 'users', user.uid);
+      await setDoc(docRef, {
+        id: user.uid,
+        email: user.email,
+        name: user.displayName,
+      });
+      return { id: user.uid, email: user.email };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// End of Login with Google.
 
 // Login with Google:
 export const loginUserWithGoogle = createAsyncThunk(
@@ -243,6 +263,20 @@ const usersSlice = createSlice({
       state.error = null;
     });
     builder.addCase(loginUserWithGoogle.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
+    // Login with Facebook Cases:
+    builder.addCase(loginUserWithFacebook.pending, () => {});
+    builder.addCase(loginUserWithFacebook.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.userlogin = true;
+      state.error = null;
+    });
+    builder.addCase(loginUserWithFacebook.rejected, (state, action) => {
       state.loading = false;
       state.user = {};
       state.error = action.payload;
