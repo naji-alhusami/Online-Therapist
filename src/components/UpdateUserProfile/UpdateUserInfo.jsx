@@ -9,7 +9,7 @@ import { updateProfile } from '../../features/users/usersSlice';
 const UpdateUserInfo = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.user);
-  // console.log(userInfo);
+  console.log(userInfo);
 
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
@@ -17,10 +17,10 @@ const UpdateUserInfo = () => {
     hobbies: userInfo.hobbies || '',
     familySize: userInfo.familySize || '',
     gender: userInfo.gender || '',
-    BirthDate:
+    birthDate:
       userInfo.birthdayYear && userInfo.birthdayMonth && userInfo.birthdayDay
         ? `${userInfo.birthdayYear}-${userInfo.birthdayMonth}-${userInfo.birthdayDay}`
-        : userInfo.BirthDate || '',
+        : userInfo.birthDate || '',
     email: userInfo.email || '',
     phoneNumber: userInfo.phoneNumber || '',
     password: userInfo.password || '',
@@ -53,9 +53,9 @@ const UpdateUserInfo = () => {
   };
 
   const onSubmitform = (userData) => {
-    console.log(state.password);
+    console.log(userInfo.id);
     console.log(userData.password);
-    if (userData.password !== state.password) {
+    if (userData.password !== userInfo.password) {
       console.log('Password is incorrect');
       return;
     }
@@ -68,10 +68,10 @@ const UpdateUserInfo = () => {
         hobbies: userData.hobbies,
         familySize: userData.familySize,
         gender: userData.gender,
-        BirthDate: userData.BirthDate,
+        birthDate: userData.birthDate,
         email: userData.email,
         phoneNumber: userData.phoneNumber,
-        // password: userData.password,
+        password: userInfo.password,
       })
     );
   };
@@ -255,12 +255,12 @@ const UpdateUserInfo = () => {
         <div className="flex flex-row justify-start items-center ml-6 mt-8">
           <p className="mr-[6.7rem]">{t('Birth Date')}</p>
           <input
-            {...register('BirthDate')}
+            {...register('birthDate')}
             type="date"
-            value={state.BirthDate}
-            // onChange={(event) =>
-            //   setState({ ...state, BirthDate: event.target.value })
-            // }
+            value={state.birthDate}
+            onChange={(event) =>
+              setState({ ...state, birthDate: event.target.value })
+            }
             className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 block p-1 w-[12rem] lg:w-[16rem]"
           />
         </div>
@@ -351,7 +351,8 @@ const UpdateUserInfo = () => {
                   },
                 })}
                 aria-invalid={errors.password ? 'true' : 'false'}
-                value={state.password}
+                // value={state.password}
+                defaultValue=""
                 onChange={(event) =>
                   setState({ ...state, password: event.target.value })
                 }

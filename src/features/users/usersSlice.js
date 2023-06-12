@@ -53,6 +53,7 @@ export const signupUser = createAsyncThunk(
       await setDoc(docRef, {
         id: user.uid,
         email,
+        password,
         fullName: `${firstName} ${lastName}`,
         birthdayDay,
         birthdayMonth,
@@ -106,10 +107,11 @@ export const updateProfile = createAsyncThunk(
         phoneNumber,
         password,
       } = payload;
-      console.log(payload.id);
+      console.log(payload);
 
       const docRef = doc(db, 'users', id);
       await setDoc(docRef, {
+        id,
         fullName,
         educationLevel,
         hobbies,
