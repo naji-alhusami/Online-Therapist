@@ -54,8 +54,6 @@ const UpdateUserInfo = () => {
   };
 
   const onSubmitform = (userData) => {
-    console.log(userInfo.id);
-    console.log(userData.password);
     if (userData.password !== userInfo.password) {
       console.log('Password is incorrect');
       return;
@@ -72,6 +70,7 @@ const UpdateUserInfo = () => {
         birthDate: userData.birthDate,
         email: userData.email,
         phoneNumber: userData.phoneNumber,
+        profilePicture: userData.profilePicture,
         password: userInfo.password,
       })
     );
@@ -323,13 +322,20 @@ const UpdateUserInfo = () => {
           </div>
         </div>
 
-        {/* Upload ID */}
+        {/* Upload Profile Picture */}
         <div className="flex flex-row justify-start items-center ml-6 mt-8">
           <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
           <input
+            {...register('profilePicture', {
+              required: 'Profile Picture is Required',
+            })}
             className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
             type="file"
             id="file-upload"
+            accept="image/*"
+            onChange={(event) => {
+              setState({ ...state, profilePicture: event.target.files[0] });
+            }}
           />
         </div>
 

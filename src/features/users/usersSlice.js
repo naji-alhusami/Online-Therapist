@@ -14,9 +14,11 @@ import {
   //   , deleteDoc
 } from 'firebase/firestore';
 
-import { ref, uploadBytes, 
+import {
+  ref,
+  uploadBytes,
   // getDownloadURL
- } from 'firebase/storage';
+} from 'firebase/storage';
 import {
   db,
   auth,
@@ -149,11 +151,15 @@ export const updateProfile = createAsyncThunk(
         profilePicture,
         password,
       } = payload;
-      console.log(payload);
+      console.log(payload.profilePicture[0].name);
+      console.log(payload.profilePicture[0]);
 
       // Upload the profile picture to Firebase Storage
-      const storageRef = ref(storage, `profilePictures/${id}`);
-      await uploadBytes(storageRef, profilePicture);
+      const storageRef = ref(storage, id);
+      const metadata = {
+        contentType: profilePicture[0].type, // Set the correct MIME type of the file
+      };
+      await uploadBytes(storageRef, profilePicture[0], metadata);
 
       const docRef = doc(db, 'users', id);
       await setDoc(docRef, {
