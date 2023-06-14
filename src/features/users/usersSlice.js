@@ -14,13 +14,15 @@ import {
   //   , deleteDoc
 } from 'firebase/firestore';
 
-// import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, 
+  // getDownloadURL
+ } from 'firebase/storage';
 import {
   db,
   auth,
   googleAuth,
   facebookAuth,
-  //   storage,
+  storage,
 } from '../../firebase-config';
 
 // start of signup:
@@ -144,9 +146,14 @@ export const updateProfile = createAsyncThunk(
         birthDate,
         email,
         phoneNumber,
+        profilePicture,
         password,
       } = payload;
       console.log(payload);
+
+      // Upload the profile picture to Firebase Storage
+      const storageRef = ref(storage, `profilePictures/${id}`);
+      await uploadBytes(storageRef, profilePicture);
 
       const docRef = doc(db, 'users', id);
       await setDoc(docRef, {

@@ -72,7 +72,7 @@ const LoginWithUserPassword = () => {
           </Link>
         </div>
       </form>
-      {/* <LoginWithGoogleFacebook /> */}
+      <LoginWithGoogleFacebook />
     </div>
   );
 };
