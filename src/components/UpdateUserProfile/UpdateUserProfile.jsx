@@ -8,6 +8,8 @@ import UpdateUserInfo from './UpdateUserInfo';
 
 const UpdateUserProfile = () => {
   const userLoading = useSelector((state) => state.users);
+  const userInfo = useSelector((state) => state.users.user);
+  console.log(userInfo);
   const { t } = useTranslation();
 
   if (userLoading.loading) {
@@ -27,13 +29,14 @@ const UpdateUserProfile = () => {
         {/* div for picture and the fields */}
         <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
           <UpdateUserPicture
-          //   setprofilepic={setprofilepic}
-          //   profilepic={userInfo.photoURL}
+            userProfilePicture={userInfo.profilePictureURL}
+            //   setprofilepic={setprofilepic}
+            //   profilepic={userInfo.photoURL}
           />
 
           {/* div for all the fields */}
           <div>
-            <UpdateUserInfo />
+            <UpdateUserInfo userInfo={userInfo} />
 
             {/* Payment Methods & Tickets */}
             <div className="flex flex-col ml-6 mt-16">

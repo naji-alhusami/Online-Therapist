@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { updateProfile } from '../../features/users/usersSlice';
 
-const UpdateUserInfo = () => {
+const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo);
+  // const userInfo = useSelector((state) => state.users.user);
+  // console.log(userInfo);
 
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
@@ -27,7 +27,6 @@ const UpdateUserInfo = () => {
     password: userInfo.password || '',
     confirmPassword: userInfo.confirmPassword || '',
   });
-  // console.log(state.BirthDate);
 
   const {
     register,
