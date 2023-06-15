@@ -12,6 +12,8 @@ import Logo from '../Images/Logo.svg';
 const Navbar = () => {
   const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
+  const userInfo = useSelector((state) => state.users.user);
+  console.log(userInfo.profilePictureURL);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
@@ -169,7 +171,7 @@ const Navbar = () => {
                     {t('Contact')}
                   </Link>
                 </li>
-                <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
+                <li className="w-fit hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer my-2">
                   <div className=" relative  absolute">
                     {!userLogin.userlogin && (
                       <Link
@@ -191,11 +193,30 @@ const Navbar = () => {
                             setShowProfileInResponsive(!showProfileInResponsive)
                           }
                         >
-                          Admin
-                          <AiFillCaretDown className=" mt-1 ml-2" />
+                          <div className="flex peer text-white ">
+                            {userInfo.profilePictureURL !==
+                            'https://firebasestorage.googleapis.com/v0/b/fir-basics-9b143.appspot.com/o/J7e5bq3CfYMmny0zyVolKAs4RqD3?alt=media&token=a6de61ea-67bb-42ce-b863-0295891c9597' ? (
+                              <>
+                                {' '}
+                                <img
+                                  src={userInfo.profilePictureURL}
+                                  alt="navbar"
+                                  className="w-[3rem] h-[3rem] rounded-full overflow-hidden"
+                                />{' '}
+                                <p className="flex justify-center items-center text-black hover:text-white ml-4">
+                                  {userInfo.fullName}
+                                </p>
+                              </>
+                            ) : (
+                              <div className="flex items-center bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
+                                <div>Admin</div>
+                                <AiFillCaretDown className="mt-1 ml-2" />
+                              </div>
+                            )}
+                          </div>
                         </button>
                         {showProfileInResponsive ? (
-                          <div className="flex relative peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                          <div className="flex relative peer-hover:flex hover:flex w-auto flex-col bg-white drop-shadow-lg">
                             <Link
                               className="p-2 pl-5 text-black hover:bg-cyan-400 hover:text-white"
                               to="/updateUserProfile"
@@ -205,7 +226,7 @@ const Navbar = () => {
                                 );
                               }}
                             >
-                              Update
+                              Update Profile
                             </Link>
                             <button
                               type="button"
@@ -300,19 +321,37 @@ const Navbar = () => {
               </li>
             )}
             {userLogin.userlogin && (
-              <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
+              <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer p-1">
                 <div className="relative absolute">
-                  <div className="flex peer text-white p-2 bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
-                    Admin
-                    <AiFillCaretDown className="mt-1 ml-2" />
+                  <div className="flex peer text-white ">
+                    {userInfo.profilePictureURL !==
+                    'https://firebasestorage.googleapis.com/v0/b/fir-basics-9b143.appspot.com/o/J7e5bq3CfYMmny0zyVolKAs4RqD3?alt=media&token=a6de61ea-67bb-42ce-b863-0295891c9597' ? (
+                      <div className='flex justify-center items-center bg-cyan-400 rounded-md'>
+                        {' '}
+                        <img
+                          src={userInfo.profilePictureURL}
+                          alt="navbar"
+                          className="w-[3rem] h-[3rem] rounded-full overflow-hidden"
+                        />
+                        <p className=" text-black hover:text-white ml-4">
+                          {userInfo.fullName}
+                        </p>
+                        <AiFillCaretDown className="mt-1 ml-2" />
+                      </div>
+                    ) : (
+                      <div className="flex items-center bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
+                        <p>Admin</p>
+                        <AiFillCaretDown className="mt-1 ml-2" />
+                      </div>
+                    )}
                   </div>
 
-                  <div className="hidden absolute peer-hover:flex hover:flex w-[100px] flex-col bg-white drop-shadow-lg">
+                  <div className="hidden absolute peer-hover:flex hover:flex w-[190px] flex-col bg-white drop-shadow-lg">
                     <Link
-                      className="p-2 pl-6 text-black hover:bg-cyan-500 hover:text-white"
+                      className="flex items-center justify-center p-2 text-black hover:bg-cyan-500 hover:text-white"
                       to="/updateUserProfile"
                     >
-                      Update
+                      Update Profile
                     </Link>
                     <button
                       type="button"
