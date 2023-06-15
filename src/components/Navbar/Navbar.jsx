@@ -13,7 +13,7 @@ const Navbar = () => {
   const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
   const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo.profilePictureURL);
+  console.log(userInfo.fullName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
@@ -271,10 +271,7 @@ const Navbar = () => {
 
             <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer ">
               <div className="relative absolute">
-                <div
-                  // type="button"
-                  className="flex peer text-black hover:text-indigo-100 p-2"
-                >
+                <div className="flex peer text-black hover:text-indigo-100 p-2">
                   {t('About')}
                   <AiFillCaretDown className="mt-1 ml-2" />
                 </div>
@@ -321,41 +318,23 @@ const Navbar = () => {
               </li>
             )}
             {userLogin.userlogin && (
-              <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md cursor-pointer p-1">
+              <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md hover:text-white cursor-pointer ">
                 <div className="relative absolute">
-                  <div className="flex peer text-white ">
-                    {userInfo.profilePictureURL !==
-                    'https://firebasestorage.googleapis.com/v0/b/fir-basics-9b143.appspot.com/o/J7e5bq3CfYMmny0zyVolKAs4RqD3?alt=media&token=a6de61ea-67bb-42ce-b863-0295891c9597' ? (
-                      <div className='flex justify-center items-center bg-cyan-400 rounded-md'>
-                        {' '}
-                        <img
-                          src={userInfo.profilePictureURL}
-                          alt="navbar"
-                          className="w-[3rem] h-[3rem] rounded-full overflow-hidden"
-                        />
-                        <p className=" text-black hover:text-white ml-4">
-                          {userInfo.fullName}
-                        </p>
-                        <AiFillCaretDown className="mt-1 ml-2" />
-                      </div>
-                    ) : (
-                      <div className="flex items-center bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
-                        <p>Admin</p>
-                        <AiFillCaretDown className="mt-1 ml-2" />
-                      </div>
-                    )}
+                  <div className="flex peer text-white p-2 bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
+                    {userInfo.fullName}
+                    <AiFillCaretDown className="mt-1 ml-2" />
                   </div>
 
-                  <div className="hidden absolute peer-hover:flex hover:flex w-[190px] flex-col bg-white drop-shadow-lg">
+                  <div className="hidden absolute peer-hover:flex hover:flex w-[120px] flex-col bg-white drop-shadow-lg">
                     <Link
-                      className="flex items-center justify-center p-2 text-black hover:bg-cyan-500 hover:text-white"
+                      className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
                       to="/updateUserProfile"
                     >
                       Update Profile
                     </Link>
                     <button
                       type="button"
-                      className="py-2 text-black hover:bg-cyan-500 hover:text-white"
+                      className="py-2 text-black hover:bg-cyan-400 hover:text-white"
                       onClick={logOut}
                     >
                       Log Out
