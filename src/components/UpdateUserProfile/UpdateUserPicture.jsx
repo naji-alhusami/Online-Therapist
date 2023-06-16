@@ -1,23 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
-import profilePicture from '../Images/ProfilePhoto.png';
+// import profilePicture from '../Images/ProfilePhoto.png';
 import ProfilePhoto from '../Images/profilePhoto.svg';
 
 function UpdateUserPicture({ userProfilePicture }) {
   const [displayPicture, setDisplayPicture] = useState(userProfilePicture);
-  const fileInputRef = useRef(null);
-  const targetInputRef = useRef(null);
+  // const fileInputRef = useRef(null);
+  // const targetInputRef = useRef(null);
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
+  // const handleButtonClick = () => {
+  //   fileInputRef.current.click();
+  // };
 
-  const handleFileInputChange = () => {
-    const file = fileInputRef.current.files[0];
-    if (file) {
-      targetInputRef.current.value = file.name;
-    }
-  };
+  // const handleFileInputChange = () => {
+  //   const file = fileInputRef.current.files[0];
+  //   if (file) {
+  //     targetInputRef.current.value = file.name;
+  //   }
+  // };
 
   const handlePictureError = () => {
     setDisplayPicture(ProfilePhoto);
@@ -32,7 +32,7 @@ function UpdateUserPicture({ userProfilePicture }) {
           onError={handlePictureError}
           className="w-[20rem] h-[23rem] rounded-full overflow-hidden"
         />
-        {displayPicture === ProfilePhoto && (
+        {/* {displayPicture === ProfilePhoto && (
           <div>
             <button
               type="button"
@@ -47,7 +47,7 @@ function UpdateUserPicture({ userProfilePicture }) {
                 />
               </div>
             </button>
-            <input
+           <input
               ref={fileInputRef}
               type="file"
               accept="image/*"
@@ -56,7 +56,7 @@ function UpdateUserPicture({ userProfilePicture }) {
             />
             <input ref={targetInputRef} type="text" />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

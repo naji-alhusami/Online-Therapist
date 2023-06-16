@@ -9,8 +9,13 @@ import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
-  // const userInfo = useSelector((state) => state.users.user);
-  // console.log(userInfo);
+
+  // const [targetInputValue, setTargetInputValue] = useState('');
+  // const handleTargetInputChange = (image) => {
+  //   setTargetInputValue(image);
+  //   console.log(image);
+  // };
+  
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
     educationLevel: userInfo.educationLevel || '',
@@ -78,7 +83,11 @@ const UpdateUserInfo = ({ userInfo }) => {
   return (
     <div>
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
-        <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} />
+        <UpdateUserPicture
+          userProfilePicture={userInfo.profilePictureURL}
+          // targetInputValue={targetInputValue}
+          // onTargetInputChange={handleTargetInputChange}
+        />
 
         <form onSubmit={handleSubmit(onSubmitform)}>
           <h1 className="text-4xl ml-5">
@@ -339,6 +348,7 @@ const UpdateUserInfo = ({ userInfo }) => {
               id="file-upload"
               accept="image/*"
               onChange={(event) => {
+                console.log(event.target.files[0]);
                 setState({
                   ...state,
                   profilePicture: event.target.files[0],
