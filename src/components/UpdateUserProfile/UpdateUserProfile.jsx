@@ -28,11 +28,7 @@ const UpdateUserProfile = () => {
 
         {/* div for picture and the fields */}
         <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
-          <UpdateUserPicture
-            userProfilePicture={userInfo.profilePictureURL}
-            //   setprofilepic={setprofilepic}
-            //   profilepic={userInfo.photoURL}
-          />
+          <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} />
 
           {/* div for all the fields */}
           <div>

@@ -13,7 +13,6 @@ const Navbar = () => {
   const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
   const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo.fullName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);

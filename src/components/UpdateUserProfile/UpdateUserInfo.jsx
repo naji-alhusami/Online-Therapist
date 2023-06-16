@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { updateProfile } from '../../features/users/usersSlice';
+// import { handleSendFile } from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
@@ -333,7 +334,10 @@ const UpdateUserInfo = ({ userInfo }) => {
             id="file-upload"
             accept="image/*"
             onChange={(event) => {
-              setState({ ...state, profilePicture: event.target.files[0] });
+              setState({
+                ...state,
+                profilePicture: event.target.files[0],
+              });
             }}
           />
         </div>
@@ -357,7 +361,6 @@ const UpdateUserInfo = ({ userInfo }) => {
                   },
                 })}
                 aria-invalid={errors.password ? 'true' : 'false'}
-                // value={state.password}
                 defaultValue=""
                 onChange={(event) =>
                   setState({ ...state, password: event.target.value })
