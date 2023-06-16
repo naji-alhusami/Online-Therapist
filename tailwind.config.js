@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        md: '865px', // Medium breakpoint starts at 768px
+      },
+    },
   },
   plugins: [],
 };

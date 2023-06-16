@@ -10,7 +10,6 @@ import LanguageButton from './LanguageButton';
 import Logo from '../Images/Logo.svg';
 
 const Navbar = () => {
-  const { t } = useTranslation();
   const userLogin = useSelector((state) => state.users);
   const userInfo = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
@@ -18,6 +17,7 @@ const Navbar = () => {
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
   const [showProfileInResponsive, setShowProfileInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
+  const { t } = useTranslation();
 
   // dispatch logout user:
   const logOut = (e) => {
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-screen sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
-      <div className="justify-between px-4 mx-auto  md:items-center md:flex md:px-8">
+      <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8">
         <div className="flex items-center md:block">
           <div className=" md:hidden">
             <button
@@ -82,13 +82,13 @@ const Navbar = () => {
         <div
           className={`flex-1 z-10 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
             showNavbarInResponsive
-              ? 'translate-x-full '
+              ? 'translate-x-full'
               : 'translate-x-[-250px]'
           }`}
         >
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
-            <div className="flex flex-col items-start  text-xl ">
-              <ul className="items-center justify-center  md:flex md:space-x-6 md:space-y-0">
+            <div className="flex flex-col items-start text-xl">
+              <ul className="items-center justify-center md:flex md:space-x-6 md:space-y-0">
                 <li className="my-2">
                   <Link
                     to="/"

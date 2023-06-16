@@ -8,7 +8,6 @@ import UpdateUserInfo from './UpdateUserInfo';
 const UpdateUserProfile = () => {
   const userLoading = useSelector((state) => state.users);
   const userInfo = useSelector((state) => state.users.user);
-  console.log(userInfo);
   const { t } = useTranslation();
 
   if (userLoading.loading) {
