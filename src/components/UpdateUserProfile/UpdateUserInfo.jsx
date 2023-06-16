@@ -11,7 +11,6 @@ const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
   // const userInfo = useSelector((state) => state.users.user);
   // console.log(userInfo);
-
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
     educationLevel: userInfo.educationLevel || '',

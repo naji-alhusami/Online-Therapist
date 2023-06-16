@@ -300,7 +300,7 @@ const Navbar = () => {
             {userLogin.userlogin && (
               <li className="hover:text-indigo-100 hover:bg-cyan-400 hover:rounded-md hover:text-white cursor-pointer ">
                 <div className="relative absolute">
-                  <div className="flex peer text-white p-2 bg-cyan-500 hover:bg-cyan-600 hover:text-white rounded-md">
+                  <div className="flex peer text-white p-2 bg-cyan-400 hover:bg-cyan-500 hover:text-white rounded-md">
                     {userInfo.fullName}
                     <AiFillCaretDown className="mt-1 ml-2" />
                   </div>
