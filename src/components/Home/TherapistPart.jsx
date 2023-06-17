@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import TherapistImg from '../Images/TherapistImg.svg';
+import AppointmentButton from './AppointmentButton';
 
 const TherapistPart = () => {
   const { t } = useTranslation();
@@ -23,18 +24,12 @@ const TherapistPart = () => {
           src={TherapistImg}
           alt="therapists"
         />
-        <p className="  lg:text-2xl font-seri text-sm lg:w-11/12 lg:pb-5 sm:w-full ">
+        <p className="lg:text-2xl font-seri text-sm lg:w-11/12 lg:pb-5 sm:w-full ">
           {t(
             'Tap into the worlds largest network of licensed, accredited, and experienced therapists who can help you with a range of issues including depression, anxiety, relationships, trauma, grief, and more. with our therapists, you get the same professionalism and quality you would expect from an in-office therapist, but with the ability to communicate whenever and however you want.'
           )}
         </p>
-
-        <button
-          type="button"
-          className="lg:text-xl md:text-base w-fit  lg:px-6 md:px-2  rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white "
-        >
-          {t('BOOK AN APPOINTMENT')}
-        </button>
+        <AppointmentButton />
       </div>
     </div>
   );
