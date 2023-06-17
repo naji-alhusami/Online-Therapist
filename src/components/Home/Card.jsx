@@ -1,6 +1,5 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import AppointmentButton from './PurchaseAppointmentButton';
 
 function Card({
   image,
@@ -14,17 +13,6 @@ function Card({
   contentPreview,
   titlePreview,
 }) {
-  // const loginState = useSelector((state) => state.loginStateHolderSlice);
-  // const navigate = useNavigate();
-
-  // function clickHolder(state, passedPrice) {
-  //   if (state) {
-  //     navigate('ticketpurchase', { state: passedPrice });
-  //   } else {
-  //     // eslint-disable-next-line no-alert
-  //     alert('We need you to login to continue.');
-  //   }
-  // }
 
   return (
     <div className="shadow-zinc-300 h-full w-full my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
@@ -42,13 +30,14 @@ function Card({
         {price}
       </h2>
       {buttonPreview && (
-        <button
-          // onClick={() => clickHolder(loginState, price)}
-          type="button"
-          className="font-poppins rounded-md box-border p-2 mb-4 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500"
-        >
-          {button}
-        </button>
+        // <button
+        //   onClick={() => clickHolder(loginState, price)}
+        //   type="button"
+        //   className="font-poppins rounded-md box-border p-2 mb-4 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500"
+        // >
+        //   {button}
+        // </button>
+        <AppointmentButton button={button} />
       )}
     </div>
   );

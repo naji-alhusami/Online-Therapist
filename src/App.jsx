@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
-import AppointmentErrorPart from './components/Home/AppointmentErrorPart';
+import ErrorPart from './components/Home/ErrorPart';
 import About from './components/About/About';
 import Team from './components/Team/Team';
 import Careers from './components/Careers/Careers';
@@ -55,7 +55,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/homeError" element={<AppointmentErrorPart />} />
+        <Route path="/homeError" element={<ErrorPart />} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
         <Route path="/careers" element={<Careers />} />

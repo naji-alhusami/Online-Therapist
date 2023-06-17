@@ -3,9 +3,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BackgroundImage from '../Images/Background.svg';
-import Error from '../Images/Error.jpg';
+import Error from '../Images/Error.png';
 
-const AppointmentErrorPart = () => {
+const ErrorPart = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -45,4 +45,4 @@ const AppointmentErrorPart = () => {
   );
 };
 
-export default AppointmentErrorPart;
+export default ErrorPart;
