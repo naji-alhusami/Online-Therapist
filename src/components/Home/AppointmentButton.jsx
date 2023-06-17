@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import AppointmentErrorPart from './AppointmentErrorPart';
-
 const AppointmentButton = () => {
   const userLogin = useSelector((state) => state.users);
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ const AppointmentButton = () => {
   };
 
   if (isError) {
-    return <AppointmentErrorPart />;
+    return navigate('/homeError');
   }
 
   return (
