@@ -147,8 +147,6 @@ export const updateProfile = createAsyncThunk(
         profilePicture,
         password,
       } = payload;
-      console.log(payload.profilePicture[0].name);
-      console.log(payload.profilePicture[0]);
 
       // Upload the profile picture to Firebase Storage
       const storageRef = ref(storage, id);

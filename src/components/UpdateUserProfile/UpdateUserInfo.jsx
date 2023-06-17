@@ -10,12 +10,6 @@ import UpdateUserPicture from './UpdateUserPicture';
 const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
 
-  // const [targetInputValue, setTargetInputValue] = useState('');
-  // const handleTargetInputChange = (image) => {
-  //   setTargetInputValue(image);
-  //   console.log(image);
-  // };
-  
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
     educationLevel: userInfo.educationLevel || '',
@@ -59,7 +53,6 @@ const UpdateUserInfo = ({ userInfo }) => {
 
   const onSubmitform = (userData) => {
     if (userData.password !== userInfo.password) {
-      console.log('Password is incorrect');
       return;
     }
 
@@ -348,7 +341,6 @@ const UpdateUserInfo = ({ userInfo }) => {
               id="file-upload"
               accept="image/*"
               onChange={(event) => {
-                console.log(event.target.files[0]);
                 setState({
                   ...state,
                   profilePicture: event.target.files[0],

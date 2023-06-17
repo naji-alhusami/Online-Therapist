@@ -14,14 +14,11 @@ const Counselor = () => {
           'Interested in joining our mental health platform? You decide your schedule and how much you want to work, we’ll take care of the client referrals and billing details!'
         )}
       </p>
-      <Link to="/requirements">
-        <button
-          type="submit"
-          className="lg:text-2xl md:text-1xl sm:text-sm rounded-md box-border py-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white w-2/6 m-auto "
-        >
-          {' '}
-          {t('LEARN MORE')}
-        </button>
+      <Link
+        to="/requirements"
+        className="lg:text-2xl md:text-1xl sm:text-sm rounded-md box-border py-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white w-2/6 m-auto "
+      >
+        {t('LEARN MORE')}
       </Link>
     </div>
   );

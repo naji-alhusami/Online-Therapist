@@ -35,7 +35,6 @@ const Singup = () => {
 
   const onSubmitform = async (userData) => {
     // check if async is required!!
-    console.log(userData);
 
     dispatch(
       signupUser({

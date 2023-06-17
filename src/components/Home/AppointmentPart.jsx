@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import BackgroundImage from '../Images/Background.svg';
 import Sofa from '../Images/Sofa.svg';
-import PurchaseAppointmentButton from './PurchaseAppointmentButton';
+import Button from '../ui/Button';
 
 const AppointmentPart = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const AppointmentPart = () => {
             {t('WE ARE HERE TO')}
           </p>
           <p className="text-5xl mb-5  md:text-7xl lg:text-9xl ">{t('HELP')}</p>
-          <PurchaseAppointmentButton />
+          <Button button="BOOK AN APPOINTMENT" />
         </div>
         <img
           className="h-2/3 w-2/3 md:h-1/3 md:w-1/3 lg:h-1/3 lg:w-1/3"

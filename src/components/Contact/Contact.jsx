@@ -14,41 +14,7 @@ const Options = [
 
 const Contact = () => {
   const { t } = useTranslation();
-  //   const navigate = useNavigate();
 
-  //   const [error, setError] = useState('');
-  //   const [formData, setFormData] = useState({
-  //     fullName: '',
-  //     email: '',
-  //     details: '',
-  //     selectedOption: '',
-  //   });
-  //   const dispatch = useDispatch();
-
-  //   const handleOptionChange = (option) => {
-  //     setFormData({ ...formData, selectedOption: option });
-  //   };
-
-  //   const handleChange = (e) => {
-  //     setFormData({ ...formData, [e.target.name]: e.target.value });
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     if (
-  //       formData.fullName === '' ||
-  //       formData.email === ' ' ||
-  //       formData.details === ' ' ||
-  //       formData.selectedOption === ' '
-  //     ) {
-  //       setError('All fields are required');
-  //     } else {
-  //       setError('');
-  //       dispatch(contactForm(formData));
-  //       navigate('/contact-thanks');
-  //     }
-  //     console.log(formData);
-  //   };
   return (
     <div>
       <div style={{ fontFamily: 'Poppins, sans-serif' }}>
