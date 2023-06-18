@@ -81,9 +81,7 @@ const Navbar = () => {
         {/* mobile screens */}
         <div
           className={`flex-1 z-10 justify-self-center bg-cyan-50 pt-4 pl-4 h-full text-base left-[-250px]  transition duration-300 transform fixed w-[250px] z-50 pb-3 md:block md:pb-0 md:mt-0 ${
-            showNavbarInResponsive
-              ? 'translate-x-full'
-              : 'translate-x-[-250px]'
+            showNavbarInResponsive ? 'translate-x-full' : 'translate-x-[-250px]'
           }`}
         >
           <div className="mt-3 space-y-2 lg:hidden md:hidden ">
@@ -208,6 +206,12 @@ const Navbar = () => {
                             >
                               Update Profile
                             </Link>
+                            <Link
+                              className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
+                              to="/Cards"
+                            >
+                              Payment Cards
+                            </Link>
                             <button
                               type="button"
                               className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
@@ -305,12 +309,18 @@ const Navbar = () => {
                     <AiFillCaretDown className="mt-1 ml-2" />
                   </div>
 
-                  <div className="hidden absolute peer-hover:flex hover:flex w-[120px] flex-col bg-white drop-shadow-lg">
+                  <div className="hidden absolute peer-hover:flex hover:flex w-[130px] flex-col bg-white drop-shadow-lg">
                     <Link
                       className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
                       to="/updateUserProfile"
                     >
                       Update Profile
+                    </Link>
+                    <Link
+                      className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
+                      to="/Cards"
+                    >
+                      Payment Cards
                     </Link>
                     <button
                       type="button"

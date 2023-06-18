@@ -16,6 +16,8 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Thanks from './components/Thanks/Thanks';
 import UpdateUserProfile from './components/UpdateUserProfile/UpdateUserProfile';
+import Cards from './components/PaymentCards/Cards';
+import AddCards from './components/PaymentCards/AddCards';
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
 // import Bookingradio from './Components/booking/Bookingradio';
@@ -66,6 +68,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/updateUserProfile" element={<UpdateUserProfile />} />
+        <Route path="/cards" element={<Cards />} />
+        <Route path="/addCards" element={<AddCards />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route element={<RequireAuth />} />
 
