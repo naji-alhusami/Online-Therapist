@@ -78,8 +78,6 @@ const UpdateUserInfo = ({ userInfo }) => {
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
         <UpdateUserPicture
           userProfilePicture={userInfo.profilePictureURL}
-          // targetInputValue={targetInputValue}
-          // onTargetInputChange={handleTargetInputChange}
         />
 
         <form onSubmit={handleSubmit(onSubmitform)}>
