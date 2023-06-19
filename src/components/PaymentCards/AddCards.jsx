@@ -2,13 +2,32 @@ import React, { useState } from 'react';
 
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
-
 import { BsFillCreditCardFill } from 'react-icons/bs';
 // import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
+
+import getCitiesOfCountry from './City';
+import { getAllCountries, 
+  // getCountryByCode 
+} from './Country';
 
 const AddCards = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
+  const [cities, setCities] = useState([]);
+  const countries = getAllCountries().map((country) => ({
+    value: country.isoCode,
+    label: country.name,
+  }));
+
+  const handleCountryChange = (e) => {
+    const countryName = e.target.value;
+    const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
+        value: city.name,
+        label: city.name,
+    }));
+    setCities(citiesOfCountry);
+};
+
   const {
     register,
     // handleSubmit,
@@ -134,12 +153,10 @@ const AddCards = () => {
             </div>
           </div>
 
-          <div className='flex flex-row w-full'>
-            {/* Expiry Date */}
+          {/* Expiry Date */}
+          <div className="flex flex-row w-full">
             <div className="w-full flex flex-col mb-5 mr-5">
-              <label className=" text-gray-400 text-xl">
-                Expiry Date
-              </label>
+              <label className=" text-gray-400 text-xl">Expiry Date</label>
               <input
                 type="text"
                 placeholder="MM / YY"
@@ -157,9 +174,7 @@ const AddCards = () => {
 
             {/* CVV Code */}
             <div className="relative w-full flex flex-col mb-5">
-              <label className=" text-gray-400 text-xl">
-                CVV Code
-              </label>
+              <label className=" text-gray-400 text-xl">CVV Code</label>
               <input
                 type="text"
                 placeholder="***"
@@ -199,6 +214,40 @@ const AddCards = () => {
             </div>
           </div>
 
+          {/* Country */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">Country</label>
+            <select
+              placeholder="United States"
+              {...register('country', {
+                onChange: (e) => {
+                  handleCountryChange(e);
+              },
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+            >
+              {countries.map((item, key) => {
+                return (
+                  <option key={key.id} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
           {/* ZIP Code */}
           <div className="flex flex-col mb-5">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
@@ -217,6 +266,39 @@ const AddCards = () => {
               type="text"
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
             />
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* City */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">City</label>
+            <select
+              placeholder="California"
+              
+              {...register('fullName', {
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+            >
+              {cities.map((item, key) => {
+                return (
+                  <option key={key.id} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </select>
             <div className="mt-2">
               {errors.fullName && (
                 <p className="text-red-600">{errors.fullName.message}</p>

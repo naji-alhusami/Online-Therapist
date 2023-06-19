@@ -1,4 +1,4 @@
-import cityList from '../../../public/cities.json';
+import cityList from './cities.json';
 
 export default function getCitiesOfCountry(countryCode) {
   if (!countryCode) return [];

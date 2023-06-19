@@ -1,4 +1,4 @@
-import countryList from '../../../public/country.json';
+import countryList from './countries.json';
 
 function getAllCountries() {
   return countryList;
