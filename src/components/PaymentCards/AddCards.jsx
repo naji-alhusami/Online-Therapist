@@ -1,5 +1,5 @@
 import React from 'react';
-
+import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
 const AddCards = () => {
@@ -9,6 +9,11 @@ const AddCards = () => {
     // watch,
     formState: { errors },
   } = useForm();
+
+  const supportedCardClass =
+    'w-full border border-cyan-400 px-5 text-center';
+  const supportedCardTextClass =
+    'mt-1 mb-2 whitespace-wrap md:text-base lg:text-lg text-cyan-500';
 
   return (
     <div className=" m-16">
@@ -21,8 +26,47 @@ const AddCards = () => {
       </p>
       <div className="flex flex-col mt-28 ">
         <form>
+          {/* Supported Card Types */}
+          <div className="flex flex-col mb-5">
+            <label className=" text-gray-400 text-xl">
+              Supported Card Types
+            </label>
+            <div className="flex mt-1">
+              <div
+                className={clsx(
+                  `${supportedCardClass} rounded-e-none`
+                    // cardTypeClass === 'visa' && 'bg-cyan'
+                )}
+              >
+                <span
+                  className={clsx(
+                    `${supportedCardTextClass}`
+                    // cardTypeClass === 'visa' && 'text-white'
+                  )}
+                >
+                  Visa
+                </span>
+              </div>
+              <div
+                className={clsx(
+                  `${supportedCardClass} rounded-s-none`
+                  //   cardTypeClass === 'mastercard' && 'bg-cyan'
+                )}
+              >
+                <span
+                  className={clsx(
+                    `${supportedCardTextClass}`
+                    // cardTypeClass === 'mastercard' && 'text-white'
+                  )}
+                >
+                  Mastercard
+                </span>
+              </div>
+            </div>
+          </div>
+
           {/* Name On Card */}
-          <div className="flex flex-col ">
+          <div className="flex flex-col mb-5">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
               Name On Card
             </label>
@@ -47,7 +91,7 @@ const AddCards = () => {
           </div>
 
           {/* ZIP Code */}
-          <div className="flex flex-col ">
+          <div className="flex flex-col mb-5">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
               ZIP Code
             </label>
@@ -72,7 +116,7 @@ const AddCards = () => {
           </div>
 
           {/* Address */}
-          <div className="flex flex-col ">
+          <div className="flex flex-col mb-5">
             <label className="mr-[6.8rem] text-gray-400 text-xl">Address</label>
             <input
               placeholder="509 Adele Mills Suite 833"
