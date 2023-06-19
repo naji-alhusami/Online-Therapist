@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 
 import { BsFillCreditCardFill } from 'react-icons/bs';
 // import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
-// import Input from '../ui/Input';
 
 const AddCards = () => {
-  const [ccNumber, setCcNumber] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
   const {
     register,
     // handleSubmit,
@@ -16,7 +16,7 @@ const AddCards = () => {
     formState: { errors },
   } = useForm();
 
-  const formatAndSetCcNumber = (e) => {
+  const formatAndSetCardNumber = (e) => {
     const inputVal = e.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
     let inputNumbersOnly = inputVal.replace(/\D/g, ''); // Get only digits
 
@@ -33,7 +33,27 @@ const AddCards = () => {
       spacedNumber = splits.join(' '); // Join all the splits with an empty space
     }
 
-    setCcNumber(spacedNumber); // Set the new CC number
+    setCardNumber(spacedNumber); // Set the new CC number
+  };
+
+  const formatAndSetExpiryDate = (e) => {
+    const inputVal = e.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
+    let inputNumbersOnly = inputVal.replace(/\D/g, ''); // Get only digits
+
+    // If entered value has a length greater than 4, take only the first 4 digits
+    if (inputNumbersOnly.length > 4) {
+      inputNumbersOnly = inputNumbersOnly.substr(0, 4);
+    }
+
+    let spacedNumber = '';
+    if (inputNumbersOnly.length > 2) {
+      // Insert a slash (/) between each pair of numbers
+      spacedNumber = inputNumbersOnly.replace(/(\d{2})(\d{2})$/, '$1 / $2');
+    } else {
+      spacedNumber = inputNumbersOnly;
+    }
+
+    setExpiryDate(spacedNumber); // Set the new expiry date
   };
 
   const supportedCardClass = 'w-full border border-cyan-400 px-5 text-center';
@@ -99,8 +119,8 @@ const AddCards = () => {
               <input
                 type="text"
                 placeholder="4287 8874 9511 3263"
-                value={ccNumber}
-                onChange={formatAndSetCcNumber}
+                value={cardNumber}
+                onChange={formatAndSetCardNumber}
                 className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -111,6 +131,46 @@ const AddCards = () => {
               {errors.fullName && (
                 <p className="text-red-600">{errors.fullName.message}</p>
               )}
+            </div>
+          </div>
+
+          <div className='flex flex-row w-full'>
+            {/* Expiry Date */}
+            <div className="w-full flex flex-col mb-5 mr-5">
+              <label className=" text-gray-400 text-xl">
+                Expiry Date
+              </label>
+              <input
+                type="text"
+                placeholder="MM / YY"
+                value={expiryDate}
+                onChange={formatAndSetExpiryDate}
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+
+              <div className="mt-2 ">
+                {errors.fullName && (
+                  <p className="text-red-600">{errors.fullName.message}</p>
+                )}
+              </div>
+            </div>
+
+            {/* CVV Code */}
+            <div className="relative w-full flex flex-col mb-5">
+              <label className=" text-gray-400 text-xl">
+                CVV Code
+              </label>
+              <input
+                type="text"
+                placeholder="***"
+                maxLength="3"
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+              <div className="mt-2 ">
+                {errors.fullName && (
+                  <p className="text-red-600">{errors.fullName.message}</p>
+                )}
+              </div>
             </div>
           </div>
 
