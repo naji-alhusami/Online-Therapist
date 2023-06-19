@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
+import { BsFillCreditCardFill } from 'react-icons/bs';
+// import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
+// import Input from '../ui/Input';
+
 const AddCards = () => {
+  const [ccNumber, setCcNumber] = useState('');
   const {
     register,
     // handleSubmit,
@@ -10,8 +16,27 @@ const AddCards = () => {
     formState: { errors },
   } = useForm();
 
-  const supportedCardClass =
-    'w-full border border-cyan-400 px-5 text-center';
+  const formatAndSetCcNumber = (e) => {
+    const inputVal = e.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
+    let inputNumbersOnly = inputVal.replace(/\D/g, ''); // Get only digits
+
+    if (inputNumbersOnly.length > 16) {
+      // If entered value has a length greater than 16 then take only the first 16 digits
+      inputNumbersOnly = inputNumbersOnly.substr(0, 16);
+    }
+
+    // Get nd array of 4 digits per an element EX: ["4242", "4242", ...]
+    const splits = inputNumbersOnly.match(/.{1,4}/g);
+
+    let spacedNumber = '';
+    if (splits) {
+      spacedNumber = splits.join(' '); // Join all the splits with an empty space
+    }
+
+    setCcNumber(spacedNumber); // Set the new CC number
+  };
+
+  const supportedCardClass = 'w-full border border-cyan-400 px-5 text-center';
   const supportedCardTextClass =
     'mt-1 mb-2 whitespace-wrap md:text-base lg:text-lg text-cyan-500';
 
@@ -35,7 +60,7 @@ const AddCards = () => {
               <div
                 className={clsx(
                   `${supportedCardClass} rounded-e-none`
-                    // cardTypeClass === 'visa' && 'bg-cyan'
+                  // cardTypeClass === 'visa' && 'bg-cyan'
                 )}
               >
                 <span
@@ -65,6 +90,30 @@ const AddCards = () => {
             </div>
           </div>
 
+          {/* Card Number */}
+          <div className="relative flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">
+              Card Number
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="4287 8874 9511 3263"
+                value={ccNumber}
+                onChange={formatAndSetCcNumber}
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <BsFillCreditCardFill className="text-gray-400 text-sm md:text-base lg:text-lg" />
+              </span>
+            </div>
+            <div className="mt-2 ">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
           {/* Name On Card */}
           <div className="flex flex-col mb-5">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
@@ -81,7 +130,7 @@ const AddCards = () => {
               })}
               aria-invalid={errors.fullName ? 'true' : 'false'}
               type="text"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 lg:w-[16rem]"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             />
             <div className="mt-2">
               {errors.fullName && (
@@ -106,7 +155,7 @@ const AddCards = () => {
               })}
               aria-invalid={errors.fullName ? 'true' : 'false'}
               type="text"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 lg:w-[16rem]"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
             />
             <div className="mt-2">
               {errors.fullName && (
@@ -129,7 +178,7 @@ const AddCards = () => {
               })}
               aria-invalid={errors.fullName ? 'true' : 'false'}
               type="text"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 lg:w-[16rem]"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
             />
             <div className="mt-2">
               {errors.fullName && (
