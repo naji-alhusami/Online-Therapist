@@ -82,81 +82,66 @@ const AddCardForm = () => {
     'mt-1 mb-2 whitespace-wrap md:text-base lg:text-lg text-cyan-500';
 
   return (
-    <div className="flex flex-col mt-28 ">
-      <form>
+    <form>
+      <div className="flex flex-col mt-28 lg:flex lg:flex-row lg:mr-12  ">
+        {/* Start first div from Supported Card Types to Name On Card */}
         {/* Supported Card Types */}
-        <div className="flex flex-col mb-5">
-          <label className=" text-gray-400 text-xl">Supported Card Types</label>
-          <div className="flex mt-1">
-            <div
-              className={clsx(
-                `${supportedCardClass} rounded-e-none`
-                // cardTypeClass === 'visa' && 'bg-cyan'
-              )}
-            >
-              <span
+        <div className="flex flex-col lg:mr-12">
+          <div className="flex flex-col mb-5">
+            <label className=" text-gray-400 text-xl">
+              Supported Card Types
+            </label>
+            <div className="flex mt-1">
+              <div
                 className={clsx(
-                  `${supportedCardTextClass}`
-                  // cardTypeClass === 'visa' && 'text-white'
+                  `${supportedCardClass} rounded-e-none`
+                  // cardTypeClass === 'visa' && 'bg-cyan'
                 )}
               >
-                Visa
-              </span>
-            </div>
-            <div
-              className={clsx(
-                `${supportedCardClass} rounded-s-none`
-                //   cardTypeClass === 'mastercard' && 'bg-cyan'
-              )}
-            >
-              <span
+                <span
+                  className={clsx(
+                    `${supportedCardTextClass}`
+                    // cardTypeClass === 'visa' && 'text-white'
+                  )}
+                >
+                  Visa
+                </span>
+              </div>
+              <div
                 className={clsx(
-                  `${supportedCardTextClass}`
-                  // cardTypeClass === 'mastercard' && 'text-white'
+                  `${supportedCardClass} rounded-s-none`
+                  //   cardTypeClass === 'mastercard' && 'bg-cyan'
                 )}
               >
-                Mastercard
-              </span>
+                <span
+                  className={clsx(
+                    `${supportedCardTextClass}`
+                    // cardTypeClass === 'mastercard' && 'text-white'
+                  )}
+                >
+                  Mastercard
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Card Number */}
-        <div className="relative flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">
-            Card Number
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="4287 8874 9511 3263"
-              value={cardNumber}
-              onChange={formatAndSetCardNumber}
-              className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
-            />
-            <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-              <BsFillCreditCardFill className="text-gray-400 text-sm md:text-base lg:text-lg" />
-            </span>
-          </div>
-          <div className="mt-2 ">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
-          </div>
-        </div>
-
-        {/* Expiry Date */}
-        <div className="flex flex-row w-full">
-          <div className="w-full flex flex-col mb-5 mr-5">
-            <label className=" text-gray-400 text-xl">Expiry Date</label>
-            <input
-              type="text"
-              placeholder="MM / YY"
-              value={expiryDate}
-              onChange={formatAndSetExpiryDate}
-              className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
-            />
-
+          {/* Card Number */}
+          <div className="relative flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">
+              Card Number
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="4287 8874 9511 3263"
+                value={cardNumber}
+                onChange={formatAndSetCardNumber}
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <BsFillCreditCardFill className="text-gray-400 text-sm md:text-base lg:text-lg" />
+              </span>
+            </div>
             <div className="mt-2 ">
               {errors.fullName && (
                 <p className="text-red-600">{errors.fullName.message}</p>
@@ -164,161 +149,186 @@ const AddCardForm = () => {
             </div>
           </div>
 
-          {/* CVV Code */}
-          <div className="relative w-full flex flex-col mb-5">
-            <label className=" text-gray-400 text-xl">CVV Code</label>
+          {/* Expiry Date */}
+          <div className="flex flex-row w-full">
+            <div className="w-full flex flex-col mb-5 mr-5">
+              <label className=" text-gray-400 text-xl">Expiry Date</label>
+              <input
+                type="text"
+                placeholder="MM / YY"
+                value={expiryDate}
+                onChange={formatAndSetExpiryDate}
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+
+              <div className="mt-2 ">
+                {errors.fullName && (
+                  <p className="text-red-600">{errors.fullName.message}</p>
+                )}
+              </div>
+            </div>
+
+            {/* CVV Code */}
+            <div className="relative w-full flex flex-col mb-5">
+              <label className=" text-gray-400 text-xl">CVV Code</label>
+              <input
+                type="text"
+                placeholder="***"
+                maxLength="3"
+                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              />
+              <div className="mt-2 ">
+                {errors.fullName && (
+                  <p className="text-red-600">{errors.fullName.message}</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Name On Card */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">
+              Name On Card
+            </label>
             <input
+              placeholder="Irene Ramos"
+              {...register('fullName', {
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
               type="text"
-              placeholder="***"
-              maxLength="3"
-              className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             />
-            <div className="mt-2 ">
+            <div className="mt-2">
               {errors.fullName && (
                 <p className="text-red-600">{errors.fullName.message}</p>
               )}
             </div>
           </div>
         </div>
+        {/* finish first div from Supported Card Types to Name On Card */}
 
-        {/* Name On Card */}
-        <div className="flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">
-            Name On Card
-          </label>
-          <input
-            placeholder="Irene Ramos"
-            {...register('fullName', {
-              required: 'Please Enter Your Full Name',
-              maxLength: {
-                value: 25,
-                message: 'Full Name should not exceed 25 characters',
-              },
-            })}
-            aria-invalid={errors.fullName ? 'true' : 'false'}
-            type="text"
-            className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
-          />
-          <div className="mt-2">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
+        <div className="flex flex-col">
+          {/* Country */}
+          <div className="flex flex-col mb-2">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">Country</label>
+            <select
+              placeholder="United States"
+              {...register('country', {
+                onChange: (e) => {
+                  handleCountryChange(e);
+                },
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+            >
+              {countries.map((item, key) => {
+                return (
+                  <option key={key.id} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* ZIP Code */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">
+              ZIP Code
+            </label>
+            <input
+              placeholder="17121-1300"
+              {...register('fullName', {
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+            />
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* City */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">City</label>
+            <select
+              placeholder="California"
+              {...register('fullName', {
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+            >
+              {cities.map((item, key) => {
+                return (
+                  <option key={key.id} value={item.value}>
+                    {item.label}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Address */}
+          <div className="flex flex-col mb-5">
+            <label className="mr-[6.8rem] text-gray-400 text-xl">Address</label>
+            <input
+              placeholder="509 Adele Mills Suite 833"
+              {...register('fullName', {
+                required: 'Please Enter Your Full Name',
+                maxLength: {
+                  value: 25,
+                  message: 'Full Name should not exceed 25 characters',
+                },
+              })}
+              aria-invalid={errors.fullName ? 'true' : 'false'}
+              type="text"
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+            />
+            <div className="mt-2">
+              {errors.fullName && (
+                <p className="text-red-600">{errors.fullName.message}</p>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Country */}
-        <div className="flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">Country</label>
-          <select
-            placeholder="United States"
-            {...register('country', {
-              onChange: (e) => {
-                handleCountryChange(e);
-              },
-              required: 'Please Enter Your Full Name',
-              maxLength: {
-                value: 25,
-                message: 'Full Name should not exceed 25 characters',
-              },
-            })}
-            aria-invalid={errors.fullName ? 'true' : 'false'}
-            type="text"
-            className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
-          >
-            {countries.map((item, key) => {
-              return (
-                <option key={key.id} value={item.value}>
-                  {item.label}
-                </option>
-              );
-            })}
-          </select>
-          <div className="mt-2">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
-          </div>
-        </div>
-
-        {/* ZIP Code */}
-        <div className="flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">ZIP Code</label>
-          <input
-            placeholder="17121-1300"
-            {...register('fullName', {
-              required: 'Please Enter Your Full Name',
-              maxLength: {
-                value: 25,
-                message: 'Full Name should not exceed 25 characters',
-              },
-            })}
-            aria-invalid={errors.fullName ? 'true' : 'false'}
-            type="text"
-            className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
-          />
-          <div className="mt-2">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
-          </div>
-        </div>
-
-        {/* City */}
-        <div className="flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">City</label>
-          <select
-            placeholder="California"
-            {...register('fullName', {
-              required: 'Please Enter Your Full Name',
-              maxLength: {
-                value: 25,
-                message: 'Full Name should not exceed 25 characters',
-              },
-            })}
-            aria-invalid={errors.fullName ? 'true' : 'false'}
-            type="text"
-            className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
-          >
-            {cities.map((item, key) => {
-              return (
-                <option key={key.id} value={item.value}>
-                  {item.label}
-                </option>
-              );
-            })}
-          </select>
-          <div className="mt-2">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
-          </div>
-        </div>
-
-        {/* Address */}
-        <div className="flex flex-col mb-5">
-          <label className="mr-[6.8rem] text-gray-400 text-xl">Address</label>
-          <input
-            placeholder="509 Adele Mills Suite 833"
-            {...register('fullName', {
-              required: 'Please Enter Your Full Name',
-              maxLength: {
-                value: 25,
-                message: 'Full Name should not exceed 25 characters',
-              },
-            })}
-            aria-invalid={errors.fullName ? 'true' : 'false'}
-            type="text"
-            className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
-          />
-          <div className="mt-2">
-            {errors.fullName && (
-              <p className="text-red-600">{errors.fullName.message}</p>
-            )}
-          </div>
-        </div>
-        <Button button="Add Card" />
-      </form>
-    </div>
+      </div>
+      <Button button="Add Card" />
+    </form>
   );
 };
 

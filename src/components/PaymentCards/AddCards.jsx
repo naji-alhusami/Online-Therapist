@@ -14,9 +14,13 @@ const AddCards = () => {
         Please make sure all of the info you enter are the same as your card
         registration info.
       </p>
-      <AddCardForm />
-      <img src={masterCard} alt="Master Card" />
-      <img src={visaCard} alt="Visa Card" />
+      <div className="flex flex-col lg:flex lg:flex-row">
+        <AddCardForm />
+        <div className='flex flex-col mt-16'>
+          <img src={masterCard} alt="Master Card" />
+          <img src={visaCard} alt="Visa Card" />
+        </div>
+      </div>
     </div>
   );
 };
