@@ -76,9 +76,7 @@ const UpdateUserInfo = ({ userInfo }) => {
   return (
     <div>
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
-        <UpdateUserPicture
-          userProfilePicture={userInfo.profilePictureURL}
-        />
+        <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} />
 
         <form onSubmit={handleSubmit(onSubmitform)}>
           <h1 className="text-4xl ml-5">
