@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
-// import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
+import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 
 import getCitiesOfCountry from './City';
 import {
@@ -16,6 +16,10 @@ const AddCardForm = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cities, setCities] = useState([]);
+
+  const [cardType, setCardType] = useState(null);
+  const [cardTypeClass, setCardTypeClass] = useState('');
+
   const countries = getAllCountries().map((country) => ({
     value: country.isoCode,
     label: country.name,
@@ -33,12 +37,32 @@ const AddCardForm = () => {
   const {
     register,
     // handleSubmit,
-    // watch,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const formatAndSetCardNumber = (e) => {
-    const inputVal = e.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
+  const cardNumberData = watch('cardNumber');
+
+  useEffect(() => {
+    if (!cardNumberData) {
+      setCardType(<BsFillCreditCardFill />);
+      setCardTypeClass('');
+      return;
+    }
+    if (cardNumberData.startsWith('4')) {
+      setCardType(<FaCcVisa />);
+      setCardTypeClass('visa');
+    } else if (cardNumberData.startsWith('5')) {
+      setCardType(<FaCcMastercard />);
+      setCardTypeClass('mastercard');
+    } else {
+      setCardType(<BsFillCreditCardFill />);
+      setCardTypeClass('');
+    }
+  }, [cardNumberData]);
+
+  const formatAndSetCardNumber = (event) => {
+    const inputVal = event.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
     let inputNumbersOnly = inputVal.replace(/\D/g, ''); // Get only digits
 
     if (inputNumbersOnly.length > 16) {
@@ -94,14 +118,14 @@ const AddCardForm = () => {
             <div className="flex mt-1">
               <div
                 className={clsx(
-                  `${supportedCardClass} rounded-e-none`
-                  // cardTypeClass === 'visa' && 'bg-cyan'
+                  `${supportedCardClass} rounded-e-none`,
+                  cardTypeClass === 'visa' && 'bg-cyan-400'
                 )}
               >
                 <span
                   className={clsx(
-                    `${supportedCardTextClass}`
-                    // cardTypeClass === 'visa' && 'text-white'
+                    `${supportedCardTextClass}`,
+                    cardTypeClass === 'visa' && 'text-white'
                   )}
                 >
                   Visa
@@ -109,14 +133,14 @@ const AddCardForm = () => {
               </div>
               <div
                 className={clsx(
-                  `${supportedCardClass} rounded-s-none`
-                  //   cardTypeClass === 'mastercard' && 'bg-cyan'
+                  `${supportedCardClass} rounded-s-none`,
+                  cardTypeClass === 'mastercard' && 'bg-cyan-400'
                 )}
               >
                 <span
                   className={clsx(
-                    `${supportedCardTextClass}`
-                    // cardTypeClass === 'mastercard' && 'text-white'
+                    `${supportedCardTextClass}`,
+                    cardTypeClass === 'mastercard' && 'text-white'
                   )}
                 >
                   Mastercard
@@ -132,14 +156,22 @@ const AddCardForm = () => {
             </label>
             <div className="relative">
               <input
+                {...register('cardNumber', {
+                  onChange: (event) => {
+                    formatAndSetCardNumber(event);
+                  },
+                })}
                 type="text"
+                // onChange={(e) => {
+                //   formatAndSetCardNumber(e);
+                // }}
                 placeholder="4287 8874 9511 3263"
                 value={cardNumber}
-                onChange={formatAndSetCardNumber}
                 className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <BsFillCreditCardFill className="text-gray-400 text-sm md:text-base lg:text-lg" />
+                {cardType}
+                {/* <BsFillCreditCardFill className="text-gray-400 text-sm md:text-base lg:text-lg" /> */}
               </span>
             </div>
             <div className="mt-2 ">
@@ -232,10 +264,10 @@ const AddCardForm = () => {
               type="text"
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             >
-              {countries.map((item, key) => {
+              {countries.map((country) => {
                 return (
-                  <option key={key.id} value={item.value}>
-                    {item.label}
+                  <option key={country.value}>
+                    {country.label}
                   </option>
                 );
               })}
@@ -288,10 +320,10 @@ const AddCardForm = () => {
               type="text"
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             >
-              {cities.map((item, key) => {
+              {cities.map((city, key) => {
                 return (
-                  <option key={key.id} value={item.value}>
-                    {item.label}
+                  <option key={key.id} value={city.value}>
+                    {city.label}
                   </option>
                 );
               })}
