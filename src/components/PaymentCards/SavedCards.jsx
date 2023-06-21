@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { MdOutlinePayment } from 'react-icons/md';
 import Button from '../ui/Button';
 
-const Cards = () => {
+const SavedCards = () => {
   const { t } = useTranslation();
 
   return (
@@ -27,4 +27,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default SavedCards;

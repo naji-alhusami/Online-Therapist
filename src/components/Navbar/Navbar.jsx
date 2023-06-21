@@ -208,7 +208,7 @@ const Navbar = () => {
                             </Link>
                             <Link
                               className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
-                              to="/Cards"
+                              to="/savedCards"
                             >
                               Payment Cards
                             </Link>
@@ -318,7 +318,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
-                      to="/Cards"
+                      to="/savedCards"
                     >
                       Payment Cards
                     </Link>

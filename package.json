@@ -24,6 +24,8 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "jquery": "^3.6.3",
     "react": "^18.2.0",
+    "react-credit-card": "^0.20.0",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.3",
     "react-i18next": "^12.1.5",
