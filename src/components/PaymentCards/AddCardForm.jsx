@@ -141,6 +141,7 @@ const AddCardForm = ({ values, setValues }) => {
   const dispatch = useDispatch();
   const onSubmitForm = (cardData) => {
     console.log(cardData);
+    console.log('clicked');
 
     dispatch(
       addCreditCard({
@@ -433,7 +434,7 @@ const AddCardForm = ({ values, setValues }) => {
       </div>
       {/* <Button button="Add Card" /> */}
       <button
-        type="button"
+        type="submit"
         className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
       >
         Add Card
