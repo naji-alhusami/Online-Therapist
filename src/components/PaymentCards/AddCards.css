@@ -1,0 +1,4 @@
+.card-container.flip {
+  transform: rotateY(180deg);
+  /* Additional styles for the flipped card */
+}

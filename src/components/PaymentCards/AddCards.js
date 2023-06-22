@@ -5,11 +5,12 @@ import AddCardForm from './AddCardForm';
 import 'react-credit-cards/es/styles-compiled.css';
 
 const AddCards = () => {
-  const [cardValues, setCardValues] = useState({
-    cardName: '',
-    cardNumber: '',
-    expiryDate: '',
+  const [values, setValues] = useState({
+    name: '',
+    number: '',
+    expiration: '',
     cvc: '',
+    focus: '',
   });
 
   return (
@@ -22,25 +23,25 @@ const AddCards = () => {
         registration info.
       </p>
       <div className="flex flex-col lg:flex lg:flex-row">
-        <AddCardForm cardValues={cardValues} setCardValues={setCardValues} />
+        <AddCardForm values={values} setValues={setValues} />
         <div className="flex flex-col mt-16">
-          <div
+          {/* <div
             className="w-[22rem] h-[12rem] bg-gray-200 rounded-lg p-4"
-            style={{ perspective: '1000px' }}
+            // style={{ perspective: '1000px' }}
           >
             <div
               className="w-full h-full bg-cyan-200 rounded-lg px-4 py-3 transform rotateY-20"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <Cards
-                className="relative"
-                name={cardValues.cardName}
-                number={cardValues.cardNumber}
-                expiry={cardValues.expiryDate}
-                cvc={cardValues.cvc}
-              />
-            </div>
-          </div>
+              // style={{ transformStyle: 'preserve-3d' }}
+            > */}
+
+          <Cards
+            className="relative"
+            name={values.name}
+            number={values.number}
+            expiry={values.expiration}
+            cvc={values.cvc}
+            focused={values.focus}
+          />
         </div>
       </div>
     </div>

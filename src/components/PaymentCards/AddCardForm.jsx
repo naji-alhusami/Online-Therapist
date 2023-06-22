@@ -12,14 +12,11 @@ import {
 } from './Country';
 import Button from '../ui/Button';
 
-const AddCardForm = ({ cardValues, setCardValues }) => {
-  console.log(cardValues);
-  //   const [cardNumber, setCardNumber] = useState('');
-  //   const [expiryDate, setExpiryDate] = useState('');
+const AddCardForm = ({ values, setValues }) => {
+  console.log(values);
   const [cities, setCities] = useState([]);
   const [cardType, setCardType] = useState(null);
   const [cardTypeClass, setCardTypeClass] = useState('');
-  //   const [cvvCode, setCVVCode] = useState('');
   const [zipCode, setZIPCode] = useState('');
   const [isCardNumberValid, setCardNumberValid] = useState(false);
 
@@ -44,7 +41,7 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
     formState: { errors },
   } = useForm();
 
-  const cardNumberData = watch('cardNumber');
+  const cardNumberData = watch('number');
 
   useEffect(() => {
     if (!cardNumberData) {
@@ -67,17 +64,24 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
   const cvvCodeFormat = (event) => {
     const inputVal = event.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
     const inputNumbersOnly = inputVal.replace(/\D/g, ''); // Get only digits
-    setCardValues((prevCardValues) => ({
+    setValues((prevCardValues) => ({
       ...prevCardValues,
       cvc: inputNumbersOnly,
     }));
   };
 
+  const handleFocus = (event) => {
+    setValues((prevCardValues) => ({
+      ...prevCardValues,
+      focus: event.target.name,
+    }));
+  };
+
   const handleCardNameChange = (event) => {
     const inputVal = event.target.value;
-    setCardValues((prevCardValues) => ({
+    setValues((prevCardValues) => ({
       ...prevCardValues,
-      cardName: inputVal,
+      name: inputVal,
     }));
   };
 
@@ -104,9 +108,9 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
       spacedNumber = splits.join(' '); // Join all the splits with an empty space
     }
 
-    setCardValues((prevCardValues) => ({
+    setValues((prevCardValues) => ({
       ...prevCardValues,
-      cardNumber: spacedNumber,
+      number: spacedNumber,
     }));
     // setCardNumber(spacedNumber); // Set the new CC number
   };
@@ -123,14 +127,14 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
     let spacedNumber = '';
     if (inputNumbersOnly.length > 2) {
       // Insert a slash (/) between each pair of numbers
-      spacedNumber = inputNumbersOnly.replace(/(\d{2})(\d{2})$/, '$1 / $2');
+      spacedNumber = inputNumbersOnly.replace(/(\d{2})(\d{2})$/, '$1/$2');
     } else {
       spacedNumber = inputNumbersOnly;
     }
 
-    setCardValues((prevCardValues) => ({
+    setValues((prevCardValues) => ({
       ...prevCardValues,
-      expiryDate: spacedNumber,
+      expiration: spacedNumber,
     }));
     // setExpiryDate(spacedNumber); // Set the new expiry date
   };
@@ -190,7 +194,7 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
             </label>
             <div className="relative">
               <input
-                {...register('cardNumber', {
+                {...register('number', {
                   onChange: (event) => {
                     formatAndSetCardNumber(event);
                     setCardNumberValid(event.target.validity.valid);
@@ -206,11 +210,12 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
                   },
                 })}
                 aria-invalid={
-                  errors.cardNumber || !isCardNumberValid ? 'true' : 'false'
+                  errors.number || !isCardNumberValid ? 'true' : 'false'
                 }
                 type="text"
                 placeholder="4287 8874 9511 3263"
-                value={cardValues.cardNumber}
+                value={values.number}
+                onFocus={handleFocus}
                 className={`w-full bg-white border ${
                   errors.cardNumber || !isCardNumberValid
                     ? 'border-grayish-cyan'
@@ -222,8 +227,8 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
               </span>
             </div>
             <div className="mt-2 ">
-              {errors.cardNumber && (
-                <p className="text-red-600">{errors.cardNumber.message}</p>
+              {errors.number && (
+                <p className="text-red-600">{errors.number.message}</p>
               )}
             </div>
           </div>
@@ -233,42 +238,44 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
             <div className="w-full flex flex-col mb-5 mr-5">
               <label className=" text-gray-400 text-xl">Expiry Date</label>
               <input
-                {...register('expiryDate', {
-                  required: 'Please Enter Your CVV Code',
+                {...register('expiration', {
+                  required: 'Please Enter Your Expiration Date Of Your Card',
                 })}
-                aria-invalid={errors.expiryDate ? 'true' : 'false'}
+                aria-invalid={errors.expiration ? 'true' : 'false'}
                 type="text"
                 placeholder="MM / YY"
-                value={cardValues.expiryDate}
+                value={values.expiration}
                 onChange={formatAndSetExpiryDate}
+                onFocus={handleFocus}
                 className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
               />
 
               <div className="mt-2 ">
-                {errors.expiryDate && (
-                  <p className="text-red-600">{errors.expiryDate.message}</p>
+                {errors.expiration && (
+                  <p className="text-red-600">{errors.expiration.message}</p>
                 )}
               </div>
             </div>
 
-            {/* CVV Code */}
+            {/* CVC Code */}
             <div className="relative w-full flex flex-col mb-5">
-              <label className=" text-gray-400 text-xl">CVV Code</label>
+              <label className=" text-gray-400 text-xl">CVC Code</label>
               <input
-                {...register('CVVCode', {
+                {...register('cvc', {
                   required: 'Please Enter Your CVV Code',
                 })}
-                aria-invalid={errors.CVVCode ? 'true' : 'false'}
+                aria-invalid={errors.cvc ? 'true' : 'false'}
                 placeholder="***"
-                type="text"
+                type="tel"
                 maxLength="3"
-                value={cardValues.cvvCode}
+                value={values.cvc}
                 onChange={cvvCodeFormat}
+                onFocus={handleFocus}
                 className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
               />
               <div className="mt-2 ">
-                {errors.CVVCode && (
-                  <p className="text-red-600">{errors.CVVCode.message}</p>
+                {errors.cvc && (
+                  <p className="text-red-600">{errors.cvc.message}</p>
                 )}
               </div>
             </div>
@@ -280,23 +287,24 @@ const AddCardForm = ({ cardValues, setCardValues }) => {
               Name On Card
             </label>
             <input
-              {...register('fullName', {
+              {...register('name', {
                 required: 'Please Enter Your Full Name',
                 maxLength: {
                   value: 25,
                   message: 'Full Name Should Not Exceed 25 Characters',
                 },
               })}
-              aria-invalid={errors.fullName ? 'true' : 'false'}
+              aria-invalid={errors.name ? 'true' : 'false'}
               placeholder="Irene Ramos"
               onChange={handleCardNameChange}
-              value={cardValues.cardName}
+              value={values.name}
+              onFocus={handleFocus}
               type="text"
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             />
             <div className="mt-2">
-              {errors.fullName && (
-                <p className="text-red-600">{errors.fullName.message}</p>
+              {errors.name && (
+                <p className="text-red-600">{errors.name.message}</p>
               )}
             </div>
           </div>
