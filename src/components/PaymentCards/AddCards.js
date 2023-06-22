@@ -24,16 +24,7 @@ const AddCards = () => {
       </p>
       <div className="flex flex-col lg:flex lg:flex-row">
         <AddCardForm values={values} setValues={setValues} />
-        <div className="flex flex-col mt-16">
-          {/* <div
-            className="w-[22rem] h-[12rem] bg-gray-200 rounded-lg p-4"
-            // style={{ perspective: '1000px' }}
-          >
-            <div
-              className="w-full h-full bg-cyan-200 rounded-lg px-4 py-3 transform rotateY-20"
-              // style={{ transformStyle: 'preserve-3d' }}
-            > */}
-
+        <div className="flex flex-col justify-center mt-10">
           <Cards
             className="relative"
             name={values.name}

@@ -5,15 +5,16 @@ import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 
+import { useDispatch } from 'react-redux';
 import getCitiesOfCountry from './City';
 import {
   getAllCountries,
   // getCountryByCode
 } from './Country';
-import Button from '../ui/Button';
+// import Button from '../ui/Button';
+import { addCreditCard } from '../../features/cards/cardsSlice';
 
 const AddCardForm = ({ values, setValues }) => {
-  console.log(values);
   const [cities, setCities] = useState([]);
   const [cardType, setCardType] = useState(null);
   const [cardTypeClass, setCardTypeClass] = useState('');
@@ -36,7 +37,7 @@ const AddCardForm = ({ values, setValues }) => {
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
@@ -112,7 +113,6 @@ const AddCardForm = ({ values, setValues }) => {
       ...prevCardValues,
       number: spacedNumber,
     }));
-    // setCardNumber(spacedNumber); // Set the new CC number
   };
 
   const formatAndSetExpiryDate = (e) => {
@@ -136,7 +136,20 @@ const AddCardForm = ({ values, setValues }) => {
       ...prevCardValues,
       expiration: spacedNumber,
     }));
-    // setExpiryDate(spacedNumber); // Set the new expiry date
+  };
+
+  const dispatch = useDispatch();
+  const onSubmitForm = (cardData) => {
+    console.log(cardData);
+
+    dispatch(
+      addCreditCard({
+        name: cardData.name,
+        number: cardData.number,
+        expiration: cardData.expiration,
+        cvc: cardData.cvc,
+      })
+    );
   };
 
   const supportedCardClass = 'w-full border border-cyan-400 px-5 text-center';
@@ -144,7 +157,7 @@ const AddCardForm = ({ values, setValues }) => {
     'mt-1 mb-2 whitespace-wrap md:text-base lg:text-lg text-cyan-500';
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmitForm)}>
       <div className="flex flex-col mt-16 lg:flex lg:flex-row lg:mr-12  ">
         {/* Start first div from Supported Card Types to Name On Card */}
         {/* Supported Card Types */}
@@ -262,7 +275,7 @@ const AddCardForm = ({ values, setValues }) => {
               <label className=" text-gray-400 text-xl">CVC Code</label>
               <input
                 {...register('cvc', {
-                  required: 'Please Enter Your CVV Code',
+                  required: 'Please Enter Your CVC Code',
                 })}
                 aria-invalid={errors.cvc ? 'true' : 'false'}
                 placeholder="***"
@@ -418,7 +431,13 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
         </div>
       </div>
-      <Button button="Add Card" />
+      {/* <Button button="Add Card" /> */}
+      <button
+        type="button"
+        className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
+      >
+        Add Card
+      </button>
     </form>
   );
 };

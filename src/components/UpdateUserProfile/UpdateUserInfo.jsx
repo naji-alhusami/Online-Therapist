@@ -51,7 +51,7 @@ const UpdateUserInfo = ({ userInfo }) => {
     return true;
   };
 
-  const onSubmitform = (userData) => {
+  const onSubmitForm = (userData) => {
     if (userData.password !== userInfo.password) {
       return;
     }
@@ -78,7 +78,7 @@ const UpdateUserInfo = ({ userInfo }) => {
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
         {/* <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} /> */}
 
-        <form onSubmit={handleSubmit(onSubmitform)}>
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <h1 className="text-4xl ml-5">
             <b>{t('PROFILE INFO')}</b>
           </h1>
