@@ -4,15 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const addCreditCard = createAsyncThunk(
   'card/addCreditCard',
   async (payload) => {
-    // const {
-    //   email,
-    //   password,
-    //   firstName,
-    //   lastName,
-    //   birthdayDay,
-    //   birthdayMonth,
-    //   birthdayYear,
-    // } = payload;
+    const { name, number, expiration, cvc } = payload;
     console.log(payload);
   }
 );
@@ -32,7 +24,7 @@ const cardsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addCreditCard.fulfilled, (state, action) => {
-      state.loading = false;
+      // state.loading = false;
       state.card = action.payload;
       state.signedup = true;
     });
