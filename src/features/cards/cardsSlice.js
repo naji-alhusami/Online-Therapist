@@ -4,8 +4,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const addCreditCard = createAsyncThunk(
   'card/addCreditCard',
   async (payload) => {
-    const { name, number, expiration, cvc } = payload;
-    console.log(payload);
+    // const { name, number, expiration, cvc } = payload;
+    // console.log(payload);
   }
 );
 // End of Add Credit Card.
