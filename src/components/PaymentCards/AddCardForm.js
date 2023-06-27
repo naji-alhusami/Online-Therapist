@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
+// import { v4 as uuidv4 } from 'uuid';
 
 import { useDispatch } from 'react-redux';
 import getCitiesOfCountry from './City';
@@ -22,13 +23,16 @@ const AddCardForm = ({ values, setValues }) => {
   const [isCardNumberValid, setCardNumberValid] = useState(false);
 
   const countries = getAllCountries().map((country) => ({
+    // id: uuidv4(),
     value: country.isoCode,
     label: country.name,
   }));
 
+
   const handleCountryChange = (e) => {
     const countryName = e.target.value;
     const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
+      // id: uuidv4(),
       value: city.name,
       label: city.name,
     }));
@@ -342,8 +346,9 @@ const AddCardForm = ({ values, setValues }) => {
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             >
               {countries.map((item) => {
+                // console.log(item);
                 return (
-                  <option key={item.value} value={item.value}>
+                  <option key={item.id} value={item.value}>
                     {item.label}
                   </option>
                 );
@@ -394,8 +399,8 @@ const AddCardForm = ({ values, setValues }) => {
             >
               {cities.map((item) => {
                 return (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
+                  <option key={item.label} value={item.value}>
+                    {item.value}
                   </option>
                 );
               })}
