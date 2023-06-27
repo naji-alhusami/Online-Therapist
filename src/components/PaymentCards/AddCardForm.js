@@ -132,7 +132,24 @@ const AddCardForm = ({ values, setValues }) => {
     let spacedNumber = '';
     if (inputNumbersOnly.length > 2) {
       // Insert a slash (/) between each pair of numbers
-      spacedNumber = inputNumbersOnly.replace(/(\d{2})(\d{2})$/, '$1/$2');
+      spacedNumber = inputNumbersOnly.replace(
+        /(\d{2})(\d{2})$/,
+        (match, beforeSlash, afterSlash) => {
+          const currentMonth = new Date().getMonth() + 1;
+          const currentYear = new Date().getFullYear();
+          const beforeSlashNumber = Math.max(
+            parseInt(beforeSlash, 10),
+            currentMonth
+          );
+          const afterSlashNumber = Math.min(
+            parseInt(afterSlash, 10),
+            currentYear
+          );
+          return `${beforeSlashNumber
+            .toString()
+            .padStart(2, '0')}/${afterSlashNumber.toString().padStart(2, '0')}`;
+        }
+      );
     } else {
       spacedNumber = inputNumbersOnly;
     }
@@ -208,9 +225,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* Card Number */}
           <div className="relative flex flex-col mb-10">
-            <label className=" text-gray-400 text-xl">
-              Card Number
-            </label>
+            <label className=" text-gray-400 text-xl">Card Number</label>
             <div className="relative">
               <input
                 {...register('number', {
@@ -220,10 +235,10 @@ const AddCardForm = ({ values, setValues }) => {
                   },
                   validate: (value) => {
                     if (!value.startsWith('4') && !value.startsWith('5')) {
-                      return 'cardNumberNotSupported';
+                      return 'Card Number Is Not Supported';
                     }
                     if (value.length < 19) {
-                      return 'cardNumberNotValid';
+                      return 'Card Number Is Not Valid';
                     }
                     return null;
                   },
@@ -236,9 +251,7 @@ const AddCardForm = ({ values, setValues }) => {
                 value={values.number}
                 onFocus={handleFocus}
                 className={`w-full bg-white border ${
-                  errors.cardNumber || !isCardNumberValid
-                    ? 'border-grayish-cyan'
-                    : 'border-red-500'
+                  errors.number ? 'border-red-500' : 'border-grayish-cyan'
                 } h-10 shadow-lg rounded-md p-1`}
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -258,15 +271,17 @@ const AddCardForm = ({ values, setValues }) => {
               <label className=" text-gray-400 text-xl">Expiry Date</label>
               <input
                 {...register('expiration', {
-                  required: 'Please Enter Your Expiration Date Of Your Card',
+                  required: 'Please Enter Expiration',
                 })}
                 aria-invalid={errors.expiration ? 'true' : 'false'}
                 type="text"
-                placeholder="MM / YY"
+                placeholder="MM/YYYY"
                 value={values.expiration}
                 onChange={formatAndSetExpiryDate}
                 onFocus={handleFocus}
-                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+                className={`w-full bg-white border ${
+                  errors.expiration ? 'border-red-500' : 'border-grayish-cyan'
+                } text-grayish-cyan h-10 shadow-lg rounded-md p-1`}
               />
 
               <div className="mt-2 ">
@@ -281,7 +296,7 @@ const AddCardForm = ({ values, setValues }) => {
               <label className="text-gray-400 text-xl">CVC Code</label>
               <input
                 {...register('cvc', {
-                  required: 'Please Enter Your CVC Code',
+                  required: 'Please Enter CVC Code',
                 })}
                 aria-invalid={errors.cvc ? 'true' : 'false'}
                 placeholder="***"
@@ -290,7 +305,9 @@ const AddCardForm = ({ values, setValues }) => {
                 value={values.cvc}
                 onChange={cvvCodeFormat}
                 onFocus={handleFocus}
-                className="w-full bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+                className={`w-full bg-white border ${
+                  errors.cvc ? 'border-red-500' : 'border-grayish-cyan'
+                } text-grayish-cyan h-10 shadow-lg rounded-md p-1`}
               />
               <div className="mt-2 ">
                 {errors.cvc && (
@@ -302,9 +319,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* Name On Card */}
           <div className="flex flex-col mb-10">
-            <label className=" text-gray-400 text-xl">
-              Name On Card
-            </label>
+            <label className=" text-gray-400 text-xl">Name On Card</label>
             <input
               {...register('name', {
                 required: 'Please Enter Your Full Name',
@@ -319,7 +334,9 @@ const AddCardForm = ({ values, setValues }) => {
               value={values.name}
               onFocus={handleFocus}
               type="text"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+              className={`bg-white border ${
+                errors.name ? 'border-red-500' : 'border-grayish-cyan'
+              } text-grayish-cyan h-10 shadow-lg rounded-md p-1 `}
             />
             <div className="mt-2">
               {errors.name && (
@@ -343,9 +360,8 @@ const AddCardForm = ({ values, setValues }) => {
                 handleCountryChange(e);
               }}
               aria-invalid={errors.country ? 'true' : 'false'}
-              placeholder="United States"
               type="text"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
             >
               {countries.map((item) => {
                 return (
@@ -377,7 +393,9 @@ const AddCardForm = ({ values, setValues }) => {
               value={zipCode}
               onChange={zipCodeFormat}
               maxLength="10"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              className={`bg-white border ${
+                errors.zipCode ? 'border-red-500' : 'border-grayish-cyan'
+              } text-grayish-cyan h-10 shadow-lg rounded-md p-1`}
             />
             <div className="mt-2">
               {errors.zipCode && (
@@ -395,8 +413,9 @@ const AddCardForm = ({ values, setValues }) => {
               })}
               aria-invalid={errors.city ? 'true' : 'false'}
               type="text"
-              placeholder="California"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
+              className={`bg-white border ${
+                errors.city ? 'border-red-500' : 'border-grayish-cyan'
+              } text-grayish-cyan h-10 shadow-lg rounded-md p-1 `}
             >
               {cities.map((item) => {
                 return (
@@ -428,7 +447,9 @@ const AddCardForm = ({ values, setValues }) => {
               type="text"
               placeholder="509 Adele Mills Suite 833"
               maxLength="30"
-              className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1"
+              className={`bg-white border ${
+                errors.address ? 'border-red-500' : 'border-grayish-cyan'
+              } text-grayish-cyan h-10 shadow-lg rounded-md p-1`}
             />
             <div className="mt-2">
               {errors.address && (
