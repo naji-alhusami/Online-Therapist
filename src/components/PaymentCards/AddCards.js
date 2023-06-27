@@ -24,7 +24,7 @@ const AddCards = () => {
       </p>
       <div className="flex flex-col lg:flex lg:flex-row">
         <AddCardForm values={values} setValues={setValues} />
-        <div className="flex flex-col justify-center mt-10">
+        <div className="flex flex-col justify-center mt-10 lg:ml-10">
           <Cards
             className="relative"
             name={values.name}

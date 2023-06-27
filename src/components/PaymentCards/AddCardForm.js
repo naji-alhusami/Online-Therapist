@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
-// import { v4 as uuidv4 } from 'uuid';
 
 import { useDispatch } from 'react-redux';
 import getCitiesOfCountry from './City';
@@ -16,6 +16,7 @@ import {
 import { addCreditCard } from '../../features/cards/cardsSlice';
 
 const AddCardForm = ({ values, setValues }) => {
+  const [selectedCountry, setSelectedCountry] = useState('');
   const [cities, setCities] = useState([]);
   const [cardType, setCardType] = useState(null);
   const [cardTypeClass, setCardTypeClass] = useState('');
@@ -23,16 +24,16 @@ const AddCardForm = ({ values, setValues }) => {
   const [isCardNumberValid, setCardNumberValid] = useState(false);
 
   const countries = getAllCountries().map((country) => ({
-    // id: uuidv4(),
+    id: uuidv4(),
     value: country.isoCode,
     label: country.name,
   }));
 
-
   const handleCountryChange = (e) => {
     const countryName = e.target.value;
+    setSelectedCountry(countryName);
     const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
-      // id: uuidv4(),
+      id: uuidv4(),
       value: city.name,
       label: city.name,
     }));
@@ -163,11 +164,11 @@ const AddCardForm = ({ values, setValues }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)}>
-      <div className="flex flex-col mt-16 lg:flex lg:flex-row lg:mr-12  ">
+      <div className="flex flex-col mt-16 lg:flex lg:flex-row   ">
         {/* Start first div from Supported Card Types to Name On Card */}
         {/* Supported Card Types */}
-        <div className="flex flex-col lg:mr-12">
-          <div className="flex flex-col mb-5">
+        <div className="flex flex-col lg:mr-2 xl:mr-10">
+          <div className="flex flex-col mb-10">
             <label className=" text-gray-400 text-xl">
               Supported Card Types
             </label>
@@ -206,8 +207,8 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* Card Number */}
-          <div className="relative flex flex-col mb-5">
-            <label className="mr-[6.8rem] text-gray-400 text-xl">
+          <div className="relative flex flex-col mb-10">
+            <label className=" text-gray-400 text-xl">
               Card Number
             </label>
             <div className="relative">
@@ -252,8 +253,8 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* Expiry Date */}
-          <div className="flex flex-row w-full">
-            <div className="w-full flex flex-col mb-5 mr-5">
+          <div className="flex flex-row w-full ">
+            <div className="w-full flex flex-col mb-10 mr-5">
               <label className=" text-gray-400 text-xl">Expiry Date</label>
               <input
                 {...register('expiration', {
@@ -276,8 +277,8 @@ const AddCardForm = ({ values, setValues }) => {
             </div>
 
             {/* CVC Code */}
-            <div className="relative w-full flex flex-col mb-5">
-              <label className=" text-gray-400 text-xl">CVC Code</label>
+            <div className="relative w-full flex flex-col mb-10">
+              <label className="text-gray-400 text-xl">CVC Code</label>
               <input
                 {...register('cvc', {
                   required: 'Please Enter Your CVC Code',
@@ -300,8 +301,8 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* Name On Card */}
-          <div className="flex flex-col mb-5">
-            <label className="mr-[6.8rem] text-gray-400 text-xl">
+          <div className="flex flex-col mb-10">
+            <label className=" text-gray-400 text-xl">
               Name On Card
             </label>
             <input
@@ -331,22 +332,22 @@ const AddCardForm = ({ values, setValues }) => {
 
         <div className="flex flex-col">
           {/* Country */}
-          <div className="flex flex-col mb-2">
+          <div className="flex flex-col mb-[1.6rem]">
             <label className="mr-[6.8rem] text-gray-400 text-xl">Country</label>
             <select
               {...register('country', {
-                onChange: (e) => {
-                  handleCountryChange(e);
-                },
                 required: 'Please Select Your Country',
               })}
+              value={selectedCountry}
+              onChange={(e) => {
+                handleCountryChange(e);
+              }}
               aria-invalid={errors.country ? 'true' : 'false'}
               placeholder="United States"
               type="text"
               className="bg-white border text-grayish-cyan h-10 shadow-lg rounded-md p-1 "
             >
               {countries.map((item) => {
-                // console.log(item);
                 return (
                   <option key={item.id} value={item.value}>
                     {item.label}
@@ -362,13 +363,13 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* ZIP Code */}
-          <div className="flex flex-col mb-5">
+          <div className="flex flex-col mb-10">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
               ZIP Code
             </label>
             <input
               {...register('zipCode', {
-                required: 'Please Enter Your Full Name',
+                required: 'Please Enter Your ZIP Code',
               })}
               aria-invalid={errors.zipCode ? 'true' : 'false'}
               placeholder="17121-1300"
@@ -386,7 +387,7 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* City */}
-          <div className="flex flex-col mb-5">
+          <div className="flex flex-col mb-10">
             <label className="mr-[6.8rem] text-gray-400 text-xl">City</label>
             <select
               {...register('city', {
@@ -399,7 +400,7 @@ const AddCardForm = ({ values, setValues }) => {
             >
               {cities.map((item) => {
                 return (
-                  <option key={item.label} value={item.value}>
+                  <option key={item.id} value={item.value}>
                     {item.value}
                   </option>
                 );
@@ -413,7 +414,7 @@ const AddCardForm = ({ values, setValues }) => {
           </div>
 
           {/* Address */}
-          <div className="flex flex-col mb-5">
+          <div className="flex flex-col mb-10">
             <label className="mr-[6.8rem] text-gray-400 text-xl">Address</label>
             <input
               {...register('address', {
