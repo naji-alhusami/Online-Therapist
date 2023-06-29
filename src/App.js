@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
+
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { css } from '@emotion/react';
+import ClipLoader from 'react-spinners/ClipLoader';
 // import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
@@ -50,7 +53,18 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return 'Loading...';
+    return (
+      <div
+        className="flex justify-center items-center h-screen"
+        style={{ minHeight: '100vh' }}
+      >
+        <ClipLoader
+          color="#2DD3E3" // Customize the color of the spinner
+          size={60} // Adjust the size of the spinner as desired
+          loading={loading}
+        />
+      </div>
+    );
   }
 
   return (

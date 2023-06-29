@@ -86,9 +86,10 @@ const AddCardForm = ({ values, setValues }) => {
 
   const handleCardNameChange = (event) => {
     const inputVal = event.target.value;
+    const capitalizedVal = inputVal.toUpperCase();
     setValues((prevCardValues) => ({
       ...prevCardValues,
-      name: inputVal,
+      name: capitalizedVal,
     }));
   };
 
