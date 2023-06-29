@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { updateProfile } from '../../features/users/usersSlice';
@@ -51,6 +52,8 @@ const UpdateUserInfo = ({ userInfo }) => {
     return true;
   };
 
+  const navigate = useNavigate();
+
   const onSubmitForm = (userData) => {
     if (userData.password !== userInfo.password) {
       return;
@@ -71,6 +74,17 @@ const UpdateUserInfo = ({ userInfo }) => {
         password: userInfo.password,
       })
     );
+
+    const thanksData = {
+      paragraphOne:
+        'Your Update Profile Information request has been received.',
+      paragraphTwo:
+        '',
+      link: '/',
+      page: 'Home'
+    };
+
+    navigate('/thanks', { state: thanksData });
   };
 
   return (

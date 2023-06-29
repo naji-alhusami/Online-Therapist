@@ -48,7 +48,16 @@ const Singup = () => {
       })
     );
 
-    navigate('/thanks');
+    const thanksData = {
+      paragraphOne:
+        'Your Sign Up request has been received, you will soon receive a confirmation email.',
+      paragraphTwo:
+        'Please follow the steps in the email to complete and activate your account.',
+      link: '/',
+      page: 'Home'
+    };
+
+    navigate('/thanks', { state: thanksData });
   };
 
   return (

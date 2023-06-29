@@ -7,6 +7,7 @@ import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import getCitiesOfCountry from './City';
 import {
   getAllCountries,
@@ -162,10 +163,8 @@ const AddCardForm = ({ values, setValues }) => {
 
   const userInfo = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onSubmitForm = (cardData) => {
-    console.log(cardData);
-    console.log('clicked');
-
     dispatch(
       addCreditCard({
         id: userInfo.id,
@@ -175,6 +174,15 @@ const AddCardForm = ({ values, setValues }) => {
         cvc: cardData.cvc,
       })
     );
+
+    const thanksData = {
+      paragraphOne: 'Your Payment Card Has Beed Added.',
+      paragraphTwo: 'Please Check The Saved Cards Page',
+      link: '/savedCards',
+      page: 'Saved Cards',
+    };
+
+    navigate('/thanks', { state: thanksData });
   };
 
   const supportedCardClass = 'w-full border border-cyan-400 px-5 text-center';

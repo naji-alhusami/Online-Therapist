@@ -4,7 +4,6 @@ import profilePhoto from '../Images/profilePhoto.svg';
 
 function UpdateUserPicture({ userProfilePicture }) {
   const [displayPicture, setDisplayPicture] = useState(userProfilePicture);
-  console.log(profilePhoto);
 
   const handlePictureError = () => {
     setDisplayPicture(profilePhoto);
