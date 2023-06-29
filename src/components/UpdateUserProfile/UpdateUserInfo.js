@@ -78,10 +78,9 @@ const UpdateUserInfo = ({ userInfo }) => {
     const thanksData = {
       paragraphOne:
         'Your Update Profile Information request has been received.',
-      paragraphTwo:
-        '',
+      paragraphTwo: '',
       link: '/',
-      page: 'Home'
+      page: 'Home',
     };
 
     navigate('/thanks', { state: thanksData });
@@ -343,9 +342,12 @@ const UpdateUserInfo = ({ userInfo }) => {
           <div className="flex flex-row justify-start items-center ml-6 mt-8">
             <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
             <input
-              {...register('profilePicture', {
-                required: 'Profile Picture is Required',
-              })}
+              {...register(
+                'profilePicture'
+                // , {
+                //   required: 'Profile Picture is Required',
+                // }
+              )}
               className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
               type="file"
               id="file-upload"
