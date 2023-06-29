@@ -29,8 +29,8 @@ const AddCardForm = ({ values, setValues }) => {
     label: country.name,
   }));
 
-  const handleCountryChange = (e) => {
-    const countryName = e.target.value;
+  const handleCountryChange = (event) => {
+    const countryName = event.target.value;
     setSelectedCountry(countryName);
     const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
       id: uuidv4(),

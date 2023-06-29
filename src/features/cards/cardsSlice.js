@@ -3,15 +3,21 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // start of Add Credit Card:
 export const addCreditCard = createAsyncThunk(
   'card/addCreditCard',
-  async (payload) => {
-    // const { name, number, expiration, cvc } = payload;
-    console.log(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { name, number, expiration, cvc } = payload;
+      console.log(payload);
+
+      return { name, number, expiration, cvc };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 // End of Add Credit Card.
 
 const cardsSlice = createSlice({
-  name: 'users',
+  name: 'cards',
   initialState: {
     loading: false,
     card: {},

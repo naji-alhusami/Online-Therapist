@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { updateProfile } from '../../features/users/usersSlice';
-// import UpdateUserPicture from './UpdateUserPicture';
+import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const UpdateUserInfo = ({ userInfo }) => {
   return (
     <div>
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
-        {/* <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} /> */}
+        <UpdateUserPicture userProfilePicture={userInfo.profilePictureURL} />
 
         <form onSubmit={handleSubmit(onSubmitForm)}>
           <h1 className="text-4xl ml-5">
