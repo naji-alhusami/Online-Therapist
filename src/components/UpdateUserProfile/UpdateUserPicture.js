@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-// import profilePicture from '../Images/ProfilePhoto.png';
-import profilePhoto from "../Images/profilePhoto.svg"
+import profilePhoto from '../Images/profilePhoto.svg';
 
 function UpdateUserPicture({ userProfilePicture }) {
   const [displayPicture, setDisplayPicture] = useState(userProfilePicture);
+  console.log(profilePhoto);
 
   const handlePictureError = () => {
     setDisplayPicture(profilePhoto);
