@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import getCitiesOfCountry from './City';
 import {
   getAllCountries,
@@ -160,6 +160,7 @@ const AddCardForm = ({ values, setValues }) => {
     }));
   };
 
+  const userInfo = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const onSubmitForm = (cardData) => {
     console.log(cardData);
@@ -167,6 +168,7 @@ const AddCardForm = ({ values, setValues }) => {
 
     dispatch(
       addCreditCard({
+        id: userInfo.id,
         name: cardData.name,
         number: cardData.number,
         expiration: cardData.expiration,

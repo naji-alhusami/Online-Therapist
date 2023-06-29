@@ -1,13 +1,23 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { doc, setDoc } from 'firebase/firestore';
+
+import { db } from '../../firebase-config';
 
 // start of Add Credit Card:
 export const addCreditCard = createAsyncThunk(
   'card/addCreditCard',
   async (payload, { rejectWithValue }) => {
     try {
-      const { name, number, expiration, cvc } = payload;
+      const { id, name, number, expiration, cvc } = payload;
+      const docRef = doc(db, 'credit-cards', id);
+      await setDoc(docRef, {
+        name,
+        number,
+        expiration,
+        cvc,
+      });
 
-      return { name, number, expiration, cvc };
+      return { id, name, number, expiration, cvc };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -19,7 +29,7 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState: {
     loading: false,
-    card: {},
+    card: [],
     error: null,
   },
 
@@ -30,12 +40,11 @@ const cardsSlice = createSlice({
     });
     builder.addCase(addCreditCard.fulfilled, (state, action) => {
       state.loading = false;
-      state.card = action.payload;
+      state.card = [...state.card, action.payload];
       state.signedup = true;
     });
     builder.addCase(addCreditCard.rejected, (state, action) => {
       state.loading = false;
-      state.card = {};
       state.error = action.payload;
     });
   },

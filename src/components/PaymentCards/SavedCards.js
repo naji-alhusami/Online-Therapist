@@ -1,18 +1,26 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import { MdOutlinePayment } from 'react-icons/md';
 import Cards from 'react-credit-cards';
-
 import 'react-credit-cards/es/styles-compiled.css';
+import 'react-multi-carousel/lib/styles.css';
+
 import { useSelector } from 'react-redux';
 import Button from '../ui/Button';
 
 const SavedCards = () => {
   const cardInformation = useSelector((state) => state.cards.card);
-  console.log(cardInformation);
+  // const [cardsSlider, setCardsSlider] = useState([]);
+
+  // useEffect(() => {
+  //   if (cardInformation) {
+  //     setCardsSlider((prevCards) => [...prevCards, cardInformation]);
+  //   }
+  // }, [cardInformation]);
+
   const { t } = useTranslation();
   const responsive = {
     superLargeDesktop: {
@@ -33,7 +41,7 @@ const SavedCards = () => {
     },
   };
 
-  const isCardInformationEmpty = Object.keys(cardInformation).length === 0;
+  const isCardSliderEmpty = Object.keys(cardInformation).length === 0;
 
   return (
     <div className=" m-16">
@@ -44,7 +52,7 @@ const SavedCards = () => {
         We only support cards as a payment method at the moment!
       </p>
       <div className="flex flex-col items-center justify-center mt-28">
-        {isCardInformationEmpty ? (
+        {isCardSliderEmpty ? (
           <>
             <MdOutlinePayment className="text-6xl text-gray mx-auto" />
             <p className="mb-10">{t('No Payment Methods Found')}</p>
@@ -55,13 +63,18 @@ const SavedCards = () => {
             containerClass="w-full"
             responsive={responsive}
           >
-            <Cards
-              className="relative"
-              name={cardInformation.name}
-              number={cardInformation.number}
-              expiry={cardInformation.expiration}
-              cvc={cardInformation.cvc}
-            />
+            {cardInformation.map((card) => {
+              return (
+                <Cards
+                  key={uuidv4()}
+                  className="relative"
+                  name={card.name}
+                  number={card.number}
+                  expiry={card.expiration}
+                  cvc={card.cvc}
+                />
+              );
+            })}
           </Carousel>
         )}
       </div>
