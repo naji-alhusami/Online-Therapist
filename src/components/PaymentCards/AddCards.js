@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
 
-import AddCardForm from './AddCardForm';
 import 'react-credit-cards/es/styles-compiled.css';
+import AddCardForm from './AddCardForm';
 
 const AddCards = () => {
   const [values, setValues] = useState({

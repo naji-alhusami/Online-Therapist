@@ -6,7 +6,6 @@ export const addCreditCard = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const { name, number, expiration, cvc } = payload;
-      console.log(payload);
 
       return { name, number, expiration, cvc };
     } catch (error) {
