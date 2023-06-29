@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { updateProfile } from '../../features/users/usersSlice';
+import { updateProfile, deleteUser } from '../../features/users/usersSlice';
 import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
@@ -84,6 +84,15 @@ const UpdateUserInfo = ({ userInfo }) => {
     };
 
     navigate('/thanks', { state: thanksData });
+  };
+
+  const handleDelete = () => {
+    console.log(userInfo);
+    dispatch(
+      deleteUser({
+        id: userInfo.id,
+      })
+    );
   };
 
   return (
@@ -428,7 +437,6 @@ const UpdateUserInfo = ({ userInfo }) => {
           {/* Action Buttons */}
           <div className="flex flex-row lg:gap-2 gap-3 ml-6 mt-8 md:mr-5">
             <button
-              //   onClick={handleSubmit(onSubmit)}
               type="submit"
               className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 text-bold bg-cyan-400 hover:bg-cyan-500 hover:text-white"
             >
@@ -437,7 +445,7 @@ const UpdateUserInfo = ({ userInfo }) => {
             <button
               type="button"
               className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
-              //   onClick={() => HandelDelete()}
+              onClick={() => handleDelete()}
             >
               {t('DELETE ACCOUNT')}
             </button>

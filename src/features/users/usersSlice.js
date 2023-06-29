@@ -7,12 +7,7 @@ import {
   //   deleteUser,
   signOut,
 } from 'firebase/auth';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  //   , deleteDoc
-} from 'firebase/firestore';
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
@@ -199,6 +194,33 @@ export const logoutUser = createAsyncThunk(
 );
 // End of Logout User.
 
+// Start of Delete User:
+export const deleteUser = createAsyncThunk(
+  'user/deleteUser',
+  async (payload, { rejectWithValue }) => {
+    try {
+
+      // const user = auth.currentUser;
+      // if (user) {
+      //   await deleteUser(user)
+      //     .then(() => {
+      //       console.log('User account deleted successfully.');
+      //     })
+      //     .catch((error) => {
+      //       console.error(error.message);
+      //     });
+      // } else {
+      //   console.log('No user is currently signed in.');
+      // }
+      await deleteDoc(doc(db, 'users', payload.id));
+      return {};
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+// End of Delete User.
+
 // Start of Load User:
 export const loadUser = createAsyncThunk(
   'user/loadUser',
@@ -322,6 +344,22 @@ const usersSlice = createSlice({
       state.signedup = false;
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
+      state.error = action.payload;
+    });
+
+    // Delete User Cases:
+    builder.addCase(deleteUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.loading = false;
+      state.user = action.payload;
+      state.error = null;
+    });
+    builder.addCase(deleteUser.rejected, (state, action) => {
       state.loading = false;
       state.user = {};
       state.error = action.payload;
