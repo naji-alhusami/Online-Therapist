@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { updateProfile, deleteUser } from '../../features/users/usersSlice';
+import {
+  updateProfile,
+  deleteUserAccount,
+  logoutUser,
+} from '../../features/users/usersSlice';
 import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
@@ -27,6 +31,20 @@ const UpdateUserInfo = ({ userInfo }) => {
     password: userInfo.password || '',
     confirmPassword: userInfo.confirmPassword || '',
   });
+
+  const [passwordState, setPasswordState] = useState({
+    passwordInput: '',
+    passwordError: '',
+    passwordConfirmInput: '',
+    passwordConfirmError: '',
+    passwordMatchedError: '',
+  });
+
+  // const [passwordInput, setPasswordInput] = useState('');
+  // const [passwordError, setPasswordError] = useState('');
+  // const [passwordConfirmInput, setPasswordConfirmInput] = useState('');
+  // const [passwordConfirmError, setPasswordConfirmError] = useState('');
+  // const [passwordMatchedError, setPasswordMatchedError] = useState('');
 
   const {
     register,
@@ -87,12 +105,45 @@ const UpdateUserInfo = ({ userInfo }) => {
   };
 
   const handleDelete = () => {
-    console.log(userInfo);
-    dispatch(
-      deleteUser({
-        id: userInfo.id,
-      })
-    );
+    console.log(state);
+    if (passwordState.passwordInput.trim() === '') {
+      console.log(passwordState.passwordInput);
+      setPasswordState((prevState) => ({
+        ...prevState,
+        passwordError: 'Please Enter Your Password',
+      }));
+      return;
+    }
+
+    if (passwordState.passwordConfirmInput.trim() === '') {
+      setPasswordState((prevState) => ({
+        ...prevState,
+        passwordConfirmError: 'Please Enter Your Password Confirmation',
+      }));
+      return;
+    }
+
+    if (
+      passwordState.passwordInput.trim() ===
+      passwordState.passwordConfirmInput.trim()
+    ) {
+      dispatch(deleteUserAccount({ id: userInfo.id }));
+
+      const thanksData = {
+        paragraphOne: 'Your Profile Has Been Deleted successfully.',
+        paragraphTwo: '',
+        link: '/',
+        page: 'Home',
+      };
+
+      navigate('/thanks', { state: thanksData });
+      dispatch(logoutUser());
+    } else {
+      setPasswordState((prevState) => ({
+        ...prevState,
+        passwordMatchedError: 'Passwords Do Not Match',
+      }));
+    }
   };
 
   return (
@@ -306,9 +357,9 @@ const UpdateUserInfo = ({ userInfo }) => {
                   aria-invalid={errors.email ? 'true' : 'false'}
                   type="text"
                   value={state.email}
-                  // onChange={(event) =>
-                  //   setState({ ...state, Email: event.target.value })
-                  // }
+                  onChange={(event) =>
+                    setState({ ...state, email: event.target.value })
+                  }
                   className="bg-white border text-gray-800 shadow-lg rounded-md p-1 lg:w-[16rem]"
                 />
               </div>
@@ -373,7 +424,10 @@ const UpdateUserInfo = ({ userInfo }) => {
           <h1 className="text-4xl ml-5 my-10">
             <b>{t('Security')}</b>
           </h1>
-
+          <p className="text-xl ml-5 my-10 w-[24rem] lg:w-[30rem]">
+            Please Enter Your Password In Order to Perform Actions (Update
+            Account Or Delete Account)
+          </p>
           {/* Password */}
           <div className="flex flex-row justify-start items-center ml-6 mt-8">
             <div className="flex flex-col">
@@ -390,9 +444,15 @@ const UpdateUserInfo = ({ userInfo }) => {
                   })}
                   aria-invalid={errors.password ? 'true' : 'false'}
                   defaultValue=""
-                  onChange={(event) =>
-                    setState({ ...state, password: event.target.value })
-                  }
+                  onChange={(event) => {
+                    const password = event.target.value;
+                    setState({ ...state, password });
+                    setPasswordState((prevState) => ({
+                      ...prevState,
+                      passwordInput: password,
+                      passwordError: password ? '' : prevState.passwordError,
+                    }));
+                  }}
                   type="password"
                   className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
                 />
@@ -400,6 +460,9 @@ const UpdateUserInfo = ({ userInfo }) => {
               <div className="mt-2 w-[85%]">
                 {errors.password && (
                   <p className="text-red-600">{errors.password.message}</p>
+                )}
+                {passwordState.passwordError && (
+                  <p className="text-red-600">{passwordState.passwordError}</p>
                 )}
               </div>
             </div>
@@ -418,9 +481,18 @@ const UpdateUserInfo = ({ userInfo }) => {
                   })}
                   type="password"
                   value={state.confirmPassword}
-                  onChange={(event) =>
-                    setState({ ...state, confirmPassword: event.target.value })
-                  }
+                  onChange={(event) => {
+                    const confirmPassword = event.target.value;
+                    setState({ ...state, confirmPassword });
+                    setPasswordState((prevState) => ({
+                      ...prevState,
+                      passwordConfirmInput: confirmPassword,
+                      passwordMatchedError:
+                        prevState.passwordInput === confirmPassword
+                          ? ''
+                          : prevState.passwordMatchedError,
+                    }));
+                  }}
                   className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
                 />
               </div>
@@ -428,6 +500,16 @@ const UpdateUserInfo = ({ userInfo }) => {
                 {errors.confirmPassword && (
                   <p className="text-red-600">
                     {errors.confirmPassword.message}
+                  </p>
+                )}
+                {passwordState.passwordConfirmError && (
+                  <p className="text-red-600">
+                    {passwordState.passwordConfirmError}
+                  </p>
+                )}
+                {passwordState.passwordMatchedError && (
+                  <p className="text-red-600">
+                    {passwordState.passwordMatchedError}
                   </p>
                 )}
               </div>

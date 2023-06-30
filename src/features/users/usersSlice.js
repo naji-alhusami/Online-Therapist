@@ -4,10 +4,14 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
-  //   deleteUser,
   signOut,
 } from 'firebase/auth';
-import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  deleteDoc
+} from 'firebase/firestore';
 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
@@ -195,27 +199,27 @@ export const logoutUser = createAsyncThunk(
 // End of Logout User.
 
 // Start of Delete User:
-export const deleteUser = createAsyncThunk(
-  'user/deleteUser',
+export const deleteUserAccount = createAsyncThunk(
+  'user/deleteUserAccount',
   async (payload, { rejectWithValue }) => {
     try {
-
-      // const user = auth.currentUser;
-      // if (user) {
-      //   await deleteUser(user)
-      //     .then(() => {
-      //       console.log('User account deleted successfully.');
-      //     })
-      //     .catch((error) => {
-      //       console.error(error.message);
-      //     });
-      // } else {
-      //   console.log('No user is currently signed in.');
-      // }
+      const user = auth.currentUser;
+      if (user) {
+        await user
+          .delete()
+          .then(() => {
+            console.log('User account deleted successfully.');
+          })
+          .catch((error) => {
+            console.error(error.message);
+          });
+      } else {
+        console.log('No user is currently signed in.');
+      }
       await deleteDoc(doc(db, 'users', payload.id));
       return {};
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -350,16 +354,17 @@ const usersSlice = createSlice({
     });
 
     // Delete User Cases:
-    builder.addCase(deleteUser.pending, (state) => {
+    builder.addCase(deleteUserAccount.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
+    builder.addCase(deleteUserAccount.fulfilled, (state, action) => {
       console.log(action.payload);
       state.loading = false;
       state.user = action.payload;
       state.error = null;
     });
-    builder.addCase(deleteUser.rejected, (state, action) => {
+    builder.addCase(deleteUserAccount.rejected, (state, action) => {
+      console.log(action.payload);
       state.loading = false;
       state.user = {};
       state.error = action.payload;
