@@ -27,7 +27,7 @@ const UpdateUserInfo = ({ userInfo }) => {
         : userInfo.birthDate || '',
     email: userInfo.email || '',
     phoneNumber: userInfo.phoneNumber || '',
-    profilePicture: userInfo.profilePicture || '',
+    profilePicture: userInfo.profilePicture,
     password: userInfo.password || '',
     confirmPassword: userInfo.confirmPassword || '',
   });
@@ -71,12 +71,16 @@ const UpdateUserInfo = ({ userInfo }) => {
     console.log(userInfo);
     console.log(userData);
 
-    if (userData.password !== userInfo.password) {
+    if (
+      userData.password !== userInfo.password &&
+      userData.confirmPassword !== userInfo.password
+    ) {
       setPasswordState((prevState) => ({
         ...prevState,
         passwordDataInfoError:
           'Your Entered Password Should be the Same of your Signup Password',
       }));
+      return;
     }
 
     dispatch(
@@ -91,6 +95,7 @@ const UpdateUserInfo = ({ userInfo }) => {
         email: userData.email,
         phoneNumber: userData.phoneNumber,
         profilePicture: userData.profilePicture,
+        // ...(userData.profilePicture && { profilePicture: userData.profilePicture }),
         password: userInfo.password,
       })
     );
@@ -124,6 +129,18 @@ const UpdateUserInfo = ({ userInfo }) => {
     }
 
     if (
+      passwordState.passwordInput !== userInfo.password &&
+      passwordState.passwordConfirmInput !== userInfo.password
+    ) {
+      setPasswordState((prevState) => ({
+        ...prevState,
+        passwordDataInfoError:
+          'Your Entered Password Should be the Same of your Signup Password',
+      }));
+      return;
+    }
+
+    if (
       passwordState.passwordInput.trim() ===
       passwordState.passwordConfirmInput.trim()
     ) {
@@ -147,6 +164,10 @@ const UpdateUserInfo = ({ userInfo }) => {
     dispatch(logoutUser());
   };
 
+  // const isFileUploaded = state.profilePicture !== userInfo.profilePictureURL;
+  // console.log(state);
+  // console.log(isFileUploaded);
+  
   return (
     <div>
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
@@ -400,27 +421,27 @@ const UpdateUserInfo = ({ userInfo }) => {
           </div>
 
           {/* Upload Profile Picture */}
-          <div className="flex flex-row justify-start items-center ml-6 mt-8">
-            <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
-            <input
-              {...register(
-                'profilePicture'
-                // , {
-                //   required: 'Profile Picture is Required',
-                // }
-              )}
-              className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
-              type="file"
-              id="file-upload"
-              accept="image/*"
-              onChange={(event) => {
-                setState({
-                  ...state,
-                  profilePicture: event.target.files[0],
-                });
-              }}
-            />
-          </div>
+          {/* {!isFileUploaded && ( */}
+            <div className="flex flex-row justify-start items-center ml-6 mt-8">
+              <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
+              <input
+                {...register('profilePicture', {
+                  required: 'Profile Picture is Required',
+                })}
+                className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
+                type="file"
+                id="file-upload"
+                accept="image/*"
+                onChange={(event) => {
+                  const newProfilePicture = event.target.files[0];
+                  setState((prevState) => ({
+                    ...prevState,
+                    profilePicture: newProfilePicture,
+                  }));
+                }}
+              />
+            </div>
+          {/* )} */}
 
           <h1 className="text-4xl ml-5 my-10">
             <b>{t('Security')}</b>
