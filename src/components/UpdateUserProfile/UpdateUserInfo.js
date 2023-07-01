@@ -38,13 +38,8 @@ const UpdateUserInfo = ({ userInfo }) => {
     passwordConfirmInput: '',
     passwordConfirmError: '',
     passwordMatchedError: '',
+    passwordDataInfoError: '',
   });
-
-  // const [passwordInput, setPasswordInput] = useState('');
-  // const [passwordError, setPasswordError] = useState('');
-  // const [passwordConfirmInput, setPasswordConfirmInput] = useState('');
-  // const [passwordConfirmError, setPasswordConfirmError] = useState('');
-  // const [passwordMatchedError, setPasswordMatchedError] = useState('');
 
   const {
     register,
@@ -73,8 +68,15 @@ const UpdateUserInfo = ({ userInfo }) => {
   const navigate = useNavigate();
 
   const onSubmitForm = (userData) => {
+    console.log(userInfo);
+    console.log(userData);
+
     if (userData.password !== userInfo.password) {
-      return;
+      setPasswordState((prevState) => ({
+        ...prevState,
+        passwordDataInfoError:
+          'Your Entered Password Should be the Same of your Signup Password',
+      }));
     }
 
     dispatch(
@@ -105,9 +107,7 @@ const UpdateUserInfo = ({ userInfo }) => {
   };
 
   const handleDelete = () => {
-    console.log(state);
     if (passwordState.passwordInput.trim() === '') {
-      console.log(passwordState.passwordInput);
       setPasswordState((prevState) => ({
         ...prevState,
         passwordError: 'Please Enter Your Password',
@@ -128,22 +128,23 @@ const UpdateUserInfo = ({ userInfo }) => {
       passwordState.passwordConfirmInput.trim()
     ) {
       dispatch(deleteUserAccount({ id: userInfo.id }));
-
-      const thanksData = {
-        paragraphOne: 'Your Profile Has Been Deleted successfully.',
-        paragraphTwo: '',
-        link: '/',
-        page: 'Home',
-      };
-
-      navigate('/thanks', { state: thanksData });
-      dispatch(logoutUser());
     } else {
       setPasswordState((prevState) => ({
         ...prevState,
         passwordMatchedError: 'Passwords Do Not Match',
       }));
+      return;
     }
+
+    const thanksData = {
+      paragraphOne: 'Your Profile Has Been Deleted successfully.',
+      paragraphTwo: '',
+      link: '/',
+      page: 'Home',
+    };
+
+    navigate('/thanks', { state: thanksData });
+    dispatch(logoutUser());
   };
 
   return (
@@ -487,10 +488,14 @@ const UpdateUserInfo = ({ userInfo }) => {
                     setPasswordState((prevState) => ({
                       ...prevState,
                       passwordConfirmInput: confirmPassword,
+                      passwordConfirmError: confirmPassword
+                        ? ''
+                        : prevState.passwordConfirmError,
                       passwordMatchedError:
-                        prevState.passwordInput === confirmPassword
-                          ? ''
-                          : prevState.passwordMatchedError,
+                        prevState.passwordConfirmInput ===
+                        prevState.passwordInput
+                          ? prevState.passwordMatchedError
+                          : '',
                     }));
                   }}
                   className="bg-white border text-gray-800 shadow-lg rounded-md mr-5 p-1 w-auto lg:w-[16rem]"
@@ -510,6 +515,11 @@ const UpdateUserInfo = ({ userInfo }) => {
                 {passwordState.passwordMatchedError && (
                   <p className="text-red-600">
                     {passwordState.passwordMatchedError}
+                  </p>
+                )}
+                {passwordState.passwordDataInfoError && (
+                  <p className="text-red-600">
+                    {passwordState.passwordDataInfoError}
                   </p>
                 )}
               </div>
@@ -534,7 +544,7 @@ const UpdateUserInfo = ({ userInfo }) => {
             <button
               type="button"
               className="lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
-              //   onClick={() => handleCancel}
+              onClick={() => navigate('/')}
             >
               {t('CANCEL')}
             </button>
