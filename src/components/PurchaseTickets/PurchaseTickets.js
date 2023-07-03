@@ -5,13 +5,17 @@ import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from '../ui/Button';
 import RightArrow from '../Images/RightArrow.svg';
 import LeftArrow from '../Images/LeftArrow.svg';
 
 const PurchaseTickets = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  console.log(location);
+  const { ticket, price } = location.state;
+
   const cardInformation = useSelector((state) => state.cards.userCards);
   console.log(cardInformation);
 
@@ -114,7 +118,8 @@ const PurchaseTickets = () => {
         )}
 
         <p className="text-3xl w-auto m-10">
-          Click Confirm To Use The Selected Card To Purchase 5 Tickets For 10$
+          Click Confirm To Use The Selected Card To Purchase {ticket} For{' '}
+          {price}
         </p>
         <Link to="/thanks" className="mb-16">
           <Button button="CONFIRM PURCHASE" disabled={activateButton} />

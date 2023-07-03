@@ -21,7 +21,7 @@ const AppointmentPart = () => {
             {t('WE ARE HERE TO')}
           </p>
           <p className="text-5xl mb-5  md:text-7xl lg:text-9xl ">{t('HELP')}</p>
-          <Button button="BOOK AN APPOINTMENT" />
+          <Button button="BOOK AN APPOINTMENT" disabled="false" />
         </div>
         <img
           className="h-2/3 w-2/3 md:h-1/3 md:w-1/3 lg:h-1/3 lg:w-1/3"

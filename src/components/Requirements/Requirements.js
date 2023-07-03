@@ -31,7 +31,7 @@ const Requirements = () => {
           })}
         </ul>
         <div className="my-10">
-          <Button button="Get Started"  />
+          <Button button="Get Started" disabled="false" />
         </div>
       </div>
       <div className="m-20">

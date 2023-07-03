@@ -31,8 +31,8 @@ function Card({
         {price}
       </h2>
       {buttonPreview && (
-        <Link to="/purchaseTickets">
-          <Button button="PURCHASE" />
+        <Link to="/purchaseTickets" state={{ price, ticket }}>
+          <Button button="PURCHASE" disabled="false" />
         </Link>
       )}
     </div>

@@ -107,7 +107,7 @@ const SavedCards = () => {
         )}
       </div>
       <Link to="/addCards">
-        <Button button="Add New Card" />
+        <Button button="Add New Card" disabled="false" />
       </Link>
     </div>
   );
