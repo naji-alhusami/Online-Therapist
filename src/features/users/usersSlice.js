@@ -266,7 +266,7 @@ const usersSlice = createSlice({
     builder.addCase(signupUser.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload;
-      state.signedup = true;
+      state.error = false;
     });
     builder.addCase(signupUser.rejected, (state, action) => {
       state.loading = false;
@@ -328,7 +328,7 @@ const usersSlice = createSlice({
     builder.addCase(updateProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload;
-      state.signedup = true;
+      state.error = false;
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
       state.loading = false;
@@ -345,7 +345,6 @@ const usersSlice = createSlice({
       state.user = {};
       state.error = null;
       state.userlogin = false;
-      state.signedup = false;
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
       state.loading = false;

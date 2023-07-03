@@ -3,6 +3,7 @@ import {
   doc,
   setDoc,
   getDocs,
+  deleteDoc,
   collection,
   query,
   where,
@@ -49,7 +50,7 @@ export const getCreditCardByUserId = createAsyncThunk(
         query(docRef, where('userId', '==', userId))
       );
       const cards = querySnapshot.docs.map((document) => document.data());
-      
+
       return cards;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -59,25 +60,18 @@ export const getCreditCardByUserId = createAsyncThunk(
 // End of Get Credit Cards of the user.
 
 // start of Delete Credit Card:
-// export const deleteCreditCard = createAsyncThunk(
-//   'card/addCreditCard',
-//   async (payload, { rejectWithValue }) => {
-//     try {
-//       const { id, name, number, expiration, cvc } = payload;
-//       const docRef = doc(db, 'credit-cards', id);
-//       await setDoc(docRef, {
-//         name,
-//         number,
-//         expiration,
-//         cvc,
-//       });
+export const deleteCreditCard = createAsyncThunk(
+  'card/deleteCreditCard',
+  async (payload, { rejectWithValue }) => {
+    try {
+      await deleteDoc(doc(db, 'credit-cards', payload.cardId));
 
-//       return { id, name, number, expiration, cvc };
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
+      return {};
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 // End of Delete Credit Card.
 
 const cardsSlice = createSlice({
@@ -97,7 +91,7 @@ const cardsSlice = createSlice({
     builder.addCase(addCreditCard.fulfilled, (state, action) => {
       state.loading = false;
       state.card = [...state.card, action.payload];
-      state.signedup = true;
+      state.error = false;
     });
     builder.addCase(addCreditCard.rejected, (state, action) => {
       state.loading = false;
@@ -111,9 +105,25 @@ const cardsSlice = createSlice({
     builder.addCase(getCreditCardByUserId.fulfilled, (state, action) => {
       state.loading = false;
       state.userCards = action.payload;
-      state.signedup = true;
+      state.error = null;
     });
     builder.addCase(getCreditCardByUserId.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    // Delete Credit Cards Cases:
+    builder.addCase(deleteCreditCard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteCreditCard.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userCards = state.userCards.filter(
+        (card) => card.id !== action.payload.cardId
+      );
+      state.error = false;
+    });
+    builder.addCase(deleteCreditCard.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

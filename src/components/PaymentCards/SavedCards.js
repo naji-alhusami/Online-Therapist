@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import { MdOutlinePayment } from 'react-icons/md';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCreditCardByUserId } from '../../features/cards/cardsSlice';
+import {
+  getCreditCardByUserId,
+  deleteCreditCard,
+} from '../../features/cards/cardsSlice';
 
 import Button from '../ui/Button';
 
@@ -21,6 +24,20 @@ const SavedCards = () => {
 
   const cardInformation = useSelector((state) => state.cards.userCards);
   console.log(cardInformation);
+
+  const navigate = useNavigate();
+  const handleDeleteCard = (id) => {
+    dispatch(deleteCreditCard({ cardId: id }));
+
+    const thanksData = {
+      paragraphOne: 'Your Credit Card Has Beed Deleted.',
+      paragraphTwo: 'Please Check Your Saved Cards Again.',
+      link: '/savedCards',
+      page: 'Saved Cards',
+    };
+
+    navigate('/thanks', { state: thanksData });
+  };
 
   const { t } = useTranslation();
   const responsive = {
@@ -78,7 +95,7 @@ const SavedCards = () => {
                   />
                   <button
                     type="button"
-                    // onClick={() => handleDeleteCard(card)}
+                    onClick={() => handleDeleteCard(card.cardId)}
                     className="m-5 bg-cyan-400 hover:bg-cyan-500 hover:text-white rounded-md box-border p-2"
                   >
                     Delete Card
