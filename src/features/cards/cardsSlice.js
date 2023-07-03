@@ -43,13 +43,13 @@ export const getCreditCardByUserId = createAsyncThunk(
     try {
       const auth = getAuth();
       const userId = auth.currentUser.uid;
-      console.log(userId);
+
       const docRef = collection(db, 'credit-cards');
       const querySnapshot = await getDocs(
         query(docRef, where('userId', '==', userId))
       );
       const cards = querySnapshot.docs.map((document) => document.data());
-      console.log(cards);
+      
       return cards;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -109,7 +109,6 @@ const cardsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getCreditCardByUserId.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       state.userCards = action.payload;
       state.signedup = true;

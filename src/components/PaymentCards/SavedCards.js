@@ -14,12 +14,13 @@ import Button from '../ui/Button';
 
 const SavedCards = () => {
   const dispatch = useDispatch();
-  const cardInformation = useSelector((state) => state.cards.userCards);
-  console.log(cardInformation);
 
   useEffect(() => {
     dispatch(getCreditCardByUserId());
   }, [dispatch]);
+
+  const cardInformation = useSelector((state) => state.cards.userCards);
+  console.log(cardInformation);
 
   const { t } = useTranslation();
   const responsive = {
