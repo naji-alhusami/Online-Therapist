@@ -42,7 +42,7 @@ import AppointmentPart from './AppointmentPart';
 import TherapistPart from './TherapistPart';
 import Communications from './Communications';
 import Slider from './BlogsSlider/Slider';
-import PurchaseTickets from './PurchaseTickets';
+import Tickets from './Tickets';
 
 const Home = () => {
   window.scrollTo(0, 0);
@@ -52,7 +52,7 @@ const Home = () => {
       <TherapistPart />
       <Communications />
       <Slider />
-      <PurchaseTickets />
+      <Tickets />
     </>
   );
 };

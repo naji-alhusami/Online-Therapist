@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
 
 function Card({
@@ -29,7 +30,11 @@ function Card({
       <h2 className="text-2xl flex justify-center p-6 md:text-lg lg:text-2xl">
         {price}
       </h2>
-      {buttonPreview && <Button button="PURCHASE" />}
+      {buttonPreview && (
+        <Link to="/purchaseTickets">
+          <Button button="PURCHASE" />
+        </Link>
+      )}
     </div>
   );
 }

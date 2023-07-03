@@ -21,6 +21,7 @@ import Thanks from './components/Thanks/Thanks';
 import UpdateUserProfile from './components/UpdateUserProfile/UpdateUserProfile';
 import SavedCards from './components/PaymentCards/SavedCards';
 import AddCards from './components/PaymentCards/AddCards';
+import PurchaseTickets from './components/PurchaseTickets/PurchaseTickets';
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
 // import Bookingradio from './Components/booking/Bookingradio';
@@ -84,6 +85,7 @@ function App() {
         <Route path="/updateUserProfile" element={<UpdateUserProfile />} />
         <Route path="/savedCards" element={<SavedCards />} />
         <Route path="/addCards" element={<AddCards />} />
+        <Route path="/purchaseTickets" element={<PurchaseTickets />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route element={<RequireAuth />} />
 

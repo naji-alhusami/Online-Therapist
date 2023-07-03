@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Counselor from './Counselor';
 import Card from './Card';
 
-function PurchaseTickets() {
+function Tickets() {
   const { t } = useTranslation();
 
   return (
@@ -41,4 +41,4 @@ function PurchaseTickets() {
   );
 }
 
-export default PurchaseTickets;
+export default Tickets;

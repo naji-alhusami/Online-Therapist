@@ -1,45 +1,18 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { MdOutlinePayment } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
-import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
-import { MdOutlinePayment } from 'react-icons/md';
-import 'react-credit-cards/es/styles-compiled.css';
-import 'react-multi-carousel/lib/styles.css';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  getCreditCardByUserId,
-  deleteCreditCard,
-} from '../../features/cards/cardsSlice';
-
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
 
-const SavedCards = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCreditCardByUserId());
-  }, [dispatch]);
-
+const PurchaseTickets = () => {
+  const { t } = useTranslation();
   const cardInformation = useSelector((state) => state.cards.userCards);
   console.log(cardInformation);
 
-  const navigate = useNavigate();
-  const handleDeleteCard = (id) => {
-    dispatch(deleteCreditCard({ cardId: id }));
-
-    const thanksData = {
-      paragraphOne: 'Your Credit Card Has Beed Deleted.',
-      paragraphTwo: 'Please Check Your Saved Cards Again.',
-      link: '/savedCards',
-      page: 'Saved Cards',
-    };
-
-    navigate('/thanks', { state: thanksData });
-  };
-
-  const { t } = useTranslation();
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -60,16 +33,15 @@ const SavedCards = () => {
   };
 
   const isCardSliderEmpty = Object.keys(cardInformation).length === 0;
-
   return (
     <div className=" m-16">
       <h1 className="font-semibold text-3xl md:text-4xl md:mb-5 lg:text-5xl uppercase">
-        YOUR SAVED CARDS
+        SELECT CARD
       </h1>
       <p className=" w-auto">
-        We only support cards as a payment method at the moment!
+        Please select the card you want to buy the tickets with
       </p>
-      <div className="flex flex-col items-center justify-center mt-28">
+      <div className="flex flex-col items-center justify-center mt-20">
         {isCardSliderEmpty ? (
           <>
             <MdOutlinePayment className="text-6xl text-gray mx-auto" />
@@ -93,24 +65,20 @@ const SavedCards = () => {
                     expiry={card.expiration}
                     cvc={card.cvc}
                   />
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteCard(card.cardId)}
-                    className="m-5 bg-cyan-400 hover:bg-cyan-500 hover:text-white rounded-md box-border p-2"
-                  >
-                    Delete Card
-                  </button>
                 </div>
               );
             })}
           </Carousel>
         )}
+        <p className="text-3xl w-auto my-12">
+          Click Confirm To Use The Selected Card To Purchase 5 Tickets For 10$
+        </p>
+        <Link to="/thanks">
+          <Button button="CONFIRM PURCHASE" />
+        </Link>
       </div>
-      <Link to="/addCards">
-        <Button button="Add New Card" />
-      </Link>
     </div>
   );
 };
 
-export default SavedCards;
+export default PurchaseTickets;
