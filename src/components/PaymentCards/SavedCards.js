@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
@@ -7,13 +7,19 @@ import { MdOutlinePayment } from 'react-icons/md';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import 'react-multi-carousel/lib/styles.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCreditCardByUserId } from '../../features/cards/cardsSlice';
 
-import { useSelector } from 'react-redux';
 import Button from '../ui/Button';
 
 const SavedCards = () => {
-  const cardInformation = useSelector((state) => state.cards.card);
+  const dispatch = useDispatch();
+  const cardInformation = useSelector((state) => state.cards.userCards);
   console.log(cardInformation);
+
+  useEffect(() => {
+    dispatch(getCreditCardByUserId());
+  }, [dispatch]);
 
   const { t } = useTranslation();
   const responsive = {
@@ -59,9 +65,11 @@ const SavedCards = () => {
           >
             {cardInformation.map((card) => {
               return (
-                <div className="flex flex-col justify-center items-center relative">
+                <div
+                  key={uuidv4()}
+                  className="flex flex-col justify-center items-center relative"
+                >
                   <Cards
-                    key={uuidv4()}
                     name={card.name}
                     number={card.number}
                     expiry={card.expiration}

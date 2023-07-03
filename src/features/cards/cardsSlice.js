@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+} from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
-
+import { getAuth } from 'firebase/auth';
 import { db } from '../../firebase-config';
 
 // start of Add Credit Card:
@@ -29,26 +36,48 @@ export const addCreditCard = createAsyncThunk(
 );
 // End of Add Credit Card.
 
-// start of Delete Credit Card:
-export const deleteCreditCard = createAsyncThunk(
-  'card/addCreditCard',
-  async (payload, { rejectWithValue }) => {
+// start of Get Credit Cards of the user:
+export const getCreditCardByUserId = createAsyncThunk(
+  'card/getCreditCardByUserId',
+  async (_, { rejectWithValue }) => {
     try {
-      const { id, name, number, expiration, cvc } = payload;
-      const docRef = doc(db, 'credit-cards', id);
-      await setDoc(docRef, {
-        name,
-        number,
-        expiration,
-        cvc,
-      });
-
-      return { id, name, number, expiration, cvc };
+      const auth = getAuth();
+      const userId = auth.currentUser.uid;
+      console.log(userId);
+      const docRef = collection(db, 'credit-cards');
+      const querySnapshot = await getDocs(
+        query(docRef, where('userId', '==', userId))
+      );
+      const cards = querySnapshot.docs.map((document) => document.data());
+      console.log(cards);
+      return cards;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+// End of Get Credit Cards of the user.
+
+// start of Delete Credit Card:
+// export const deleteCreditCard = createAsyncThunk(
+//   'card/addCreditCard',
+//   async (payload, { rejectWithValue }) => {
+//     try {
+//       const { id, name, number, expiration, cvc } = payload;
+//       const docRef = doc(db, 'credit-cards', id);
+//       await setDoc(docRef, {
+//         name,
+//         number,
+//         expiration,
+//         cvc,
+//       });
+
+//       return { id, name, number, expiration, cvc };
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
 // End of Delete Credit Card.
 
 const cardsSlice = createSlice({
@@ -56,6 +85,7 @@ const cardsSlice = createSlice({
   initialState: {
     loading: false,
     card: [],
+    userCards: [],
     error: null,
   },
 
@@ -74,19 +104,20 @@ const cardsSlice = createSlice({
       state.error = action.payload;
     });
 
-    // Add Credit Card Cases:
-    // builder.addCase(deleteCreditCard.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(deleteCreditCard.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.card = [...state.card, action.payload];
-    //   state.signedup = true;
-    // });
-    // builder.addCase(deleteCreditCard.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // });
+    // Get Credit Cards Cases:
+    builder.addCase(getCreditCardByUserId.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getCreditCardByUserId.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.loading = false;
+      state.userCards = action.payload;
+      state.signedup = true;
+    });
+    builder.addCase(getCreditCardByUserId.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
 
