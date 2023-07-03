@@ -168,7 +168,7 @@ const AddCardForm = ({ values, setValues }) => {
   const onSubmitForm = (cardData) => {
     dispatch(
       addCreditCard({
-        id: userInfo.id,
+        userId: userInfo.id,
         name: cardData.name,
         number: cardData.number,
         expiration: cardData.expiration,

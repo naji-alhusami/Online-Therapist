@@ -13,13 +13,7 @@ import Button from '../ui/Button';
 
 const SavedCards = () => {
   const cardInformation = useSelector((state) => state.cards.card);
-  // const [cardsSlider, setCardsSlider] = useState([]);
-
-  // useEffect(() => {
-  //   if (cardInformation) {
-  //     setCardsSlider((prevCards) => [...prevCards, cardInformation]);
-  //   }
-  // }, [cardInformation]);
+  console.log(cardInformation);
 
   const { t } = useTranslation();
   const responsive = {
@@ -60,19 +54,27 @@ const SavedCards = () => {
         ) : (
           <Carousel
             infinite="true"
-            containerClass="w-full"
+            containerClass="w-full m-10"
             responsive={responsive}
           >
             {cardInformation.map((card) => {
               return (
-                <Cards
-                  key={uuidv4()}
-                  className="relative"
-                  name={card.name}
-                  number={card.number}
-                  expiry={card.expiration}
-                  cvc={card.cvc}
-                />
+                <div className="flex flex-col justify-center items-center relative">
+                  <Cards
+                    key={uuidv4()}
+                    name={card.name}
+                    number={card.number}
+                    expiry={card.expiration}
+                    cvc={card.cvc}
+                  />
+                  <button
+                    type="button"
+                    // onClick={() => handleDeleteCard(card)}
+                    className="m-5 bg-cyan-400 hover:bg-cyan-500 hover:text-white rounded-md box-border p-2"
+                  >
+                    Delete Card
+                  </button>
+                </div>
               );
             })}
           </Carousel>
