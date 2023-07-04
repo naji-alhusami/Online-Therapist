@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// import profilePhoto from '../Images/profilePhoto.svg';
+import profilePhoto from '../Images/profilePhoto.svg';
 
 function UpdateUserPicture({ userProfilePicture }) {
   const [displayPicture, setDisplayPicture] = useState(
