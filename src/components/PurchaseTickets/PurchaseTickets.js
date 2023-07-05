@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Button from '../ui/Button';
 import RightArrow from '../Images/RightArrow.svg';
 import LeftArrow from '../Images/LeftArrow.svg';
@@ -121,9 +121,13 @@ const PurchaseTickets = () => {
           Click Confirm To Use The Selected Card To Purchase {ticket} For{' '}
           {price}
         </p>
-        <Link to="/thanks" className="mb-16">
-          <Button button="CONFIRM PURCHASE" disabled={activateButton} />
-        </Link>
+        {/* <Link to="/thanks" className="mb-16"> */}
+        <Button
+          button="CONFIRM PURCHASE"
+          disabled={activateButton}
+          ticket={ticket}
+        />
+        {/* </Link> */}
       </div>
     </div>
   );

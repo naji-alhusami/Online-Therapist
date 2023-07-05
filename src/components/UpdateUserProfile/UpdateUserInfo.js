@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -13,6 +13,11 @@ import {
 import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
+  const cardNumbers = useSelector((state) => state.cards.userCards);
+  const numberOfCards = cardNumbers.length;
+  const tickets = useSelector((state) => state.tickets.ticket);
+  console.log(tickets);
+
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
@@ -167,7 +172,7 @@ const UpdateUserInfo = ({ userInfo }) => {
   // const isFileUploaded = state.profilePicture !== userInfo.profilePictureURL;
   // console.log(state);
   // console.log(isFileUploaded);
-  
+
   return (
     <div>
       <div className="flex flex-col items-center md:flex md:flex-row md:items-start ">
@@ -422,25 +427,25 @@ const UpdateUserInfo = ({ userInfo }) => {
 
           {/* Upload Profile Picture */}
           {/* {!isFileUploaded && ( */}
-            <div className="flex flex-row justify-start items-center ml-6 mt-8">
-              <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
-              <input
-                {...register('profilePicture', {
-                  required: 'Profile Picture is Required',
-                })}
-                className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
-                type="file"
-                id="file-upload"
-                accept="image/*"
-                onChange={(event) => {
-                  const newProfilePicture = event.target.files[0];
-                  setState((prevState) => ({
-                    ...prevState,
-                    profilePicture: newProfilePicture,
-                  }));
-                }}
-              />
-            </div>
+          <div className="flex flex-row justify-start items-center ml-6 mt-8">
+            <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
+            <input
+              {...register('profilePicture', {
+                required: 'Profile Picture is Required',
+              })}
+              className="bg-white border text-gray-800 shadow-lg rounded-md block p-1 w-[12rem] mr-5 lg:w-[16rem]"
+              type="file"
+              id="file-upload"
+              accept="image/*"
+              onChange={(event) => {
+                const newProfilePicture = event.target.files[0];
+                setState((prevState) => ({
+                  ...prevState,
+                  profilePicture: newProfilePicture,
+                }));
+              }}
+            />
+          </div>
           {/* )} */}
 
           <h1 className="text-4xl ml-5 my-10">
@@ -579,10 +584,11 @@ const UpdateUserInfo = ({ userInfo }) => {
             <div className="flex flex-rows gap-10 mt-8 mb-16">
               <div className="flex flex-col ">
                 <div className="lg:text-lg text-sm mb-2">
-                  {t('3 Cards Added')}
+                  {numberOfCards} Cards Added
                 </div>
                 <button
                   type="button"
+                  onClick={() => navigate('/savedCards')}
                   className="lg:text-2xl md:text-1xl sm:text-sm rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
                 >
                   {t('SHOW CARDS')}
@@ -591,10 +597,11 @@ const UpdateUserInfo = ({ userInfo }) => {
 
               <div className="flex flex-col">
                 <div className="lg:text-lg text-sm mb-2 ">
-                  {t('10 Tickets Remaining')}
+                  {tickets} Tickets Remaining
                 </div>
                 <button
                   type="button"
+                  onClick={() => navigate('/')}
                   className="lg:text-2xl md:text-1xl sm:text-sm rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 hover:text-white"
                 >
                   {t('BUY TICKETS')}

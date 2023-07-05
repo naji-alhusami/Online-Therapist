@@ -16,22 +16,22 @@ function Tickets() {
       </h4>
       <div className=" flex flex-col md:flex-row items-center justify-around w-full lg:h-80 ">
         <Card
-          ticket={t('5 TICKETS')}
-          price="10$"
+          ticket="5"
+          price="10"
           button={t('PURCHASE')}
           buttonPreview
         />
 
         <Card
-          ticket={t('25 TICKETS')}
-          price="40$"
+          ticket="25"
+          price="40"
           button={t('PURCHASE')}
           buttonPreview
         />
 
         <Card
-          ticket={t('50 TICKETS')}
-          price="70$"
+          ticket="50"
+          price="70"
           button={t('PURCHASE')}
           buttonPreview
         />

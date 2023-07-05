@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getTicketsNumber } from '../../features/tickets/ticketsSlice';
 
-const Button = ({ button, disabled }) => {
+const Button = ({ button, disabled, ticket }) => {
+  const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
@@ -12,6 +14,19 @@ const Button = ({ button, disabled }) => {
       navigate('/');
     } else {
       setIsError(true);
+    }
+
+    if (ticket) {
+      dispatch(getTicketsNumber({ ticket }));
+
+      const thanksData = {
+        paragraphOne: 'Your Purchase Has Been Submitted,',
+        paragraphTwo: 'Your Tickets Have Been Added To Your Profile.',
+        link: '/',
+        page: 'Home',
+      };
+
+      navigate('/thanks', { state: thanksData });
     }
   };
 

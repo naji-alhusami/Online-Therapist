@@ -26,9 +26,9 @@ function Card({
           {content}
         </p>
       )}
-      <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket}</h2>
+      <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket} TICKETS</h2>
       <h2 className="text-2xl flex justify-center p-6 md:text-lg lg:text-2xl">
-        {price}
+        {price}$
       </h2>
       {buttonPreview && (
         <Link to="/purchaseTickets" state={{ price, ticket }}>
