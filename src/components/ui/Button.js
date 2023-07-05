@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getTicketsNumber } from '../../features/tickets/ticketsSlice';
 
-const Button = ({ button, disabled, ticket }) => {
+const Button = ({ button, disabled, ticket, handleNextQuestion }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.users);
   const navigate = useNavigate();
@@ -33,18 +33,24 @@ const Button = ({ button, disabled, ticket }) => {
   if (isError) {
     return navigate('/homeError');
   }
+
+  const handleClick = () => {
+    handleError();
+    handleNextQuestion();
+  };
+
   return disabled ? (
     <button
-      onClick={handleError}
+      onClick={handleClick}
       type="button"
-      className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
+      className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
     >
       {button}
     </button>
   ) : (
     <button
       disabled={!disabled}
-      onClick={handleError}
+      onClick={handleClick}
       type="button"
       className="flex flex-col justify-start w-fit text-md rounded-md box-border py-2 px-6 transition-all duration-250 bg-gray-400 md:text-2xl"
     >

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 const BookingHeader = () => {
   const { t } = useTranslation();
   return (
-    <div className='m-16' style={{ fontFamily: 'Poppins, sans-serif' }}>
+    <div style={{ fontFamily: 'Poppins, sans-serif' }} className='m-10'>
       <h1 className="tracking-wider uppercase text-4xl mb-10">
         {t("let's match you with the right therapist")}
       </h1>

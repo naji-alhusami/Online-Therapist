@@ -1,17 +1,17 @@
 export const MultipleChoices = [
   {
     id: '1',
-    Qustion: 'What type of coumseling are you looking for?',
-    answer: ['Individual counseling', ' Teen counseling (for my child)'],
+    question: 'What type of coumseling are you looking for?',
+    answer: ['Individual counseling', 'Teen counseling (for my child)'],
   },
   {
     id: '2',
-    Qustion: 'What is your relationship status?',
+    question: 'What is your relationship status?',
     answer: ['Single', 'Married', 'Divorced'],
   },
   {
     id: '3',
-    Qustion: 'Have you ever been in therspy before?',
+    question: 'Have you ever been in therspy before?',
     answer: ['Yes', ' No'],
   },
 ];
@@ -19,7 +19,7 @@ export const MultipleChoices = [
 export const RadioQuestions = [
   {
     id: '1',
-    Qustion: "Are there any specific qualities that you'd like in a counselor?",
+    question: "Are there any specific qualities that you'd like in a counselor?",
     answer: [
       'I prefer a male counselor',
       'I prefer a female counselor',
@@ -29,7 +29,7 @@ export const RadioQuestions = [
   },
   {
     id: '2',
-    Qustion: "Are there any issues you'd like to focus on?",
+    question: "Are there any issues you'd like to focus on?",
     answer: [
       'Depression',
       'Stress and Anxiety',

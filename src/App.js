@@ -22,6 +22,7 @@ import UpdateUserProfile from './components/UpdateUserProfile/UpdateUserProfile'
 import SavedCards from './components/PaymentCards/SavedCards';
 import AddCards from './components/PaymentCards/AddCards';
 import PurchaseTickets from './components/PurchaseTickets/PurchaseTickets';
+import BookingFirst from './components/BookingAppointment/BookingFirst';
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
 // import Bookingradio from './Components/booking/Bookingradio';
@@ -31,7 +32,7 @@ import PurchaseTickets from './components/PurchaseTickets/PurchaseTickets';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
-import BookingHeader from './components/BookingAppointment/BookingHeader';
+// import BookingHeader from './components/BookingAppointment/BookingHeader';
 
 function App() {
   const dispatch = useDispatch();
@@ -87,7 +88,7 @@ function App() {
         <Route path="/savedCards" element={<SavedCards />} />
         <Route path="/addCards" element={<AddCards />} />
         <Route path="/purchaseTickets" element={<PurchaseTickets />} />
-        <Route path="/bookingHeader" element={<BookingHeader />} />
+        <Route path="/bookingFirst/:id" element={<BookingFirst />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route element={<RequireAuth />} />
 

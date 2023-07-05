@@ -22,7 +22,7 @@ const AppointmentPart = () => {
             {t('WE ARE HERE TO')}
           </p>
           <p className="text-5xl mb-5  md:text-7xl lg:text-9xl ">{t('HELP')}</p>
-          <Link to="/bookingHeader">
+          <Link to="/bookingFirst/1">
             <Button button="BOOK AN APPOINTMENT" disabled="false" />
           </Link>
         </div>
