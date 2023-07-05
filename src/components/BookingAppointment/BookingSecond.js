@@ -21,7 +21,7 @@ const BookingSecond = () => {
     if (nextQuestionId <= totalQuestions) {
       navigate(`/bookingSecond/${nextQuestionId}`);
     } else {
-      navigate('/bookingSecond');
+      navigate('/bookingNote');
     }
   };
 

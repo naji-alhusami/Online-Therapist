@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getTicketsNumber } from '../../features/tickets/ticketsSlice';
 
-const Button = ({ button, disabled, ticket, handleNextQuestion }) => {
+const Button = ({
+  button,
+  disabled,
+  ticket,
+  handleNextQuestion,
+  appointment,
+}) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.users);
   const navigate = useNavigate();
@@ -36,7 +42,9 @@ const Button = ({ button, disabled, ticket, handleNextQuestion }) => {
 
   const handleClick = () => {
     handleError();
-    handleNextQuestion();
+    if (appointment) {
+      handleNextQuestion();
+    }
   };
 
   return disabled ? (

@@ -59,6 +59,7 @@ const Booking = ({
           handleNextQuestion={handleNextQuestion}
           button="Next"
           disabled="false"
+          appointment="true"
         />
       </div>
     </div>
