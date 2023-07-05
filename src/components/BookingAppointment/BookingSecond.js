@@ -1,27 +1,27 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import BookingHeader from './BookingHeader';
-import { MultipleChoices } from './BookingQuestionsData';
+import { RadioQuestions } from './BookingQuestionsData';
 import Booking from './Booking';
 
-const BookingFirst = () => {
+const BookingSecond = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const currentQuestion = MultipleChoices.find(
+  const currentQuestion = RadioQuestions.find(
     (question) => question.id === id
   );
-  console.log(currentQuestion);
-
+  
   const currentAnswers = currentQuestion.answer;
+  console.log(currentAnswers);
 
   const handleNextQuestion = () => {
     const nextQuestionId = parseInt(id, 10) + 1;
-    const totalQuestions = MultipleChoices.length;
+    const totalQuestions = RadioQuestions.length;
     if (nextQuestionId <= totalQuestions) {
-      navigate(`/bookingFirst/${nextQuestionId}`);
+      navigate(`/bookingSecond/${nextQuestionId}`);
     } else {
-      navigate('/bookingSecond/1');
+      navigate('/bookingSecond');
     }
   };
 
@@ -29,12 +29,12 @@ const BookingFirst = () => {
     <div>
       <BookingHeader />
       <Booking
-        questionsButton={currentQuestion.question}
-        answersButton={currentAnswers}
+        questionsRadio={currentQuestion.question}
+        answersRadio={currentAnswers}
         handleNextQuestion={handleNextQuestion}
       />
     </div>
   );
 };
 
-export default BookingFirst;
+export default BookingSecond;
