@@ -6,9 +6,8 @@ import Button from '../ui/Button';
 const BookingNote = () => {
   const navigate = useNavigate();
   const handleNextQuestion = () => {
-    navigate('/bookingNote');
+    navigate('/bookingSubmit');
   };
-
 
   return (
     <div className="w-full">
@@ -17,13 +16,13 @@ const BookingNote = () => {
         className="ml-10 mb-5 w-[20rem] md:w-[50rem] h-48 p-3 rounded border border-gray-300 shadow"
         placeholder="Write Something Here..."
       />
-      <div className='m-10'>
-      <Button
-        handleNextQuestion={handleNextQuestion}
-        button="Next"
-        disabled="false"
-        appointment="true"
-      />
+      <div className="m-10">
+        <Button
+          handleNextQuestion={handleNextQuestion}
+          button="Next"
+          disabled="false"
+          appointment="true"
+        />
       </div>
     </div>
   );

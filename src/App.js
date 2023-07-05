@@ -25,6 +25,7 @@ import PurchaseTickets from './components/PurchaseTickets/PurchaseTickets';
 import BookingFirst from './components/BookingAppointment/BookingFirst';
 import BookingSecond from './components/BookingAppointment/BookingSecond';
 import BookingNote from './components/BookingAppointment/BookingNote';
+import BookingSubmit from './components/BookingAppointment/BookingSubmit';
 // import Profilepic from "./Components/UpdateUserInfo/Profilepic"
 // import Bookingtem from './Components/booking/Bookingtem';
 // import Bookingradio from './Components/booking/Bookingradio';
@@ -94,6 +95,7 @@ function App() {
         <Route path="/bookingSecond/:id" element={<BookingSecond />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route path="/bookingNote" element={<BookingNote />} />
+        <Route path="/bookingSubmit" element={<BookingSubmit />} />
         <Route element={<RequireAuth />} />
 
         {/* </Route> */}
