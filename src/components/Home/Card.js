@@ -26,10 +26,14 @@ function Card({
           {content}
         </p>
       )}
-      <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket} TICKETS</h2>
-      <h2 className="text-2xl flex justify-center p-6 md:text-lg lg:text-2xl">
-        {price}$
-      </h2>
+      {ticket && (
+        <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket} TICKETS</h2>
+      )}
+      {price && (
+        <h2 className="text-2xl flex justify-center p-6 md:text-lg lg:text-2xl">
+          {price}$
+        </h2>
+      )}
       {buttonPreview && (
         <Link to="/purchaseTickets" state={{ price, ticket }}>
           <Button button="PURCHASE" disabled="false" />

@@ -31,6 +31,7 @@ import PurchaseTickets from './components/PurchaseTickets/PurchaseTickets';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
+import BookingHeader from './components/BookingAppointment/BookingHeader';
 
 function App() {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function App() {
         <Route path="/savedCards" element={<SavedCards />} />
         <Route path="/addCards" element={<AddCards />} />
         <Route path="/purchaseTickets" element={<PurchaseTickets />} />
+        <Route path="/bookingHeader" element={<BookingHeader />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route element={<RequireAuth />} />
 
