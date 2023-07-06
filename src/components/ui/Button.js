@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getTicketsNumber } from '../../features/tickets/ticketsSlice';
+import { addTicketsNumber } from '../../features/tickets/ticketsSlice';
 
 const Button = ({
   button,
@@ -23,7 +23,7 @@ const Button = ({
     }
 
     if (ticket) {
-      dispatch(getTicketsNumber({ ticket }));
+      dispatch(addTicketsNumber({ ticket }));
 
       const thanksData = {
         paragraphOne: 'Your Purchase Has Been Submitted,',
