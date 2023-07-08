@@ -25,22 +25,21 @@ export const addTicketsNumber = createAsyncThunk(
       const existingData = docSnap.data();
 
       // Convert existing ticket value to a number
-      const existingTicket = Number(existingData.ticket);
+      let numberOfTickets = parseInt(existingData.ticket || 0, 10);
 
       // Convert the new ticket value to a number
       const newTicket = Number(ticket);
 
       // Calculate the updated ticket total
-      const updatedTicketTotal = existingTicket + newTicket;
-      console.log(updatedTicketTotal);
+      numberOfTickets += newTicket;
 
       // Update the document with the updated ticket total
       await setDoc(docRef, {
         ...existingData,
-        ticket: updatedTicketTotal,
+        ticket: numberOfTickets,
       });
 
-      return { ticket };
+      return numberOfTickets;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -51,14 +50,14 @@ export const addTicketsNumber = createAsyncThunk(
 // Start Of Subtract Ticket Number:
 export const getTicketsNumber = createAsyncThunk(
   'card/getTicketsNumber',
-  async (payload, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const auth = getAuth();
       const userId = auth.currentUser.uid;
       const docRef = doc(db, 'users', userId);
-
       // Retrieve the existing document data
       const docSnap = await getDoc(docRef);
+      console.log(docSnap);
 
       return docSnap.ticket;
     } catch (error) {
@@ -72,7 +71,7 @@ const ticketsSlice = createSlice({
   name: 'tickets',
   initialState: {
     loading: false,
-    ticket: 0,
+    ticketsNumber: null,
     error: null,
   },
 
@@ -82,9 +81,9 @@ const ticketsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addTicketsNumber.fulfilled, (state, action) => {
-      console.log(action.payload.ticket);
       state.loading = false;
-      state.ticket += Number(action.payload.ticket);
+      // state.ticket += Number(action.payload);
+      state.ticketsNumber = action.payload;
       state.error = false;
     });
     builder.addCase(addTicketsNumber.rejected, (state, action) => {

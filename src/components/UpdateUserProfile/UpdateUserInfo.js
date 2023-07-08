@@ -15,8 +15,8 @@ import UpdateUserPicture from './UpdateUserPicture';
 const UpdateUserInfo = ({ userInfo }) => {
   const cardNumbers = useSelector((state) => state.cards.userCards);
   const numberOfCards = cardNumbers.length;
-  const tickets = useSelector((state) => state.tickets.ticket);
-  console.log(tickets);
+  const ticketsNumber = useSelector((state) => state.tickets.ticketsNumber);
+  console.log(ticketsNumber);
 
   const dispatch = useDispatch();
 
@@ -597,7 +597,7 @@ const UpdateUserInfo = ({ userInfo }) => {
 
               <div className="flex flex-col">
                 <div className="lg:text-lg text-sm mb-2 ">
-                  {tickets} Tickets Remaining
+                  {ticketsNumber} Tickets Remaining
                 </div>
                 <button
                   type="button"
