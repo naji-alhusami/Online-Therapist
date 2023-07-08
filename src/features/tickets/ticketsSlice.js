@@ -78,7 +78,22 @@ export const subtractTicketsNumber = createAsyncThunk(
     }
   }
 );
-// End Of Subtract Ticket Number:
+// End Of Subtract Ticket Number.
+
+// Start of Load Tickets:
+export const loadTickets = createAsyncThunk(
+  'user/loadTickets',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const docRef = doc(db, 'users', payload.uid);
+      const docSnap = await getDoc(docRef);
+      return docSnap.data();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// End of of Load User.
 
 const ticketsSlice = createSlice({
   name: 'tickets',
@@ -86,6 +101,7 @@ const ticketsSlice = createSlice({
     loading: false,
     ticketsNumber: null,
     error: null,
+    userlogin: false,
   },
 
   extraReducers: (builder) => {
@@ -117,6 +133,28 @@ const ticketsSlice = createSlice({
     });
     builder.addCase(subtractTicketsNumber.rejected, (state, action) => {
       state.loading = false;
+      state.error = action.payload;
+    });
+
+    // Load User Tickets:
+    builder.addCase(loadTickets.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(loadTickets.fulfilled, (state, action) => {
+      state.loading = false;
+      if (action.payload && action.payload.error) {
+        state.ticketsNumber = null;
+        state.userlogin = false;
+        state.error = action.payload.error;
+      } else {
+        state.ticketsNumber = action.payload.ticket;
+        state.userlogin = true;
+        state.error = null;
+      }
+    });
+    builder.addCase(loadTickets.rejected, (state, action) => {
+      state.loading = false;
+      state.user = {};
       state.error = action.payload;
     });
   },
