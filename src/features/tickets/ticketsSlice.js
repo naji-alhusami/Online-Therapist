@@ -93,7 +93,7 @@ export const loadTickets = createAsyncThunk(
     }
   }
 );
-// End of of Load User.
+// End of of Load Tickets.
 
 const ticketsSlice = createSlice({
   name: 'tickets',

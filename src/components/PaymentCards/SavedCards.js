@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
@@ -8,19 +8,12 @@ import { MdOutlinePayment } from 'react-icons/md';
 import 'react-credit-cards/es/styles-compiled.css';
 import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  getCreditCardByUserId,
-  deleteCreditCard,
-} from '../../features/cards/cardsSlice';
+import { deleteCreditCard } from '../../features/cards/cardsSlice';
 
 import Button from '../ui/Button';
 
 const SavedCards = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCreditCardByUserId());
-  }, [dispatch]);
 
   const cardInformation = useSelector((state) => state.cards.userCards);
   console.log(cardInformation);

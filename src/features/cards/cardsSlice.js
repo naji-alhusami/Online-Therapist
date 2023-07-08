@@ -81,6 +81,7 @@ const cardsSlice = createSlice({
     card: [],
     userCards: [],
     error: null,
+    userlogin: false,
   },
 
   extraReducers: (builder) => {
