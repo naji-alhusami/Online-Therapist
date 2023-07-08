@@ -48,18 +48,31 @@ export const addTicketsNumber = createAsyncThunk(
 // End of Add Tickets To The Current User:
 
 // Start Of Subtract Ticket Number:
-export const getTicketsNumber = createAsyncThunk(
-  'card/getTicketsNumber',
+export const subtractTicketsNumber = createAsyncThunk(
+  'card/subtractTicketsNumber',
   async (_, { rejectWithValue }) => {
     try {
       const auth = getAuth();
       const userId = auth.currentUser.uid;
       const docRef = doc(db, 'users', userId);
+
       // Retrieve the existing document data
       const docSnap = await getDoc(docRef);
-      console.log(docSnap);
+      const existingData = docSnap.data();
 
-      return docSnap.ticket;
+      // Get the current ticket number
+      const currentTickets = existingData.ticket || 0;
+
+      // Subtract 1 from the current ticket number
+      const newTickets = currentTickets - 1;
+
+      // Update the document with the new ticket number
+      await setDoc(docRef, {
+        ...existingData,
+        ticket: newTickets,
+      });
+
+      return newTickets;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -92,16 +105,17 @@ const ticketsSlice = createSlice({
     });
 
     // Get Tickets Cases:
-    builder.addCase(getTicketsNumber.pending, (state) => {
+    builder.addCase(subtractTicketsNumber.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getTicketsNumber.fulfilled, (state, action) => {
+    builder.addCase(subtractTicketsNumber.fulfilled, (state, action) => {
       console.log(action.payload);
       state.loading = false;
-      state.ticket -= Number(action.payload);
+      // state.ticket -= Number(action.payload);
+      state.ticketsNumber = action.payload;
       state.error = false;
     });
-    builder.addCase(getTicketsNumber.rejected, (state, action) => {
+    builder.addCase(subtractTicketsNumber.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

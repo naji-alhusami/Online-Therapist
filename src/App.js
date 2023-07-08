@@ -35,6 +35,7 @@ import BookingSubmit from './components/BookingAppointment/BookingSubmit';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
+// import { loadCards } from './features/cards/cardsSlice';
 // import BookingHeader from './components/BookingAppointment/BookingHeader';
 
 function App() {
@@ -49,8 +50,12 @@ function App() {
           dispatch(
             loadUser({ uid: user.uid, emailVerified: user.emailVerified })
           );
+          // dispatch(
+          //   loadCards({ uid: user.uid, emailVerified: user.emailVerified })
+          // );
         } else {
           dispatch(loadUser(null));
+          // dispatch(loadCards(null));
         }
       });
     };

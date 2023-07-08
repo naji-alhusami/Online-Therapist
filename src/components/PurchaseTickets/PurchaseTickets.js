@@ -1,16 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MdOutlinePayment } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 import { useLocation } from 'react-router-dom';
+import { getCreditCardByUserId } from '../../features/cards/cardsSlice';
 import Button from '../ui/Button';
 import RightArrow from '../Images/RightArrow.svg';
 import LeftArrow from '../Images/LeftArrow.svg';
 
 const PurchaseTickets = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCreditCardByUserId());
+  }, [dispatch]);
   const { t } = useTranslation();
   const location = useLocation();
   console.log(location);

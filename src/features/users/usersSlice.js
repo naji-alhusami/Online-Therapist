@@ -250,13 +250,7 @@ const usersSlice = createSlice({
     user: {},
     error: null,
     userlogin: false,
-    // SurveyAnswer: [],
   },
-  // reducers: {
-  //   AddAnswer: (state, action) => {
-  //     state.SurveyAnswer.push(action.payload);
-  //   },
-  // },
 
   extraReducers: (builder) => {
     // Signup Cases:

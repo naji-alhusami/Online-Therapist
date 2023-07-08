@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getTicketsNumber } from '../../features/tickets/ticketsSlice';
+import { subtractTicketsNumber } from '../../features/tickets/ticketsSlice';
 import Button from '../ui/Button';
 
 const BookingSubmit = () => {
   const dispatch = useDispatch();
   const handleNextQuestion = () => {
-    dispatch(getTicketsNumber());
+    dispatch(subtractTicketsNumber());
   };
 
   return (
