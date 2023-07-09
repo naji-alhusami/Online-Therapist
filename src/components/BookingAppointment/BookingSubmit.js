@@ -1,12 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { subtractTicketsNumber } from '../../features/tickets/ticketsSlice';
 import Button from '../ui/Button';
 
 const BookingSubmit = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleNextQuestion = () => {
     dispatch(subtractTicketsNumber());
+    navigate('/bookingConfirm');
   };
 
   return (
@@ -25,7 +28,7 @@ const BookingSubmit = () => {
           </div>
           <Button
             handleNextQuestion={handleNextQuestion}
-            button="Submit"
+            button="SUBMIT"
             disabled="false"
             appointment="true"
           />

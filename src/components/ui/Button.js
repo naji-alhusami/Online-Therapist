@@ -9,6 +9,7 @@ const Button = ({
   ticket,
   handleNextQuestion,
   appointment,
+  appointmentConfirm,
 }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.users);
@@ -42,9 +43,12 @@ const Button = ({
 
   const handleClick = () => {
     handleError();
-    if (appointment) {
+    if (appointment || appointmentConfirm) {
       handleNextQuestion();
     }
+    // if (appointmentConfirm) {
+    //   handleNextQuestion();
+    // }
   };
 
   return disabled ? (

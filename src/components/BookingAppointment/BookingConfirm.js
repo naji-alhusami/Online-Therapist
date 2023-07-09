@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 
-const BookingSubmit = () => {
+const BookingConfirm = () => {
   const navigate = useNavigate();
   const handleNextQuestion = () => {
     navigate('/');
@@ -19,14 +19,16 @@ const BookingSubmit = () => {
       <div className="flex flex-col justify-center items-center m-8">
         <div className="flex flex-col justify-center items-center space-y-8 px-10 pt-8 pb-[1rem] bg-white shadow-lg roundedflex-col lg:w-[37rem] md:w-[30rem] space-y-8 px-10 pt-8 pb-[2rem] bg-white shadow-xl rounded">
           <h1 className="text-2xl capitalize">Request Submitted</h1>
-          <div className="flex gap-2 flex-col">
-            You Will Receive A Confirmation Email Soon, Please Keep An Eye On Your Email
-          </div>
+          <p className="text-center">
+            You Will Receive A Confirmation Email Soon, Please Keep An Eye On
+            Your Email
+          </p>
           <Button
             handleNextQuestion={handleNextQuestion}
-            button="Submit"
+            button="BACK TO HOME"
             disabled="false"
             // appointment="true"
+            appointmentConfirm="true"
           />
         </div>
       </div>
@@ -34,4 +36,4 @@ const BookingSubmit = () => {
   );
 };
 
-export default BookingSubmit;
+export default BookingConfirm;
