@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
+// import { useTranslation } from 'react-i18next';
 import BackgroundImage from '../Images/Background.svg';
 import Error from '../Images/Error.png';
 
 const ErrorPart = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
+  const location = useLocation();
+  const { paragraphOne, paragraphTwo, paragraphThree, link, page } =
+    location.state;
 
   return (
     <div
@@ -18,22 +20,24 @@ const ErrorPart = () => {
         <div className=" flex flex-col items-center   md:flex-col md:items-center  lg:items-center ">
           <p className="text-3xl mb-5 md:text-4xl lg:text-5xl">
             {' '}
-            {t('You Should Login')}
+            {paragraphOne}
           </p>
           <p className="text-3xl mb-5 md:text-4xl lg:text-5xl">
             {' '}
-            {t('To Buy Your Tickets')}
+            {paragraphTwo}
           </p>
           <p className="text-3xl mb-5  md:text-4xl lg:text-5xl ">
-            {t('And Take Your Appointment')}
+            {paragraphThree}
           </p>
-          <button
-            onClick={() => navigate('/login')}
-            type="button"
-            className="text-md mb-8 rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
-          >
-            {t('Login')}
-          </button>
+          <Link to={link}>
+            <button
+              // onClick={() => navigate({ link })}
+              type="button"
+              className="text-md mb-8 rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
+            >
+              {page}
+            </button>
+          </Link>
         </div>
         <img
           className="h-2/3 w-2/3 md:h-1/3 md:w-1/3 lg:h-1/3 lg:w-1/3"

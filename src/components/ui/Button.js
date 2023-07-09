@@ -13,6 +13,8 @@ const Button = ({
 }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.users);
+  const tickets = useSelector((state) => state.tickets.ticketsNumber);
+  console.log(tickets);
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
 
@@ -43,12 +45,12 @@ const Button = ({
 
   const handleClick = () => {
     handleError();
+    if (tickets && tickets > 0) {
+      navigate('/bookingFirst/1');
+    }
     if (appointment || appointmentConfirm) {
       handleNextQuestion();
     }
-    // if (appointmentConfirm) {
-    //   handleNextQuestion();
-    // }
   };
 
   return disabled ? (
