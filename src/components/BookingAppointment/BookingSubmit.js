@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { subtractTicketsNumber } from '../../features/tickets/ticketsSlice';
-import Button from '../ui/Button';
+// import Button from '../ui/Button';
 
 const BookingSubmit = () => {
   const dispatch = useDispatch();
@@ -26,12 +26,19 @@ const BookingSubmit = () => {
           <div className="flex gap-2 flex-col">
             Please Be Aware That This Action Will Cost You A Ticket!
           </div>
-          <Button
+          <button
+            type="button"
+            className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+            onClick={handleNextQuestion}
+          >
+            SUBMIT
+          </button>
+          {/* <Button
             handleNextQuestion={handleNextQuestion}
             button="SUBMIT"
             disabled="false"
             appointment="true"
-          />
+          /> */}
         </div>
       </div>
     </div>

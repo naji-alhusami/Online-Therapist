@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookingHeader from './BookingHeader';
-import Button from '../ui/Button';
+// import Button from '../ui/Button';
 
 const BookingNote = () => {
   const navigate = useNavigate();
@@ -17,12 +17,19 @@ const BookingNote = () => {
         placeholder="Write Something Here..."
       />
       <div className="m-10">
-        <Button
+        <button
+          type="button"
+          className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+          onClick={handleNextQuestion}
+        >
+          NEXT
+        </button>
+        {/* <Button
           handleNextQuestion={handleNextQuestion}
           button="Next"
           disabled="false"
           appointment="true"
-        />
+        /> */}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import { MdOutlinePayment } from 'react-icons/md';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -10,7 +10,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteCreditCard } from '../../features/cards/cardsSlice';
 
-import Button from '../ui/Button';
+// import Button from '../ui/Button';
 
 const SavedCards = () => {
   const dispatch = useDispatch();
@@ -99,9 +99,17 @@ const SavedCards = () => {
           </Carousel>
         )}
       </div>
-      <Link to="/addCards">
+      <button
+        type="button"
+        className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+        onClick={() => navigate('/addCards')}
+      >
+        Add New Card
+      </button>
+
+      {/* <Link to="/addCards">
         <Button button="Add New Card" disabled="false" />
-      </Link>
+      </Link> */}
     </div>
   );
 };

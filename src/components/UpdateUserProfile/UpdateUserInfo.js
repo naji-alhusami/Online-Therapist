@@ -596,9 +596,15 @@ const UpdateUserInfo = ({ userInfo }) => {
               </div>
 
               <div className="flex flex-col">
-                <div className="lg:text-lg text-sm mb-2 ">
-                  {ticketsNumber} Tickets Remaining
-                </div>
+                {ticketsNumber ? (
+                  <div className="lg:text-lg text-sm mb-2 ">
+                    {ticketsNumber} Tickets Remaining
+                  </div>
+                ) : (
+                  <div className="lg:text-lg text-sm mb-2 ">
+                    0 Tickets Remaining
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={() => navigate('/')}

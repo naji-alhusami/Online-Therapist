@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import Button from '../ui/Button';
-// import { RadioQuestions } from './BookingQuestionsData';
+// import Button from '../ui/Button';
 
 const Booking = ({
   questionsButton,
@@ -38,10 +37,7 @@ const Booking = ({
           <input
             type="radio"
             onClick={() => handleSelectedAnswer(index)}
-            className='mr-5'
-            // className={`pl-[1rem] text-xl p-1 text-center capitalize flex items-center lg:w-[30rem] h-[3.5rem] transition-all duration-500 hover:bg-cyan-500 bg-white border-2 rounded-md border-gray-150 hover:text-white ${
-            //   selected === index ? 'bg-cyan-500 text-white' : ''
-            // }`}
+            className="mr-5"
           />
           {answer}
         </div>
@@ -51,16 +47,25 @@ const Booking = ({
   return (
     <div className="grid justify-items-center m-8">
       <div className="flex-col space-y-8 px-10 pt-8 pb-[1rem] bg-white shadow-lg roundedflex-col lg:w-[37rem] md:w-[30rem] space-y-8 px-10 pt-8 pb-[2rem] bg-white shadow-xl rounded">
-        <h1 className="text-2xl capitalize">{questionsButton || questionsRadio}</h1>
+        <h1 className="text-2xl capitalize">
+          {questionsButton || questionsRadio}
+        </h1>
         <div className="flex gap-2 flex-col">
           {answersButton ? allAnswersButton : allAnswersRadio}
         </div>
-        <Button
+        <button
+          type="button"
+          className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+          onClick={handleNextQuestion}
+        >
+          NEXT
+        </button>
+        {/* <Button
           handleNextQuestion={handleNextQuestion}
           button="Next"
           disabled="false"
           appointment="true"
-        />
+        /> */}
       </div>
     </div>
   );
