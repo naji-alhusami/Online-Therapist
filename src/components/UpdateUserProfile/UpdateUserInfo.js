@@ -100,7 +100,6 @@ const UpdateUserInfo = ({ userInfo }) => {
         email: userData.email,
         phoneNumber: userData.phoneNumber,
         profilePicture: userData.profilePicture,
-        // ...(userData.profilePicture && { profilePicture: userData.profilePicture }),
         password: userInfo.password,
       })
     );
@@ -168,10 +167,6 @@ const UpdateUserInfo = ({ userInfo }) => {
     navigate('/thanks', { state: thanksData });
     dispatch(logoutUser());
   };
-
-  // const isFileUploaded = state.profilePicture !== userInfo.profilePictureURL;
-  // console.log(state);
-  // console.log(isFileUploaded);
 
   return (
     <div>

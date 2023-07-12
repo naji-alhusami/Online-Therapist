@@ -27,12 +27,7 @@ import BookingSecond from './components/BookingAppointment/BookingSecond';
 import BookingNote from './components/BookingAppointment/BookingNote';
 import BookingSubmit from './components/BookingAppointment/BookingSubmit';
 import BookingConfirm from './components/BookingAppointment/BookingConfirm';
-// import Profilepic from "./Components/UpdateUserInfo/Profilepic"
-// import Bookingtem from './Components/booking/Bookingtem';
-// import Bookingradio from './Components/booking/Bookingradio';
-// import Note from "./Components/booking/Note"
-// import Submit from './Components/booking/Submit';
-// import Requestsubmit from './Components/booking/RequestSubmit';
+import TherapistProfile from './components/Requirements/TherapistProfile';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
@@ -104,6 +99,7 @@ function App() {
         <Route path="/bookingNote" element={<BookingNote />} />
         <Route path="/bookingSubmit" element={<BookingSubmit />} />
         <Route path="/bookingConfirm" element={<BookingConfirm />} />
+        <Route path="/therapistProfile" element={<TherapistProfile />} />
         <Route element={<RequireAuth />} />
 
         {/* </Route> */}

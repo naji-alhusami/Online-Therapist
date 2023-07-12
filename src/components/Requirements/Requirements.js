@@ -1,9 +1,10 @@
 import React from 'react';
-import Button from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
 import { whyHealing, requirements } from './RequirementsData';
 import requirementImage from '../Images/requirementImage.svg';
 
 const Requirements = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col md:flex-row m-10">
       <div className="w-full ">
@@ -31,7 +32,13 @@ const Requirements = () => {
           })}
         </ul>
         <div className="my-10">
-          <Button button="Get Started" disabled="false" />
+          <button
+            type="button"
+            className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+            onClick={() => navigate('/therapistProfile')}
+          >
+            Get Started
+          </button>
         </div>
       </div>
       <div className="m-20">

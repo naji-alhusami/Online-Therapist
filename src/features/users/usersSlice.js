@@ -106,7 +106,7 @@ export const loginUserWithFacebook = createAsyncThunk(
     }
   }
 );
-// End of Login with Google.
+// End of Login with Facebook.
 
 // Login with Google:
 export const loginUserWithGoogle = createAsyncThunk(
