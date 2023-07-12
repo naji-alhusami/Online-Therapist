@@ -11,7 +11,7 @@ const BookingNote = () => {
 
   return (
     <div className="w-full">
-      <BookingHeader />
+      <BookingHeader note="true" />
       <textarea
         className="ml-10 mb-5 w-[20rem] md:w-[50rem] h-48 p-3 rounded border border-gray-300 shadow"
         placeholder="Write Something Here..."
