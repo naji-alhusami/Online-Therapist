@@ -42,7 +42,7 @@ const AppointmentPart = () => {
 
   return (
     <div
-      className=" w-screen bg-cover bg-top bg-no-repeat"
+      className=" bg-cover bg-top bg-no-repeat"
       style={{ backgroundImage: `url(${BackgroundImage})`, top: 0 }}
     >
       <div className="flex flex-col pt-12 pb-12  items-center md:flex-col   lg:flex-row    lg:justify-evenly lg:items-center md:items-center lg:pt-30 lg:pb-20 md:pt-20">
@@ -54,7 +54,7 @@ const AppointmentPart = () => {
           <p className="text-5xl mb-5  md:text-7xl lg:text-9xl ">{t('HELP')}</p>
           <button
             type="button"
-            className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
+            className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white my-8"
             onClick={handleAppointment}
           >
             BOOK AN APPOINTMENT

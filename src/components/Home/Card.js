@@ -14,7 +14,7 @@ function Card({
   titlePreview,
 }) {
   return (
-    <div className="shadow-zinc-300 h-full w-full my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
+    <div className="shadow-zinc-300 h-full w-screen my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
       {imagePreview && (
         <img className="pt-4  mb-4 w-20 h-20 " src={image} alt={title} />
       )}

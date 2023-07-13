@@ -19,12 +19,12 @@ function About() {
           )}
         </div>
       </div>
-      <div className="flex items-center flex-grow flex-col lg:flex-row pb-16 bg-cyan-50 w-full ">
+      <div className="flex items-center flex-grow flex-col lg:flex-row pb-16 bg-cyan-50 ">
         <div className="self-center lg:ml-[10%] lg:mt-[0%] mt-[2%] pt-8 pb-8">
           <img
             src={Founder}
             alt="man"
-            className=" sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] lg:w-[65em] lg:h-[15em] rounded-md object-cover"
+            className="w-[18rem] h-[18rem] md:w-[220px] md:h-[220px] lg:w-[65em] lg:h-[15em] rounded-md"
           />
         </div>
         <div className="text-gray-700 ml-[10%] lg:ml-[5%] mr-[8%] lg:mt-[0%] mt-[5%] lg:mb-[0%] mb-10 ">

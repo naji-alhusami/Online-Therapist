@@ -10,7 +10,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="relative bg-amber-200 bottom-0 w-screen pt-4 md:flex md:items-center md:justify-between md:p-2 ">
+    <footer className="relative bg-amber-200 bottom-0 w-screen pt-4 md:flex md:items-center md:justify-between md:p-5 ">
       <span className="text-sm ">
         <div className="flex items-center flex-col  lg:items-start lg:ml-16">
           <h1 className=" text-BlackTexts text-4xl font-medium h-[44px]">
@@ -25,38 +25,6 @@ const Footer = () => {
           </p>
 
           <SubscribeForm />
-          {/* <div className=" md:flex ">
-            <div className="flex flex-row mb-4 w-[300px] h-[50px] box-border rounded-lg border-2 border-[#718096]">
-              <form
-                // ref={form}
-                className="w-full"
-                // onSubmit={formik.handleSubmit}
-              >
-                <div>
-                  <input
-                    name="email"
-                    id="email"
-                    // onChange={formik.handleChange}
-                    // value={formik.values.email}
-                    className=" w-full h-[46.5px] rounded-l-lg text-SubTexts text-black-800 placeholder:pl-2 placeholder:text-base"
-                    type="text"
-                    placeholder={t('Enter Your E-Mail')}
-                  />
-                </div>
-              </form>
-              <button
-                // onClick={handleFormSubmit}
-                type="button"
-                className="bg-teal-500 rounded-r-lg w-[74px] h-[47.5px]"
-              >
-                <img
-                  className="w-[24px] h-[24px] top-[18px] left-[310px] items-center mx-auto"
-                  src={Subscribe}
-                  alt="Arrow"
-                />
-              </button>
-            </div>
-          </div> */}
         </div>
       </span>
       <div
