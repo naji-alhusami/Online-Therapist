@@ -1,12 +1,10 @@
 import React from 'react';
-
 import { Link, useLocation } from 'react-router-dom';
-// import { useTranslation } from 'react-i18next';
+
 import BackgroundImage from '../Images/Background.svg';
 import Error from '../Images/Error.png';
 
 const ErrorPart = () => {
-  // const { t } = useTranslation();
   const location = useLocation();
   const { paragraphOne, paragraphTwo, paragraphThree, link, page } =
     location.state;
@@ -31,7 +29,6 @@ const ErrorPart = () => {
           </p>
           <Link to={link}>
             <button
-              // onClick={() => navigate({ link })}
               type="button"
               className="text-md mb-8 rounded-md box-border p-2 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
             >

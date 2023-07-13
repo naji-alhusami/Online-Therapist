@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { useTranslation } from 'react-i18next';
+
+import Card from './Card';
 
 import Video from '../Images/Video.svg';
 import Call from '../Images/Call.svg';
 import Chat from '../Images/Chat.svg';
-import Card from './Card';
 
 function Communications() {
   const { t } = useTranslation();

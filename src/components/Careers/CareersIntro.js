@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
-// import { HashLink as Link } from 'react-router-hash-link';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function CareersIntro() {
-  const { t } = useTranslation();
   const [showContent, setShowContent] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div>

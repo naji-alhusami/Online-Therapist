@@ -1,10 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import SubscribeForm from '../Subscribe/SubscribeForm';
+
 import FacebookLogo from '../Images/FacebookLogo.svg';
 import TwitterLogo from '../Images/TwitterLogo.svg';
 import GoogleLogo from '../Images/GoogleLogo.svg';
-import SubscribeForm from '../Subscribe/SubscribeForm';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -27,11 +29,7 @@ const Footer = () => {
           <SubscribeForm />
         </div>
       </span>
-      <div
-        className="flex flex-col items-center sm:mr-12
-                
-               text-SubTexts font-normal text-xl leading-5 tracking-[0.075px]"
-      >
+      <div className="flex flex-col items-center sm:mr-12 text-SubTexts font-normal text-xl leading-5 tracking-[0.075px]">
         <ul className="flex p-4 items-center sm:text-center mt-3 sm:mt-0 md:space-x-6">
           <li>
             <Link to="/" className="mr-4 hover:underline md:mr-6 ">

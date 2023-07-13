@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
 
 import { logoutUser } from '../../features/users/usersSlice';
-
 import LanguageButton from './LanguageButton';
+
 import Logo from '../Images/Logo.svg';
 
 const Navbar = () => {
@@ -14,10 +14,11 @@ const Navbar = () => {
   const userInfo = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
   const [showNavbarInResponsive, setShowNavbarInResponsive] = useState(false);
   const [showProfileInResponsive, setShowProfileInResponsive] = useState(false);
   const [showAboutInResponsive, setShowAboutInResponsive] = useState(false);
-  const { t } = useTranslation();
 
   // dispatch logout user:
   const logOut = (e) => {
@@ -204,20 +205,20 @@ const Navbar = () => {
                                 );
                               }}
                             >
-                              Update Profile
+                              {t('Update Profile')}
                             </Link>
                             <Link
                               className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
                               to="/savedCards"
                             >
-                              Payment Cards
+                              {t('Payment Cards')}
                             </Link>
                             <button
                               type="button"
                               className="p-2 text-black hover:bg-cyan-400 hover:text-indigo-100"
                               onClick={logOut}
                             >
-                              Log Out
+                              {t('Log Out')}
                             </button>
                           </div>
                         ) : (
@@ -314,20 +315,20 @@ const Navbar = () => {
                       className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
                       to="/updateUserProfile"
                     >
-                      Update Profile
+                      {t('Update Profile')}
                     </Link>
                     <Link
                       className="flex items-center justify-center p-2 text-black hover:bg-cyan-400 hover:text-white"
                       to="/savedCards"
                     >
-                      Payment Cards
+                      {t('Payment Cards')}
                     </Link>
                     <button
                       type="button"
                       className="py-2 text-black hover:bg-cyan-400 hover:text-white"
                       onClick={logOut}
                     >
-                      Log Out
+                      {t('Log Out')}
                     </button>
                   </div>
                 </div>

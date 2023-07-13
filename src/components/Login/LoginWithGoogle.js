@@ -1,15 +1,14 @@
 import React from 'react';
-
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { loginUserWithGoogle } from '../../features/users/usersSlice';
-import Line from '../Images/Line.svg';
+
 import GoogleLogo from '../Images/GoogleLogo.svg';
+import Line from '../Images/Line.svg';
 
 const LoginWithGoogle = () => {
   const dispatch = useDispatch();
-
   const { t } = useTranslation();
 
   const handleLoginGoogle = (event) => {

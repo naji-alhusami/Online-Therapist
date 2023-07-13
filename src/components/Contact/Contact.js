@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import { addContactDetails } from '../../features/contact/contactSlice';
+
 import ContactUs from '../Images/ContactUs.png';
 
 const Options = [
@@ -19,6 +21,7 @@ const Contact = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   const [contactData, setContactData] = useState({
     contactType: '',
     fullName: '',
@@ -91,8 +94,7 @@ const Contact = () => {
       <div className="flex flex-col lg:flex lg:flex-row my-10">
         <form className="mb-20 flex-1" onSubmit={handleSubmit}>
           <p className="font-semibold mb-4 text-2xl">
-            {' '}
-            {t('Type of Contact:')}
+            {t('Type of Contact')}:
           </p>
           <div className="flex flex-col gap-4">
             {Options.map((option) => (
@@ -135,7 +137,7 @@ const Contact = () => {
           {/* Email */}
           <div className="flex flex-col mt-8">
             <div className="flex flex-col mr-5">
-              <p className="font-semibold mb-2">Email:</p>
+              <p className="font-semibold mb-2">{t('Email')}:</p>
               <input
                 type="text"
                 name="email"
@@ -155,11 +157,9 @@ const Contact = () => {
           {/* Details */}
           <div className="flex flex-col mt-8">
             <div className="flex flex-col mr-5">
-              <p className="font-semibold mb-2">Details:</p>
+              <p className="font-semibold mb-2">{t('Details')}:</p>
               <textarea
                 name="details"
-                // value={formData.details}
-                // onChange={handleChange}
                 onChange={handleContactValues}
                 placeholder={t('Enter Your Details Here...')}
                 className="h-[15rem] w-[20rem] lg:w-[30rem] border shadow-lg rounded-lg p-2"
@@ -174,7 +174,7 @@ const Contact = () => {
             type="submit"
             className="my-8 lg:text-xl md:text-1xl rounded-md box-border p-2 transition-all duration-250 text-bold bg-cyan-400 hover:bg-cyan-500 hover:text-white"
           >
-            SUBMIT
+            {t('SUBMIT')}
           </button>
         </form>
 

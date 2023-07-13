@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-
 import { useTranslation } from 'react-i18next';
+
 import CareersPhilosophy from './CareersPhilosophy';
 import CareersPositions from './CareersPositions';
 
 const Careers = () => {
-  const { t } = useTranslation();
   const [showContent, setShowContent] = useState(false);
   const positionsRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (showContent) {

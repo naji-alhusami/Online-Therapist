@@ -1,17 +1,15 @@
 import React from 'react';
-
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import TherapistImg from '../Images/TherapistImg.svg';
 
 const TherapistPart = () => {
-  const { t } = useTranslation();
-
   const userLogin = useSelector((state) => state.users);
   const tickets = useSelector((state) => state.tickets.ticketsNumber);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleAppointment = () => {
     if (userLogin.userlogin && tickets && tickets > 0) {
@@ -66,7 +64,7 @@ const TherapistPart = () => {
           className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
           onClick={handleAppointment}
         >
-          BOOK AN APPOINTMENT
+          {t('BOOK AN APPOINTMENT')}
         </button>
       </div>
     </div>

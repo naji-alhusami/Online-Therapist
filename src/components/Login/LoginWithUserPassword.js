@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { loginUser } from '../../features/users/usersSlice';
 import LoginWithGoogle from './LoginWithGoogle';
@@ -17,10 +17,10 @@ const LoginWithUserPassword = () => {
   const navigate = useNavigate();
 
   // dispatch user login with email:
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    const response = await dispatch(loginUser({ email, password }));
+    const response = dispatch(loginUser({ email, password }));
 
     if (response.meta.rejectedWithValue) {
       setError(response.payload);

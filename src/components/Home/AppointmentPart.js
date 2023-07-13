@@ -1,18 +1,17 @@
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import BackgroundImage from '../Images/Background.svg';
 import Sofa from '../Images/Sofa.svg';
 
 const AppointmentPart = () => {
-  const { t } = useTranslation();
-
   const userLogin = useSelector((state) => state.users);
   const tickets = useSelector((state) => state.tickets.ticketsNumber);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleAppointment = () => {
     if (userLogin.userlogin && tickets && tickets > 0) {
@@ -57,7 +56,7 @@ const AppointmentPart = () => {
             className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white my-8"
             onClick={handleAppointment}
           >
-            BOOK AN APPOINTMENT
+            {t('BOOK AN APPOINTMENT')}
           </button>
         </div>
         <img

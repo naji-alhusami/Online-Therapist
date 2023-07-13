@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import CareersData from './CareersData';
+
 import CareersCard from './CareersCard';
+import CareersData from './CareersData';
 
 function ContentC() {
   const { t } = useTranslation();
