@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuidv4 } from 'uuid';
 import SubscribeIconSend from '../Images/Subscribe.svg';
 import { db } from '../../firebase-config';
 
@@ -14,48 +15,57 @@ const SubscribeForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const emailRegex =
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailRegex = /^\S+@\S+\.\S+$/;
     if (!emailRegex.test(email)) {
-      setError('Please enter an email address');
+      setError('Please enter a valid email address!');
+      return;
     }
-    // Email is valid, add it to Firestore
 
-    await addDoc(collection(db, 'emails'), {
-      useremail: email,
+    const subscribeId = uuidv4();
+
+    const docRef = doc(db, 'subscribe', subscribeId);
+    await setDoc(docRef, {
+      userEmail: email,
     });
-    setEmail('');
-    setError('');
-    navigate('/thank-you');
+
+    const thanksData = {
+      paragraphOne:
+        'Your email has been added to the mailing list successfully!',
+      paragraphTwo: '',
+      link: '/',
+      page: 'Home',
+    };
+
+    navigate('/thanks', { state: thanksData });
   };
 
   return (
-    <div className="pt-[2rem] sm:w[5rem]">
+    <div className="mt-5">
       <form>
-        <label htmlFor="email">
+        <div className="mt-2">
+          {error && <p className="text-lg text-red-600">{error}</p>}
+        </div>
+        <div className="flex flex-row">
           <input
-            className=" w-[15rem] h-[2.5rem] text-xl leading-loose text-gray-500 bg-white border-2 text-left border-gray-500 "
+            className=" w-[15rem] h-[2.5rem] text-xl text-gray-500 bg-white border-2 text-left border-gray-500 "
             type="emailSubscribe"
             id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder={t('Enter your e-mail')}
           />
-
           <button
-            className="  w-[3rem] h-[2.5rem] leading-loose bg-[#2DD3E3] border-2  rounded-br-md border-gray-500 translate-y-1  hover:bg-cyan-500 hover:text-white "
+            className="  w-[3rem] h-[2.5rem] bg-[#2DD3E3] border-2  rounded-br-md border-gray-500 hover:bg-cyan-500 "
             type="submit"
             onClick={handleSubmit}
           >
             <img
               src={SubscribeIconSend}
               alt="sendicon"
-              className="  hover:img-white mx-auto w-[1.5rem]"
+              className="hover:img-white mx-auto w-[1.5rem]"
             />
           </button>
-          <div>{error && <p>{error}</p>}</div>
-          <div />
-        </label>
+        </div>
       </form>
     </div>
   );

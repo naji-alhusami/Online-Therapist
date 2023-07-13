@@ -29,36 +29,30 @@ function BlogsArticle() {
     <div
       data-testid="blogarticle"
       id={id}
-      className=" flex flex-col justify-center items-start lg:ml-[12rem] sm:ml-[10rem]"
+      className=" flex flex-col items-center m-12 md:m-32"
     >
-      <img
-        className=" rounded-xl p-9 xl:w-[60rem] xl:h-[35rem] md:h-[35rem] md:w-[50rem] sm:h-[15rem] sm:w-[22rem] "
-        src={imageurl}
-        alt="article"
-      />
-      <div className="space-y-9  ml-10 xl:w-[55rem] sm:w-[30rem]">
-        <h1 className=" 2xl:text-5xl sm:text-4xl uppercase ">
-          {t(`${filterbyid[0].header}`)}
-        </h1>
-        <p className=" 2xl:text-l sm:text-m font-light leading-loose uppercase">
+      <img className=" rounded-xl my-4 w-full" src={imageurl} alt="article" />
+      <div className="">
+        <h1 className="my-8 text-2xl">{t(`${filterbyid[0].header}`)}</h1>
+        <p className=" font-light uppercase">
           {t(`${filterbyid[0].paragraph}`)}
         </p>
-        <div className="pt-[2rem]">
-          <h4 className="2xl:text-5xl sm:text-4xl  uppercase pb-[1rem] ">
+        <div className="">
+          <h4 className="mt-8 mb-5 uppercase">
             {t(`${filterbyid[0].header1}`)}
           </h4>
-          <div className=" pb-[1rem] 2xl:text-l sm:text-l font-light leading-loose uppercase">
+          <div className="font-light leading-loose uppercase">
             <p>{t(`${filterbyid[0].paragraph2}`)}</p>
             <p>{t(`${filterbyid[0].paragraph3}`)}</p>
-            <p>{t(`${filterbyid[0].paragraph4}`)}</p>
+            {filterbyid[0].paragraph4 && (
+              <p>{t(`${filterbyid[0].paragraph4}`)}</p>
+            )}
           </div>
         </div>
       </div>
-      <div className="pl-[2.5rem] space-y-3 pt-3 xl:w-[40rem] sm:w-[15rem]  ">
-        <p className="2xl:text-3xl sm:text-xl uppercase ">
-          {t('Sign up for The Healing blog')}
-        </p>
-        <p className="2xl:text-xl  sm:text-l uppercase ">
+      <div className="flex flex-col items-left justify-start ml-0 mt-8 mb-2">
+        <p className="text-3xl uppercase mb-2">{t('Sign up for The Healing blog')}</p>
+        <p className=" uppercase ">
           {t('A weekly, ad-free Blog that helps you stay in the know.')}
         </p>
 

@@ -37,7 +37,7 @@ function Slider() {
   ));
 
   return (
-    <div className="bg-cyan-50 w-screen">
+    <div className="relative bg-cyan-50 w-screen z-10">
       <div className="lg:ml-32 mx-20 pb-20 ">
         <p className=" py-10 lg:text-5xl text-4xl md:text-2xl">
           {t('RECENT BLOGS')}

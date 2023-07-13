@@ -22,16 +22,15 @@ const BlogsRecommended = ({ id }) => {
   return (
     <div
       id={id}
-      className="xl:w-[75rem] xl:h-[35rem] sm:w-[40rem] sm:h-[rem] xl:pt-[10rem] sm:pt-[5rem] "
+      className="w-fit "
     >
-      <p className=" 2xl:text-3xl sm:text-3xl uppercase ">
+      <p className="text-2xl lg:text-3xl mt-16 mb-8">
         {t('Recommended for you')}
       </p>
-      <div className="xl:flex space-x-4 xl:pt-[3rem]">
+      <div className="flex flex-col md:flex md:flex-row">
         <button
           type="submit"
           onClick={handleBlog1}
-          className=" rounded  xl:w-[27rem] xl:h-[15rem] sm:w-[15rem] sm:h-[10rem] "
         >
           {' '}
           <img src={blogs[0].logo} alt="second" />
@@ -39,7 +38,7 @@ const BlogsRecommended = ({ id }) => {
         <button
           type="submit"
           onClick={handleBlog2}
-          className=" rounded xl:w-[27rem] xl:h-[15rem] sm:w-[15rem] sm:h-[10rem]"
+          className=""
         >
           <img src={blogs[1].logo} alt="third" />
         </button>
