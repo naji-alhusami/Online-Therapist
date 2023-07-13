@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import BookingHeader from './BookingHeader';
-import { MultipleChoices } from './BookingQuestionsData';
 import Booking from './Booking';
+import { MultipleChoices } from './BookingQuestionsData';
 
 const BookingFirst = () => {
   const { id } = useParams();

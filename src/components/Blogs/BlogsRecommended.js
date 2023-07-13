@@ -1,12 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import BlogData from './BlogsData';
 
 const BlogsRecommended = ({ id }) => {
-  const { t } = useTranslation();
-  const blogs = BlogData.filter((blog) => blog.id !== id);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const blogs = BlogData.filter((blog) => blog.id !== id);
 
   const handleBlog1 = (e) => {
     window.scrollTo(0, 0);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 const Booking = ({
   questionsButton,
@@ -9,6 +10,7 @@ const Booking = ({
   handleNextQuestion,
 }) => {
   const [selected, setSelected] = useState(null);
+  const { t } = useTranslation();
 
   const handleSelectedAnswer = (index) => {
     setSelected(index);
@@ -56,7 +58,7 @@ const Booking = ({
           className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
           onClick={handleNextQuestion}
         >
-          NEXT
+          {t('NEXT')}
         </button>
       </div>
     </div>

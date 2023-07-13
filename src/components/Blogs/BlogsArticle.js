@@ -1,17 +1,19 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+
 import BlogData from './BlogsData';
 import SubscribeForm from '../Subscribe/SubscribeForm';
 import BlogsRecommended from './BlogsRecommended';
+
 import Blog1 from '../Images/Blog1.jpg';
 import Blog2 from '../Images/Blog2.jpg';
 import Blog3 from '../Images/Blog3.jpg';
 
 function BlogsArticle() {
+  window.scrollTo(0, 0);
   const { t } = useTranslation();
 
-  window.scrollTo(0, 0);
 
   const { id } = useParams();
   const filterbyid = BlogData.filter((blog) => blog.id === id);

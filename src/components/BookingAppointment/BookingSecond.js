@@ -1,17 +1,16 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import BookingHeader from './BookingHeader';
-import { RadioQuestions } from './BookingQuestionsData';
 import Booking from './Booking';
+import { RadioQuestions } from './BookingQuestionsData';
 
 const BookingSecond = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const currentQuestion = RadioQuestions.find(
-    (question) => question.id === id
-  );
-  
+  const currentQuestion = RadioQuestions.find((question) => question.id === id);
+
   const currentAnswers = currentQuestion.answer;
 
   const handleNextQuestion = () => {
