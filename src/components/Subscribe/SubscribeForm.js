@@ -41,7 +41,7 @@ const SubscribeForm = () => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-8">
       <form>
         <div className="mt-2">
           {error && <p className="text-lg text-red-600">{error}</p>}
@@ -53,7 +53,7 @@ const SubscribeForm = () => {
             id="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder={t('Enter your e-mail')}
+            placeholder={t('Enter Your Email')}
           />
           <button
             className="  w-[3rem] h-[2.5rem] bg-[#2DD3E3] border-2  rounded-br-md border-gray-500 hover:bg-cyan-500 "

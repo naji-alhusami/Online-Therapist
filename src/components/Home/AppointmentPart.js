@@ -47,7 +47,6 @@ const AppointmentPart = () => {
       <div className="flex flex-col pt-12 pb-12  items-center md:flex-col   lg:flex-row    lg:justify-evenly lg:items-center md:items-center lg:pt-30 lg:pb-20 md:pt-20">
         <div className=" flex flex-col items-center   md:flex-col md:items-center  lg:items-center ">
           <p className="text-3xl mb-5 md:text-4xl lg:text-5xl">
-            {' '}
             {t('WE ARE HERE TO')}
           </p>
           <p className="text-5xl mb-5  md:text-7xl lg:text-9xl ">{t('HELP')}</p>

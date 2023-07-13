@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import Button from '../ui/Button';
 
@@ -14,6 +15,8 @@ function Card({
   contentPreview,
   titlePreview,
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="shadow-zinc-300 h-full w-2/3 my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
       {imagePreview && (
@@ -28,7 +31,7 @@ function Card({
         </p>
       )}
       {ticket && (
-        <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket} TICKETS</h2>
+        <h2 className="text-2xl md:text-2xl lg:text-4xl">{ticket} {t('TICKETS')}</h2>
       )}
       {price && (
         <h2 className="text-2xl flex justify-center p-6 md:text-lg lg:text-2xl">
@@ -37,7 +40,7 @@ function Card({
       )}
       {buttonPreview && (
         <Link to="/purchaseTickets" state={{ price, ticket }}>
-          <Button button="PURCHASE" disabled="false" />
+          <Button button={t('PURCHASE')} disabled="false" />
         </Link>
       )}
     </div>

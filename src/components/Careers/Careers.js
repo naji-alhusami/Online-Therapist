@@ -27,7 +27,7 @@ const Careers = () => {
           </div>
           <div className="lg:text-lg text-base leading-6 lg:mt-24 mt-16 lg:ml-28 ml-10 lg:mr-52 md:mr-20 mr-10 text-gray-700">
             {t(
-              'Our SEO software cuts through mountains of data to surface critical insights. We build and maintain systems that process massive amounts of data (we are talking 36 trillion records per day and multiple petabytes of storage.) We model transparent and empathetic marketing for the world. We educate our community, making every effort to help them improve their skill. And we do it all by fostering a culture that encourages accountability, empathy, and transparency.'
+              'Our SEO software cuts through mountains of data to surface critical insights. We build and maintain systems that process massive amounts of data (we&apos;re talking 36 trillion records per day and multiple petabytes of storage.) We model transparent and empathetic marketing for the world. We educate our community, making every effort to help them improve their skill. And we do it all by fostering a culture that encourages accountability, empathy, and transparency.'
             )}
           </div>
           <div className="lg:text-2xl text-lg leading-6 mt-20 lg:ml-28 ml-10 text-gray-700">

@@ -94,7 +94,7 @@ const Contact = () => {
       <div className="flex flex-col lg:flex lg:flex-row my-10">
         <form className="mb-20 flex-1" onSubmit={handleSubmit}>
           <p className="font-semibold mb-4 text-2xl">
-            {t('Type of Contact')}:
+            {t('Type of Contact:')}
           </p>
           <div className="flex flex-col gap-4">
             {Options.map((option) => (
@@ -108,7 +108,7 @@ const Contact = () => {
                     checked={contactData.contactType === option}
                     onChange={handleContactTypeOption}
                   />
-                  {`${option}`}
+                  {t(option)}
                 </label>
               </div>
             ))}
