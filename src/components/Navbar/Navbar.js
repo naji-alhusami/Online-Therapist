@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { AiFillCaretDown } from 'react-icons/ai';
+import { useTranslation } from 'react-i18next';
 
 import { logoutUser } from '../../features/users/usersSlice';
 import LanguageButton from './LanguageButton';

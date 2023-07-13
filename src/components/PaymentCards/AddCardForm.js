@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
+import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
-import { useForm } from 'react-hook-form';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import getCitiesOfCountry from './City';
-import {
-  getAllCountries,
-  // getCountryByCode
-} from './Country';
-// import Button from '../ui/Button';
+import { getAllCountries } from './Country';
 import { addCreditCard } from '../../features/cards/cardsSlice';
 
 const AddCardForm = ({ values, setValues }) => {
@@ -23,23 +18,9 @@ const AddCardForm = ({ values, setValues }) => {
   const [cardTypeClass, setCardTypeClass] = useState('');
   const [zipCode, setZIPCode] = useState('');
   const [isCardNumberValid, setCardNumberValid] = useState(false);
-
-  const countries = getAllCountries().map((country) => ({
-    id: uuidv4(),
-    value: country.isoCode,
-    label: country.name,
-  }));
-
-  const handleCountryChange = (event) => {
-    const countryName = event.target.value;
-    setSelectedCountry(countryName);
-    const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
-      id: uuidv4(),
-      value: city.name,
-      label: city.name,
-    }));
-    setCities(citiesOfCountry);
-  };
+  const userInfo = useSelector((state) => state.users.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -47,7 +28,6 @@ const AddCardForm = ({ values, setValues }) => {
     watch,
     formState: { errors },
   } = useForm();
-
   const cardNumberData = watch('number');
 
   useEffect(() => {
@@ -67,6 +47,23 @@ const AddCardForm = ({ values, setValues }) => {
       setCardTypeClass('');
     }
   }, [cardNumberData]);
+
+  const countries = getAllCountries().map((country) => ({
+    id: uuidv4(),
+    value: country.isoCode,
+    label: country.name,
+  }));
+
+  const handleCountryChange = (event) => {
+    const countryName = event.target.value;
+    setSelectedCountry(countryName);
+    const citiesOfCountry = getCitiesOfCountry(countryName).map((city) => ({
+      id: uuidv4(),
+      value: city.name,
+      label: city.name,
+    }));
+    setCities(citiesOfCountry);
+  };
 
   const cvvCodeFormat = (event) => {
     const inputVal = event.target.value.replace(/ /g, ''); // remove all the empty spaces in the input
@@ -162,9 +159,7 @@ const AddCardForm = ({ values, setValues }) => {
     }));
   };
 
-  const userInfo = useSelector((state) => state.users.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
   const onSubmitForm = (cardData) => {
     dispatch(
       addCreditCard({

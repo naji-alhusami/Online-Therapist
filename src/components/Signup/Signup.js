@@ -15,7 +15,6 @@ import signupImage from '../Images/Singup.svg';
 import Line from '../Images/Line.svg';
 
 const Singup = () => {
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -24,10 +23,9 @@ const Singup = () => {
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onSubmitform = (userData) => {
-    // check if async is required!!
-
     dispatch(
       signupUser({
         email: userData.email,

@@ -30,7 +30,6 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
 import { loadTickets } from './features/tickets/ticketsSlice';
-import { getCreditCardByUserId } from './features/cards/cardsSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,11 +43,9 @@ function App() {
           dispatch(
             loadUser({ uid: user.uid, emailVerified: user.emailVerified })
           );
-          dispatch(getCreditCardByUserId());
           dispatch(loadTickets({ uid: user.uid }));
         } else {
           dispatch(loadUser(null));
-          dispatch(getCreditCardByUserId(null));
           dispatch(loadTickets(null));
         }
       });

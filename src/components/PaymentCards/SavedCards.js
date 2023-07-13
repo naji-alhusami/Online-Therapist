@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid';
-import Cards from 'react-credit-cards';
-import { useNavigate } from 'react-router-dom';
-
 import Carousel from 'react-multi-carousel';
-import { MdOutlinePayment } from 'react-icons/md';
-import 'react-credit-cards/es/styles-compiled.css';
 import 'react-multi-carousel/lib/styles.css';
-import { useSelector, useDispatch } from 'react-redux';
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/es/styles-compiled.css';
+import { MdOutlinePayment } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
+
 import {
   getCreditCardByUserId,
   deleteCreditCard,
@@ -17,6 +17,9 @@ import {
 
 const SavedCards = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cardInformation = useSelector((state) => state.cards.userCards);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const load = () => {
@@ -33,9 +36,6 @@ const SavedCards = () => {
     load();
   }, [dispatch]);
 
-  const cardInformation = useSelector((state) => state.cards.userCards);
-
-  const navigate = useNavigate();
   const handleDeleteCard = (id) => {
     dispatch(deleteCreditCard({ cardId: id }));
 
@@ -49,7 +49,6 @@ const SavedCards = () => {
     navigate('/thanks', { state: thanksData });
   };
 
-  const { t } = useTranslation();
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -74,10 +73,10 @@ const SavedCards = () => {
   return (
     <div className=" m-16">
       <h1 className="font-semibold text-3xl md:text-4xl md:mb-5 lg:text-5xl uppercase">
-        YOUR SAVED CARDS
+        {t('YOUR SAVED CARDS')}
       </h1>
       <p className=" w-auto">
-        We only support cards as a payment method at the moment!
+        {t('We only support cards as a payment method at the moment!')}
       </p>
       <div className="flex flex-col items-center justify-center mt-28">
         {isCardSliderEmpty ? (
@@ -108,7 +107,7 @@ const SavedCards = () => {
                     onClick={() => handleDeleteCard(card.cardId)}
                     className="m-5 bg-cyan-400 hover:bg-cyan-500 hover:text-white rounded-md box-border p-2"
                   >
-                    Delete Card
+                    {t('Delete Card')}
                   </button>
                 </div>
               );
@@ -121,12 +120,8 @@ const SavedCards = () => {
         className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl hover:text-white"
         onClick={() => navigate('/addCards')}
       >
-        Add New Card
+        {t('Add New Card')}
       </button>
-
-      {/* <Link to="/addCards">
-        <Button button="Add New Card" disabled="false" />
-      </Link> */}
     </div>
   );
 };

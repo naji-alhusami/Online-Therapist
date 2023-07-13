@@ -13,11 +13,18 @@ import {
 import UpdateUserPicture from './UpdateUserPicture';
 
 const UpdateUserInfo = ({ userInfo }) => {
+  const ticketsNumber = useSelector((state) => state.tickets.ticketsNumber);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cardNumbers = useSelector((state) => state.cards.userCards);
   const numberOfCards = cardNumbers.length;
-  const ticketsNumber = useSelector((state) => state.tickets.ticketsNumber);
-
-  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const { t } = useTranslation();
 
   const [state, setState] = useState({
     fullName: userInfo.fullName || '',
@@ -45,13 +52,7 @@ const UpdateUserInfo = ({ userInfo }) => {
     passwordDataInfoError: '',
   });
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const { t } = useTranslation();
+ 
 
   const validateFamilySize = (value) => {
     const parsedValue = parseInt(value, 10);
@@ -69,7 +70,6 @@ const UpdateUserInfo = ({ userInfo }) => {
     return true;
   };
 
-  const navigate = useNavigate();
 
   const onSubmitForm = (userData) => {
     if (
@@ -213,7 +213,6 @@ const UpdateUserInfo = ({ userInfo }) => {
                     required: 'Please Select an Education Level',
                   })}
                   aria-invalid={errors.educationLevel ? 'true' : 'false'}
-                  // defaultValue=""
                   value={state.educationLevel}
                   onChange={(event) =>
                     setState({ ...state, educationLevel: event.target.value })
@@ -323,7 +322,6 @@ const UpdateUserInfo = ({ userInfo }) => {
                     required: 'Please Select Gender',
                   })}
                   aria-invalid={errors.gender ? 'true' : 'false'}
-                  // defaultValue=""
                   value={state.gender}
                   onChange={(event) =>
                     setState({ ...state, gender: event.target.value })
@@ -417,7 +415,6 @@ const UpdateUserInfo = ({ userInfo }) => {
           </div>
 
           {/* Upload Profile Picture */}
-          {/* {!isFileUploaded && ( */}
           <div className="flex flex-row justify-start items-center ml-6 mt-8">
             <p className="mr-[1.3rem]">{t('Upload Profile Picture')}</p>
             <input
@@ -437,7 +434,6 @@ const UpdateUserInfo = ({ userInfo }) => {
               }}
             />
           </div>
-          {/* )} */}
 
           <h1 className="text-4xl ml-5 my-10">
             <b>{t('Security')}</b>

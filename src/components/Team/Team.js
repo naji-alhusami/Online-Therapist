@@ -1,12 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import TeamCard from './TeamCard';
 import TeamData from './TeamData';
-
-
-// const names = ['Muhammed Mustafa', 'Naji Alhusami', 'Nour Al Maleh'];
-// const job = 'Front-End Developer';
-// const photos = [mohammed, naji, nour];
 
 function Team() {
   window.scrollTo(0, 0);

@@ -1,22 +1,22 @@
 import React from 'react';
-
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import { addTherapistsData } from '../../features/therapists/therapistsSlice';
 
 const TherapistProfile = () => {
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+  const { t } = useTranslation();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const onSubmitForm = (therapistData) => {
     dispatch(
       addTherapistsData({

@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
-import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import SubscribeIconSend from '../Images/Subscribe.svg';
+import { useTranslation } from 'react-i18next';
 import { db } from '../../firebase-config';
 
+import SubscribeIconSend from '../Images/Subscribe.svg';
+
 const SubscribeForm = () => {
-  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

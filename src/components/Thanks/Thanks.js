@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
 
 function Thanks() {
-  const { t } = useTranslation();
   const location = useLocation();
   const { paragraphOne, paragraphTwo, link, page } = location.state;
+  const { t } = useTranslation();
 
   return (
     <div className="pl-[5rem] w-full min-h-screen">

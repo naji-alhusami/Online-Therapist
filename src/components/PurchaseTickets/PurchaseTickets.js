@@ -1,18 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MdOutlinePayment } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
-import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
-import { useLocation } from 'react-router-dom';
+import { MdOutlinePayment } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
+
 import { getCreditCardByUserId } from '../../features/cards/cardsSlice';
+
 import Button from '../ui/Button';
 import RightArrow from '../Images/RightArrow.svg';
 import LeftArrow from '../Images/LeftArrow.svg';
 
 const PurchaseTickets = () => {
   const dispatch = useDispatch();
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [activateButton, setActivateButton] = useState(false);
+  const cardInformation = useSelector((state) => state.cards.userCards);
 
   useEffect(() => {
     dispatch(getCreditCardByUserId());
@@ -21,7 +26,6 @@ const PurchaseTickets = () => {
   const location = useLocation();
   const { ticket, price } = location.state;
 
-  const cardInformation = useSelector((state) => state.cards.userCards);
 
   const responsive = {
     superLargeDesktop: {
@@ -50,21 +54,21 @@ const PurchaseTickets = () => {
   const handlePrevSlide = () => {
     carouselRef.current.previous();
   };
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [activateButton, setActivateButton] = useState(false);
+
   const handleSlideClick = (card) => {
     setSelectedCard(card);
     setActivateButton(true);
   };
+
   const isCardSliderEmpty = Object.keys(cardInformation).length === 0;
-  //   const isButtonDisabled = selectedCard === null;
+
   return (
     <div className="">
       <h1 className="font-semibold text-3xl md:text-4xl md:mb-5 lg:text-5xl uppercase m-16">
-        SELECT CARD
+        {t('SELECT CARD')}
       </h1>
       <p className=" m-16 w-auto">
-        Please select the card you want to buy the tickets with
+        {t('Please select the card you want to buy the tickets with')}
       </p>
       <div className="flex flex-col items-center justify-center mt-20">
         {isCardSliderEmpty ? (
@@ -122,8 +126,7 @@ const PurchaseTickets = () => {
         )}
 
         <p className="text-3xl w-auto m-10">
-          Click Confirm To Use The Selected Card To Purchase {ticket} For{' '}
-          {price}
+          Click Confirm To Use The Selected Card To Purchase {ticket} For {price}
         </p>
         <Button
           button="CONFIRM PURCHASE"

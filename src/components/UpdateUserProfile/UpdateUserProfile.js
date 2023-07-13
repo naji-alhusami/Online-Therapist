@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { useSelector } from 'react-redux';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { useTranslation } from 'react-i18next';
 
 import UpdateUserInfo from './UpdateUserInfo';
@@ -11,7 +11,18 @@ const UpdateUserProfile = () => {
   const { t } = useTranslation();
 
   if (userLoading.loading) {
-    return 'loading...';
+    return (
+      <div
+        className="flex justify-center items-center h-screen"
+        style={{ minHeight: '100vh' }}
+      >
+        <ClipLoader
+          color="#2DD3E3" // Customize the color of the spinner
+          size={60} // Adjust the size of the spinner as desired
+          loading={userLoading.loading}
+        />
+      </div>
+    );
   }
   if (userLoading.userlogin) {
     return (
