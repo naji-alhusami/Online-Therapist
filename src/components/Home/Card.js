@@ -14,12 +14,12 @@ function Card({
   titlePreview,
 }) {
   return (
-    <div className="shadow-zinc-300 h-full w-screen my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
+    <div className="shadow-zinc-300 h-full w-2/3 my-4 flex flex-col items-center justify-evenly shadow-lg  rounded-3xl md:m-12 p-4">
       {imagePreview && (
         <img className="pt-4  mb-4 w-20 h-20 " src={image} alt={title} />
       )}
       {titlePreview && (
-        <h1 className="pt-4 text-center md:text-xl lg:text-3xl   ">{title}</h1>
+        <h1 className="pt-4 text-center md:text-xl lg:text-3xl">{title}</h1>
       )}
       {contentPreview && (
         <p className="text-opacity-50 text-black text-center text-sm md:text-lg lg:text-lg py-4">

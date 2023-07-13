@@ -10,7 +10,6 @@ export const addContactDetails = createAsyncThunk(
     try {
       const contactId = uuidv4();
       const { contactType, fullName, email, details } = payload;
-      console.log(payload);
 
       const docRef = doc(db, 'contact-data', contactId);
       await setDoc(docRef, {

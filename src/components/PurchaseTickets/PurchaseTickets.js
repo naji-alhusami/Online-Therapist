@@ -19,11 +19,9 @@ const PurchaseTickets = () => {
   }, [dispatch]);
   const { t } = useTranslation();
   const location = useLocation();
-  console.log(location);
   const { ticket, price } = location.state;
 
   const cardInformation = useSelector((state) => state.cards.userCards);
-  console.log(cardInformation);
 
   const responsive = {
     superLargeDesktop: {
@@ -127,13 +125,11 @@ const PurchaseTickets = () => {
           Click Confirm To Use The Selected Card To Purchase {ticket} For{' '}
           {price}
         </p>
-        {/* <Link to="/thanks" className="mb-16"> */}
         <Button
           button="CONFIRM PURCHASE"
           disabled={activateButton}
           ticket={ticket}
         />
-        {/* </Link> */}
       </div>
     </div>
   );

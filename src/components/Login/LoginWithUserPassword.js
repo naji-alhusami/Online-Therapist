@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { loginUser } from '../../features/users/usersSlice';
-import LoginWithGoogleFacebook from './LoginWithGoogleFacebook';
+import LoginWithGoogle from './LoginWithGoogle';
 
 const LoginWithUserPassword = () => {
   const { t } = useTranslation();
@@ -72,7 +72,7 @@ const LoginWithUserPassword = () => {
           </Link>
         </div>
       </form>
-      <LoginWithGoogleFacebook />
+      <LoginWithGoogle />
     </div>
   );
 };

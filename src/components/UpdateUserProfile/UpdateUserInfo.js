@@ -16,7 +16,6 @@ const UpdateUserInfo = ({ userInfo }) => {
   const cardNumbers = useSelector((state) => state.cards.userCards);
   const numberOfCards = cardNumbers.length;
   const ticketsNumber = useSelector((state) => state.tickets.ticketsNumber);
-  console.log(ticketsNumber);
 
   const dispatch = useDispatch();
 
@@ -73,9 +72,6 @@ const UpdateUserInfo = ({ userInfo }) => {
   const navigate = useNavigate();
 
   const onSubmitForm = (userData) => {
-    console.log(userInfo);
-    console.log(userData);
-
     if (
       userData.password !== userInfo.password &&
       userData.confirmPassword !== userInfo.password

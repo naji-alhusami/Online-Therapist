@@ -8,22 +8,14 @@ import { useTranslation } from 'react-i18next';
 import {
   signupUser,
   loginUserWithGoogle,
-  loginUserWithFacebook,
 } from '../../features/users/usersSlice';
 
-import facebookicon from '../Images/FacebookLogo.svg';
 import googleicon from '../Images/GoogleLogo.svg';
 import signupImage from '../Images/Singup.svg';
 import Line from '../Images/Line.svg';
 
 const Singup = () => {
   const { t } = useTranslation();
-  // const userInfo = useSelector((state) => state.users);
-  // const { signedup } = useSelector((state) => state.users);
-
-  // const [enteredInput, setEnteredInput] = useState(true);
-  // const [alertitem, showalertitm] = useState(false);
-  // const [error, setError] = useState('');
   const {
     register,
     handleSubmit,
@@ -33,7 +25,7 @@ const Singup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmitform = async (userData) => {
+  const onSubmitform = (userData) => {
     // check if async is required!!
 
     dispatch(
@@ -54,7 +46,7 @@ const Singup = () => {
       paragraphTwo:
         'Please follow the steps in the email to complete and activate your account.',
       link: '/',
-      page: 'Home'
+      page: 'Home',
     };
 
     navigate('/thanks', { state: thanksData });
@@ -285,17 +277,6 @@ const Singup = () => {
             <img src={Line} alt="A line" />
           </div>
           <div className="flex justify-center my-6 gap-x-12">
-            <button
-              type="button"
-              style={{ height: 32, width: 32 }}
-              onClick={() => {
-                dispatch(loginUserWithFacebook());
-                navigate('/');
-              }}
-            >
-              {' '}
-              <img src={facebookicon} alt="facebookicon" />{' '}
-            </button>
             <button
               type="button"
               style={{ height: 32, width: 32 }}

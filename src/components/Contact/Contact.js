@@ -64,7 +64,6 @@ const Contact = () => {
         details: contactData.details,
       })
     );
-    console.log(contactData);
 
     const thanksData = {
       paragraphOne:

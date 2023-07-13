@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid';
 import Cards from 'react-credit-cards';
 import { useNavigate } from 'react-router-dom';
+
 import Carousel from 'react-multi-carousel';
 import { MdOutlinePayment } from 'react-icons/md';
 import 'react-credit-cards/es/styles-compiled.css';
 import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteCreditCard } from '../../features/cards/cardsSlice';
-
-// import Button from '../ui/Button';
+import {
+  getCreditCardByUserId,
+  deleteCreditCard,
+} from '../../features/cards/cardsSlice';
 
 const SavedCards = () => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const load = () => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(getCreditCardByUserId());
+        } else {
+          dispatch(getCreditCardByUserId(null));
+        }
+      });
+    };
+
+    load();
+  }, [dispatch]);
+
   const cardInformation = useSelector((state) => state.cards.userCards);
-  console.log(cardInformation);
 
   const navigate = useNavigate();
   const handleDeleteCard = (id) => {

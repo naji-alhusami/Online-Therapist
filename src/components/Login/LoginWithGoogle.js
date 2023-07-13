@@ -3,27 +3,18 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import {
-  loginUserWithGoogle,
-  loginUserWithFacebook,
-} from '../../features/users/usersSlice';
+import { loginUserWithGoogle } from '../../features/users/usersSlice';
 import Line from '../Images/Line.svg';
-import FacebookLogo from '../Images/FacebookLogo.svg';
 import GoogleLogo from '../Images/GoogleLogo.svg';
 
-const LoginWithGoogleFacebook = () => {
+const LoginWithGoogle = () => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
 
-  const handleLoginGoogle = async (event) => {
+  const handleLoginGoogle = (event) => {
     event.preventDefault();
-    await dispatch(loginUserWithGoogle());
-  };
-
-  const handleLoginFacebook = async (event) => {
-    event.preventDefault();
-    await dispatch(loginUserWithFacebook());
+    dispatch(loginUserWithGoogle());
   };
 
   return (
@@ -34,14 +25,6 @@ const LoginWithGoogleFacebook = () => {
         <img src={Line} alt="A line" className="w-32" />
       </div>
       <div className="flex justify-center my-6 gap-x-20">
-        <button type="button" onClick={handleLoginFacebook}>
-          <img
-            src={FacebookLogo}
-            alt="Facebook logo"
-            className="cursor-pointer"
-          />
-        </button>
-
         <button type="button" onClick={handleLoginGoogle}>
           <img src={GoogleLogo} alt="Google logo" className="cursor-pointer" />
         </button>
@@ -50,4 +33,4 @@ const LoginWithGoogleFacebook = () => {
   );
 };
 
-export default LoginWithGoogleFacebook;
+export default LoginWithGoogle;

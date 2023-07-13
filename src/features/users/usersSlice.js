@@ -6,21 +6,10 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  deleteDoc
-} from 'firebase/firestore';
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import {
-  db,
-  auth,
-  googleAuth,
-  facebookAuth,
-  storage,
-} from '../../firebase-config';
+import { db, auth, googleAuth, storage } from '../../firebase-config';
 
 // start of signup:
 export const signupUser = createAsyncThunk(
@@ -87,26 +76,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 // End of Login.
-
-// Login with Facebook:
-export const loginUserWithFacebook = createAsyncThunk(
-  'user/loginUserWithFacebook',
-  async (_, { rejectWithValue }) => {
-    try {
-      const { user } = await signInWithPopup(auth, facebookAuth);
-      const docRef = doc(db, 'users', user.uid);
-      await setDoc(docRef, {
-        id: user.uid,
-        email: user.email,
-        name: user.displayName,
-      });
-      return { id: user.uid, email: user.email };
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-// End of Login with Facebook.
 
 // Login with Google:
 export const loginUserWithGoogle = createAsyncThunk(
@@ -301,20 +270,6 @@ const usersSlice = createSlice({
       state.error = action.payload;
     });
 
-    // Login with Facebook Cases:
-    builder.addCase(loginUserWithFacebook.pending, () => {});
-    builder.addCase(loginUserWithFacebook.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-      state.userlogin = true;
-      state.error = null;
-    });
-    builder.addCase(loginUserWithFacebook.rejected, (state, action) => {
-      state.loading = false;
-      state.user = {};
-      state.error = action.payload;
-    });
-
     // Update User Cases:
     builder.addCase(updateProfile.pending, (state) => {
       state.loading = true;
@@ -351,13 +306,11 @@ const usersSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(deleteUserAccount.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       state.user = action.payload;
       state.error = null;
     });
     builder.addCase(deleteUserAccount.rejected, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       state.user = {};
       state.error = action.payload;

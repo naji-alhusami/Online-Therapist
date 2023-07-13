@@ -10,10 +10,8 @@ export const addTherapistsData = createAsyncThunk(
     try {
       const therapistId = uuidv4();
       const { userName, email, city, licenseNumber, password } = payload;
-      console.log(payload);
 
       const docRef = doc(db, 'therapists-data', therapistId);
-      console.log(therapistId);
       await setDoc(docRef, {
         therapistId,
         userName,
@@ -45,14 +43,11 @@ const therapistsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addTherapistsData.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       state.therapistsData = action.payload;
       state.error = false;
     });
     builder.addCase(addTherapistsData.rejected, (state, action) => {
-      console.log(action.payload);
-
       state.loading = false;
       state.error = action.payload;
     });

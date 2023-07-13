@@ -18,7 +18,6 @@ const TherapistProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSubmitForm = (therapistData) => {
-    console.log(therapistData);
     dispatch(
       addTherapistsData({
         userName: therapistData.userName,

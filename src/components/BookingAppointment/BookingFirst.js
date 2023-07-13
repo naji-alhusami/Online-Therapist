@@ -11,7 +11,6 @@ const BookingFirst = () => {
   const currentQuestion = MultipleChoices.find(
     (question) => question.id === id
   );
-  console.log(currentQuestion);
 
   const currentAnswers = currentQuestion.answer;
 

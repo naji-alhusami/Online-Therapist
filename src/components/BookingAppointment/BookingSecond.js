@@ -13,7 +13,6 @@ const BookingSecond = () => {
   );
   
   const currentAnswers = currentQuestion.answer;
-  console.log(currentAnswers);
 
   const handleNextQuestion = () => {
     const nextQuestionId = parseInt(id, 10) + 1;

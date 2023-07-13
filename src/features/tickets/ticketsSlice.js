@@ -118,9 +118,7 @@ const ticketsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(subtractTicketsNumber.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
-      // state.ticket -= Number(action.payload);
       state.ticketsNumber = action.payload;
       state.error = false;
     });
