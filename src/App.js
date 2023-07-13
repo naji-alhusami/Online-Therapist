@@ -33,7 +33,6 @@ import Footer from './components/Footer/Footer';
 import { loadUser } from './features/users/usersSlice';
 import { loadTickets } from './features/tickets/ticketsSlice';
 import { getCreditCardByUserId } from './features/cards/cardsSlice';
-// import BookingHeader from './components/BookingAppointment/BookingHeader';
 
 function App() {
   const dispatch = useDispatch();
@@ -101,17 +100,6 @@ function App() {
         <Route path="/bookingConfirm" element={<BookingConfirm />} />
         <Route path="/therapistProfile" element={<TherapistProfile />} />
         <Route element={<RequireAuth />} />
-
-        {/* </Route> */}
-
-        {/* <Route path="/Thank-you" element={<Thankyoupage path="/Thank-you" header="Thank you!" text=" Your email has been added to the mailing list successfully!"/>}/> */}
-        {/* <Route path="/Profilepic" element={<Profilepic />}/>
-       <Route path="/booking1/:id" element={<Bookingtem />}/>
-        <Route path="/booking2/:id" element={<Bookingradio />}/>
-        <Route path="/bookingnote" element={<Note />} />
-        <Route path="/bookingsubmit" element={<Submit />} />
-        <Route path="/Requestsubmit" element={<Requestsubmit />} />
-          */}
       </Routes>
       <Footer />
     </>
