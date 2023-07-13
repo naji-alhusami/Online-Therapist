@@ -439,8 +439,7 @@ const UpdateUserInfo = ({ userInfo }) => {
             <b>{t('Security')}</b>
           </h1>
           <p className="text-xl ml-5 my-10 w-[24rem] lg:w-[30rem]">
-            Please Enter Your Password In Order to Perform Actions (Update
-            Account Or Delete Account)
+            {t('Please Enter Your Password In Order to Perform Actions (Update Account Or Delete Account)')}
           </p>
           {/* Password */}
           <div className="flex flex-row justify-start items-center ml-6 mt-8">
@@ -571,7 +570,7 @@ const UpdateUserInfo = ({ userInfo }) => {
             <div className="flex flex-rows gap-10 mt-8 mb-16">
               <div className="flex flex-col ">
                 <div className="lg:text-lg text-sm mb-2">
-                  {numberOfCards} Cards Added
+                  {numberOfCards} {t('Cards Added')}
                 </div>
                 <button
                   type="button"
@@ -585,11 +584,11 @@ const UpdateUserInfo = ({ userInfo }) => {
               <div className="flex flex-col">
                 {ticketsNumber ? (
                   <div className="lg:text-lg text-sm mb-2 ">
-                    {ticketsNumber} Tickets Remaining
+                    {ticketsNumber} {t('Tickets Remaining')}
                   </div>
                 ) : (
                   <div className="lg:text-lg text-sm mb-2 ">
-                    0 Tickets Remaining
+                    0 {t('Tickets Remaining')}
                   </div>
                 )}
                 <button

@@ -68,7 +68,7 @@ const PurchaseTickets = () => {
         {t('SELECT CARD')}
       </h1>
       <p className=" m-16 w-auto">
-        {t('Please select the card you want to buy the tickets with')}
+        {t('Please select the card you want to buy the tickets with.')}
       </p>
       <div className="flex flex-col items-center justify-center mt-20">
         {isCardSliderEmpty ? (
@@ -126,10 +126,10 @@ const PurchaseTickets = () => {
         )}
 
         <p className="text-3xl w-auto m-10">
-          Click Confirm To Use The Selected Card To Purchase {ticket} For {price}
+          {t('Click Confirm To Use The Selected Card To Purchase')} {ticket} {t('Tickets with')} {price}$
         </p>
         <Button
-          button="CONFIRM PURCHASE"
+          button={t("CONFIRM PURCHASE")}
           disabled={activateButton}
           ticket={ticket}
         />

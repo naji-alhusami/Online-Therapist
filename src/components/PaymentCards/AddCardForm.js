@@ -6,6 +6,7 @@ import { BsFillCreditCardFill } from 'react-icons/bs';
 import { FaCcMastercard, FaCcVisa } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import getCitiesOfCountry from './City';
 import { getAllCountries } from './Country';
@@ -21,6 +22,7 @@ const AddCardForm = ({ values, setValues }) => {
   const userInfo = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const {
     register,
@@ -193,7 +195,7 @@ const AddCardForm = ({ values, setValues }) => {
         <div className="flex flex-col lg:mr-2 xl:mr-10">
           <div className="flex flex-col mb-10">
             <label className=" text-gray-400 text-xl">
-              Supported Card Types
+              {t('Supported Card Types')}
             </label>
             <div className="flex mt-1">
               <div
@@ -231,7 +233,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* Card Number */}
           <div className="relative flex flex-col mb-10">
-            <label className=" text-gray-400 text-xl">Card Number</label>
+            <label className=" text-gray-400 text-xl">{t('Card Number')}</label>
             <div className="relative">
               <input
                 {...register('number', {
@@ -274,7 +276,7 @@ const AddCardForm = ({ values, setValues }) => {
           {/* Expiry Date */}
           <div className="flex flex-row w-full ">
             <div className="w-full flex flex-col mb-10 mr-5">
-              <label className=" text-gray-400 text-xl">Expiry Date</label>
+              <label className=" text-gray-400 text-xl">{t('Expiry Date')}</label>
               <input
                 {...register('expiration', {
                   required: 'Please Enter Expiration',
@@ -299,7 +301,7 @@ const AddCardForm = ({ values, setValues }) => {
 
             {/* CVC Code */}
             <div className="relative w-full flex flex-col mb-10">
-              <label className="text-gray-400 text-xl">CVC Code</label>
+              <label className="text-gray-400 text-xl">{t('CVC Code')}</label>
               <input
                 {...register('cvc', {
                   required: 'Please Enter CVC Code',
@@ -325,7 +327,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* Name On Card */}
           <div className="flex flex-col mb-10">
-            <label className=" text-gray-400 text-xl">Name On Card</label>
+            <label className=" text-gray-400 text-xl">{t('Name On Card')}</label>
             <input
               {...register('name', {
                 required: 'Please Enter Your Full Name',
@@ -356,7 +358,7 @@ const AddCardForm = ({ values, setValues }) => {
         <div className="flex flex-col">
           {/* Country */}
           <div className="flex flex-col mb-[1.6rem]">
-            <label className="mr-[6.8rem] text-gray-400 text-xl">Country</label>
+            <label className="mr-[6.8rem] text-gray-400 text-xl">{t('Country')}</label>
             <select
               {...register('country', {
                 required: 'Please Select Your Country',
@@ -387,7 +389,7 @@ const AddCardForm = ({ values, setValues }) => {
           {/* ZIP Code */}
           <div className="flex flex-col mb-10">
             <label className="mr-[6.8rem] text-gray-400 text-xl">
-              ZIP Code
+              {t('ZIP Code')}
             </label>
             <input
               {...register('zipCode', {
@@ -412,7 +414,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* City */}
           <div className="flex flex-col mb-10">
-            <label className="mr-[6.8rem] text-gray-400 text-xl">City</label>
+            <label className="mr-[6.8rem] text-gray-400 text-xl">{t('City')}</label>
             <select
               {...register('city', {
                 required: 'Please Select Your City',
@@ -440,7 +442,7 @@ const AddCardForm = ({ values, setValues }) => {
 
           {/* Address */}
           <div className="flex flex-col mb-10">
-            <label className="mr-[6.8rem] text-gray-400 text-xl">Address</label>
+            <label className="mr-[6.8rem] text-gray-400 text-xl">{t('Address')}</label>
             <input
               {...register('address', {
                 required: 'Please Enter Your Address',
@@ -470,7 +472,7 @@ const AddCardForm = ({ values, setValues }) => {
         type="submit"
         className="flex flex-col justify-start w-fit text-md  rounded-md box-border py-2 px-6 transition-all duration-250 bg-cyan-400 hover:bg-cyan-500 md:text-2xl"
       >
-        Add Card
+        {t('Add Card')}
       </button>
     </form>
   );
