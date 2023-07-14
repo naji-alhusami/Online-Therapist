@@ -10,8 +10,8 @@ function Thanks() {
   return (
     <div className="pl-[5rem] w-full min-h-screen">
       <p className=" text-4xl mt-[3rem] mb-5">{t('THANK YOU!')}</p>
-      <p className="text-black text-opacity-50 ">{paragraphOne}</p>
-      <p className="text-black text-opacity-50 ">{paragraphTwo}</p>
+      <p className="text-black text-opacity-50 ">{t(paragraphOne)}</p>
+      <p className="text-black text-opacity-50 ">{t(paragraphTwo)}</p>
 
       <Link to={link}>
         <button

@@ -13,7 +13,7 @@ const BookingConfirm = () => {
   return (
     <div className="m-16">
       <h1 className="font-semibold text-3xl md:text-4xl md:mb-5 lg:text-5xl uppercase">
-        {t('Our Request Has Been Submitted!')}
+        {t('YOUR REQUEST HAS BEEN SUBMITTED!')}
       </h1>
       <p className="w-auto">
         {t('You Will Receive An Email Guiding You To Book A Date And Time Soon.')}

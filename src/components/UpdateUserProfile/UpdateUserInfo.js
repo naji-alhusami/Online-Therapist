@@ -102,7 +102,7 @@ const UpdateUserInfo = ({ userInfo }) => {
 
     const thanksData = {
       paragraphOne:
-        'Your Update Profile Information request has been received.',
+        'Your update profile information request has been received.',
       paragraphTwo: '',
       link: '/',
       page: 'Home',

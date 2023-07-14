@@ -40,7 +40,7 @@ const SavedCards = () => {
     dispatch(deleteCreditCard({ cardId: id }));
 
     const thanksData = {
-      paragraphOne: 'Your Credit Card Has Beed Deleted.',
+      paragraphOne: 'Your Credit Card Has Been Deleted.',
       paragraphTwo: 'Please Check Your Saved Cards Again.',
       link: '/savedCards',
       page: 'Saved Cards',

@@ -26,7 +26,7 @@ const Booking = ({
             selected === index ? 'bg-cyan-500 text-white' : ''
           }`}
         >
-          {answer}
+          {t(answer)}
         </button>
       ))
     : null;
@@ -39,17 +39,17 @@ const Booking = ({
             onClick={() => handleSelectedAnswer(index)}
             className="mr-5"
           />
-          {answer}
+          {t(answer)}
         </div>
       ))
     : null;
 
+  const questionText = questionsButton || questionsRadio;
+
   return (
     <div className="grid justify-items-center m-8">
       <div className="flex-col space-y-8 px-10 pt-8 pb-[1rem] bg-white shadow-lg roundedflex-col lg:w-[37rem] md:w-[30rem] space-y-8 px-10 pt-8 pb-[2rem] bg-white shadow-xl rounded">
-        <h1 className="text-2xl capitalize">
-          {questionsButton || questionsRadio}
-        </h1>
+        <h1 className="text-2xl capitalize">{t(questionText)}</h1>
         <div className="flex gap-2 flex-col">
           {answersButton ? allAnswersButton : allAnswersRadio}
         </div>

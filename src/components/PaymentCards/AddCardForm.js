@@ -174,7 +174,7 @@ const AddCardForm = ({ values, setValues }) => {
     );
 
     const thanksData = {
-      paragraphOne: 'Your Payment Card Has Beed Added.',
+      paragraphOne: 'Your Credit Card Has Beed Added.',
       paragraphTwo: 'Please Check The Saved Cards Page',
       link: '/savedCards',
       page: 'Saved Cards',

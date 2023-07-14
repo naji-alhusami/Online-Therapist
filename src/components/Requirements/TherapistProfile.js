@@ -30,7 +30,7 @@ const TherapistProfile = () => {
 
     const thanksData = {
       paragraphOne:
-        'Thank you for your interest in working with Healing, we have recieved your application.',
+        'Thank you for your interest in working with Healing, we have received your application.',
       paragraphTwo:
         'If your Profile is accepted, you will receive an email guiding you for the next steps.',
       link: '/',

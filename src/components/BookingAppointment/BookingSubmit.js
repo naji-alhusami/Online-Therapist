@@ -18,7 +18,7 @@ const BookingSubmit = () => {
   return (
     <div className="m-16">
       <h1 className="font-semibold text-3xl md:text-4xl md:mb-5 lg:text-5xl uppercase">
-        {t('Submit Your Appointment')}
+        {t('SUBMIT YOUR APPOINTMENT')}
       </h1>
       <p className="w-auto">
         {t('Click Submit If You Are Sure Of All Your Choices.')}

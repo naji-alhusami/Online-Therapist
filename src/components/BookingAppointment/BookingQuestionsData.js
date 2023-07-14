@@ -1,7 +1,7 @@
 export const MultipleChoices = [
   {
     id: '1',
-    question: 'What type of coumseling are you looking for?',
+    question: 'What type of counseling are you looking for?',
     answer: ['Individual counseling', 'Teen counseling (for my child)'],
   },
   {
@@ -12,7 +12,7 @@ export const MultipleChoices = [
   {
     id: '3',
     question: 'Have you ever been in therspy before?',
-    answer: ['Yes', ' No'],
+    answer: ['Yes', 'No'],
   },
 ];
 
