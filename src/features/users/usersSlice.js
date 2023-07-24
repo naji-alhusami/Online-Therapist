@@ -7,8 +7,8 @@ import {
   signOut,
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
-
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
 import { db, auth, googleAuth, storage } from '../../firebase-config';
 
 // start of signup:
