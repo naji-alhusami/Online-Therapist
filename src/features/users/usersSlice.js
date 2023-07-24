@@ -62,6 +62,7 @@ export const loginUser = createAsyncThunk(
     const { email, password } = payload;
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
+      
       if (response.user.emailVerified === false) {
         return rejectWithValue('Email is Not Verified');
       }
