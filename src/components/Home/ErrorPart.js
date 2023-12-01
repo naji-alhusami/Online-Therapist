@@ -13,7 +13,7 @@ const ErrorPart = () => {
 
   return (
     <div
-      className=" w-screen bg-cover bg-top bg-no-repeat"
+      className="  bg-cover bg-top bg-no-repeat"
       style={{ backgroundImage: `url(${BackgroundImage})`, top: 0 }}
     >
       <div className="flex flex-col pt-12 pb-12  items-center md:flex-col   lg:flex-row    lg:justify-evenly lg:items-center md:items-center lg:pt-30 lg:pb-20 md:pt-20">

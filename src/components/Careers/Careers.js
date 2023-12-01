@@ -16,8 +16,8 @@ const Careers = () => {
   }, [showContent]);
 
   return (
-    <div className="  w-screen">
-      <div className="flex flex-col font-poppins w-screen ">
+    <div>
+      <div className="flex flex-col font-poppins  ">
         <div>
           <div className="lg:text-5xl md:text-3xl text-2xl leading-6 mt-10 lg:ml-28 ml-10 text-gray-700">
             <h1>{t('CAREERS AT HEALING')}</h1>
@@ -48,7 +48,7 @@ const Careers = () => {
         </div>
       </div>
       {showContent && (
-        <div className="flex flex-col w-screen font-poppins" ref={positionsRef}>
+        <div className="flex flex-col  font-poppins" ref={positionsRef}>
           <CareersPositions />
         </div>
       )}

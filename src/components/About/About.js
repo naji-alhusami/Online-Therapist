@@ -8,7 +8,7 @@ function About() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col w-screen font-poppins text-black tracking-[-0.01em]">
+    <div className="flex flex-col font-poppins text-black tracking-[-0.01em]">
       <div className="flex flex-grow bg-white flex-col lg:mb-[0%] mb-[5%] ml-[10%] mt-[5%] mr-[8%]">
         <h2 className="lg:text-5xl text-3xl">HEALING</h2>
         <h3 className="lg:text-3xl text-xl text-black text-opacity-50">

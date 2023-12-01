@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-screen sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
+    <nav className=" sticky top-0 z-50 bg-cyan-50 shadow font-poppins">
       <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8">
         <div className="flex items-center md:block">
           <div className=" md:hidden">
